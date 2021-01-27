@@ -1,9 +1,7 @@
-import Dashboard2 from './components/Dashboard2/Dashboard2';
-
 function App() {
   return (
     <div className="App">
-      <Dashboard2></Dashboard2>
+      <h1>Our dashboard will be here</h1>
     </div>
   );
 }
