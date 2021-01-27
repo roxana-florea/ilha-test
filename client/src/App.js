@@ -1,7 +1,10 @@
+import Dashboard from './components/Dashboard/Dashboard';
+
+
 function App() {
   return (
     <div className="App">
-      <h1>Our dashboard will be here</h1>
+      <Dashboard/>
     </div>
   );
 }

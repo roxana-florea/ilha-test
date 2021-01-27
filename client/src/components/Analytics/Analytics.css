@@ -1,0 +1,48 @@
+/* @media only screen and (max-width:1920px){
+    .chart-container{
+        position: absolute;
+        top:12vh;
+        right: 4vw;
+        width:75vw;
+        height:54vh;
+        overflow-x: hidden;
+        overflow-y: hidden;
+        z-index: -1;
+    }
+    .chart-buttons{
+        text-align: center;
+        margin-bottom: 2vh;
+    } 
+}
+@media only screen and (max-width:1366px){
+     .chart-container{
+        height: 90vh;
+    } 
+} */
+
+.paper {
+    width: 200px;
+    height: 200px;
+    margin-left: 10%;
+}
+
+.paper-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.analytics-container {
+    display: flex;
+   
+}
+      
+
+
+/* @media only screen and (min-width:540px) and (max-width:1024px){
+    .chart-container{
+        width: 75vw;
+        height: 90vh;
+        right:3vw
+    }
+} */
