@@ -25,6 +25,7 @@ export default function Plans() {
     const executeReduxAction = useDispatch();
     const plans = useSelector(state => state.plansReducer);
     const classes = useStyles();
+    const [lastPlan, setLastPlan] = React.useState({});
 
 
 
@@ -34,6 +35,7 @@ export default function Plans() {
             name: 'New plan'
         }
         executeReduxAction(addPlan(newPlan));
+        setLastPlan(newPlan);
     }
 
     return (
@@ -60,7 +62,7 @@ export default function Plans() {
                     </Card>
                 </div>
             </div>
-            {plans.map((plan, key) => <Plan key={plan.id} plan={plan} />)}
+            {plans.map((plan, key) => <Plan key={plan.id} plan={plan} isLastPlan={plan.id === lastPlan.id}/>)}
         </div>
     );
 }
