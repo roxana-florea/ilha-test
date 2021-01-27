@@ -40,20 +40,24 @@ export default function Plans() {
         <div className={classes.root}>
             <div className="add-plan-container">
                 <div className="empty-plan-container">
-                <Card className={classes.root}>
-                    <CardContent>
-                        <Typography className={classes.title} color="textSecondary" gutterBottom>
-                            You have no studies plan yet
+                    <Card className={classes.root}>
+                        <CardContent>
+
+
+                            {plans.length>0 ? "" : <Typography className={classes.title} color="textSecondary" gutterBottom>
+                                You have no studies plan yet
                         </Typography>
-                    </CardContent>
-                    <CardActions>
-                        <div className="add-plan-button">
-                        <Button variant="contained" color="primary" onClick={addNewPlan}>
-                            Add a new plan
+                            }
+
+                        </CardContent>
+                        <CardActions>
+                            <div className="add-plan-button">
+                                <Button variant="contained" color="primary" onClick={addNewPlan}>
+                                    Add a new plan
                         </Button>
-                        </div>
-                    </CardActions>
-                </Card>
+                            </div>
+                        </CardActions>
+                    </Card>
                 </div>
             </div>
             {plans.map((plan, key) => <Plan key={plan.id} plan={plan} />)}
