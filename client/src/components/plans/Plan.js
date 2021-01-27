@@ -38,7 +38,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function Plan({ plan }) {
+export default function Plan({ plan, isLastPlan }) {
   const [planName, setPlanName] = React.useState('');
   const [taskName, setTaskName] = React.useState('');
   const [description, setDescription] = React.useState('');
@@ -49,6 +49,14 @@ export default function Plan({ plan }) {
 
   const executeReduxAction = useDispatch();
   const tasks = useSelector((state) => state.tasksReducer);
+
+  const [expanded, setExpanded] = React.useState(isLastPlan);
+  console.log(isLastPlan);
+ 
+  const openCloseAccordion = () => {
+    setExpanded(!expanded);
+  };
+
 
   const deleteCurrentPlan = () => {
     executeReduxAction(deletePlan(plan.id));
@@ -102,15 +110,16 @@ export default function Plan({ plan }) {
   };
 
   return (
-    <Accordion>
+    <Accordion expanded={expanded} onChange={openCloseAccordion}>
       <AccordionSummary
         expandIcon={<ExpandMoreIcon />}
         aria-controls="panel1a-content"
         id="panel1a-header"
+    
       >
         <Typography className={classes.heading}>{planToString()}</Typography>
       </AccordionSummary>
-      <AccordionDetails>
+      <AccordionDetails >
         <div className="new-plan-container">
           <Card className={classes.root}>
             <CardContent>
