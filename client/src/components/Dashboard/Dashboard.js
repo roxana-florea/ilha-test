@@ -25,8 +25,8 @@ import VideoCallIcon from '@material-ui/icons/VideoCall';
 import Button from '@material-ui/core/Button';
 // import Paper from '@material-ui/core/Paper';
 import logo from '../images/logo_White_NT.png';
-import Analytics from '../Analytics/Analytics.js';
-// import Plans from '../Dashboard/Plans/Plans.js';
+import Analytics from '../analytics/Analytics.js';
+import Plans from '../plans/Plans.js';
 // import UserProfile from '../Dashboard/UserProfile/UserProfile';
 // import photo from '../Images/userIconMale.jpg';
 import './Dashboard.css';
@@ -229,7 +229,7 @@ export default function MiniDrawer() {
       <main className={classes.content}>
         
         <Analytics/>
-        {/* <Plans/> */}
+        <Plans/>
         
         
 
