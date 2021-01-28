@@ -28,3 +28,32 @@ p {
     margin-bottom: 5px;
     margin-top: 5px;
 }
+
+.makeStyles-drawerOpen-7{
+    background-color: rgb(255, 255, 255) !important;
+}
+
+.makeStyles-button-11{
+    background-color: rgb(255, 255, 255) !important;
+}
+
+.user-profile-pic{
+    background-color: yellow;
+}
+
+.user-profile{
+    display: flex;
+    justify-content: center;
+    margin:2vh;
+    flex-direction: column;
+}
+
+.makeStyles-drawerClose-8{
+    background-color: rgb(255, 255, 255) !important;
+}
+
+.small-avatar{
+    margin-top:2vh;
+    margin-bottom: 2vh;
+
+}

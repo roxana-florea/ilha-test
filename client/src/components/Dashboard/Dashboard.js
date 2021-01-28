@@ -27,6 +27,10 @@ import Button from '@material-ui/core/Button';
 import logo from '../images/logo_White_NT.png';
 import Analytics from '../analytics/Analytics.js';
 import Plans from '../plans/Plans.js';
+import UserAvatar from 'react-user-avatar';
+import Avatar from '@material-ui/core/Avatar';
+
+
 // import UserProfile from '../Dashboard/UserProfile/UserProfile';
 // import photo from '../Images/userIconMale.jpg';
 import './Dashboard.css';
@@ -36,15 +40,15 @@ const drawerWidth = 200;
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
-    
+
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
-    backgroundColor:'rgb(39, 25, 90)',
+    backgroundColor: 'rgb(39, 25, 90)',
     transition: theme.transitions.create(['width', 'margin'], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
-      
+
     }),
   },
   appBarShift: {
@@ -65,12 +69,12 @@ const useStyles = makeStyles((theme) => ({
     width: drawerWidth,
     flexShrink: 0,
     whiteSpace: 'nowrap',
-    
-    
+
+
   },
   drawerOpen: {
     width: drawerWidth,
-    backgroundColor:'rgb(233, 42, 138)',
+    backgroundColor: 'rgb(233, 42, 138)',
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
@@ -79,10 +83,10 @@ const useStyles = makeStyles((theme) => ({
   drawerClose: {
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen, 
+      duration: theme.transitions.duration.leavingScreen,
     }),
     overflowX: 'hidden',
-    backgroundColor:'rgb(233, 42, 138)',
+    backgroundColor: 'rgb(233, 42, 138)',
     width: theme.spacing(7) + 1,
     [theme.breakpoints.up('sm')]: {
       width: theme.spacing(9) + 1,
@@ -104,22 +108,22 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 50,
     flexDirection: 'column',
     alignItems: 'center',
-    
+
   },
 
   button: {
-      backgroundColor: 'rgb(233, 42, 138)',
-      marginLeft: '90%',
-      position: 'absolute',
-      
+    backgroundColor: 'rgb(233, 42, 138)',
+    marginLeft: '90%',
+    position: 'absolute',
+
   }
 }));
 
 function HomeIcon(props) {
-    return (
-      <MenuIcon/>
-    );
-  }
+  return (
+    <MenuIcon />
+  );
+}
 
 export default function MiniDrawer() {
   const classes = useStyles();
@@ -153,20 +157,20 @@ export default function MiniDrawer() {
               [classes.hide]: open,
             })}
           >
-          <HomeIcon />
+            <HomeIcon />
           </IconButton>
           <Typography variant="h6" noWrap>
-          <div className='logo-container'>
-          <img src={logo} alt='ilha logo'/>
-           <p>ILHA</p>
-          </div>
+            <div className='logo-container'>
+              <img src={logo} alt='ilha logo' />
+              <p>ILHA</p>
+            </div>
           </Typography>
-          <Button variant="contained" className ={classes.button}>
-          <VideoCallIcon/>
+          <Button variant="contained" className={classes.button}>
+            <VideoCallIcon />
           </Button>
-          
+
         </Toolbar>
-       
+
       </AppBar>
       <Drawer
         variant="permanent"
@@ -180,7 +184,7 @@ export default function MiniDrawer() {
             [classes.drawerClose]: !open,
           }),
         }}
-        
+
       >
         <div className={classes.toolbar}>
           <IconButton onClick={handleDrawerClose}>
@@ -189,49 +193,64 @@ export default function MiniDrawer() {
         </div>
 
         {/* { open ? <UserProfile/> : <img src={photo} id='logo-image'/> } */}
-        
-        <Divider/>
+
+
+        <div className={classes.root}>
+
+        </div>
         <List>
-            <ListItem button>
-              <ListItemIcon><AccountCircleIcon /></ListItemIcon>
-              <ListItemText primary={'My Profile'} />
-            </ListItem>
-
-            <ListItem button>
-              <ListItemIcon><DashboardIcon /></ListItemIcon>
-              <ListItemText primary={'Dashboard'} />
-            </ListItem>
-
-            <ListItem button>
-              <ListItemIcon><MailIcon /></ListItemIcon>
-              <ListItemText primary={'Messages'} />
-            </ListItem>
-
-            <ListItem button>
-              <ListItemIcon><EventIcon /></ListItemIcon>
-              <ListItemText primary={'Agenda'} />
-            </ListItem>
-
-            <ListItem button>
-              <ListItemIcon><LibraryBooksIcon /></ListItemIcon>
-              <ListItemText primary={'Files'} />
-            </ListItem>
-
-            <ListItem button>
-              <ListItemIcon><ExitToAppIcon /></ListItemIcon>
-              <ListItemText primary={'Log out'} />
-            </ListItem>
+        <ListItem button>
+        {open ? <UserAvatar size="120" name="Jane Doe" color="#a8a8a8" className="user-profile"/> :
+        
+           <ListItemIcon><Avatar alt="Jane Doe" src="/static/images/avatar/1.jpg" className="small-avatar" /></ListItemIcon>
           
+          }
+            
+            
+          </ListItem>
+
+
+          <Divider />
+          <ListItem button>
+            <ListItemIcon><AccountCircleIcon /></ListItemIcon>
+            <ListItemText primary={'My Profile'} />
+          </ListItem>
+
+          <ListItem button>
+            <ListItemIcon><DashboardIcon /></ListItemIcon>
+            <ListItemText primary={'Dashboard'} />
+          </ListItem>
+
+          <ListItem button>
+            <ListItemIcon><MailIcon /></ListItemIcon>
+            <ListItemText primary={'Messages'} />
+          </ListItem>
+
+          <ListItem button>
+            <ListItemIcon><EventIcon /></ListItemIcon>
+            <ListItemText primary={'Agenda'} />
+          </ListItem>
+
+          <ListItem button>
+            <ListItemIcon><LibraryBooksIcon /></ListItemIcon>
+            <ListItemText primary={'Files'} />
+          </ListItem>
+
+          <ListItem button>
+            <ListItemIcon><ExitToAppIcon /></ListItemIcon>
+            <ListItemText primary={'Log out'} />
+          </ListItem>
+
         </List>
         <Divider />
-       
+
       </Drawer>
       <main className={classes.content}>
-        
-        <Analytics/>
-        <Plans/>
-        
-        
+
+        <Analytics />
+        <Plans />
+
+
 
       </main>
     </div>

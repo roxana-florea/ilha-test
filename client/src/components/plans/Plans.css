@@ -4,3 +4,9 @@
     width: 100%;
     position: relative;
 }
+
+#video-icon{
+    display: felx;
+    justify-content: right;
+    margin-left:50vh;
+}
