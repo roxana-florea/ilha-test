@@ -38,25 +38,22 @@ const useStyles = makeStyles({
   },
 });
 
-export default function Plan({ plan, isLastPlan }) {
+export default function Plan({ plan, isExpanded, toggleExpanded }) {
   const [planName, setPlanName] = React.useState('');
   const [taskName, setTaskName] = React.useState('');
   const [description, setDescription] = React.useState('');
   const [duration, setDuration] = React.useState('');
   const [warningMessage, setWarningMessage] = React.useState(false);
+  const [expanded, setExpanded] = React.useState(false);
 
   const classes = useStyles();
 
   const executeReduxAction = useDispatch();
   const tasks = useSelector((state) => state.tasksReducer);
 
-  const [expanded, setExpanded] = React.useState(isLastPlan);
-  console.log(isLastPlan);
- 
   const openCloseAccordion = () => {
-    setExpanded(!expanded);
+    toggleExpanded(plan.id);
   };
-
 
   const deleteCurrentPlan = () => {
     executeReduxAction(deletePlan(plan.id));
@@ -112,13 +109,16 @@ export default function Plan({ plan, isLastPlan }) {
     setDuration(event.target.value);
   };
 
+  React.useEffect(() => {
+    setExpanded(isExpanded);
+  }, [isExpanded]);
+
   return (
     <Accordion expanded={expanded} onChange={openCloseAccordion}>
       <AccordionSummary
         expandIcon={<ExpandMoreIcon />}
         aria-controls="panel1a-content"
         id="panel1a-header"
-    
       >
         <Typography className={classes.heading}>{planToString()}</Typography>
         <div id="video-icon">
@@ -127,7 +127,7 @@ export default function Plan({ plan, isLastPlan }) {
                     </IconButton>
                   </div>
       </AccordionSummary>
-      <AccordionDetails >
+      <AccordionDetails>
         <div className="new-plan-container">
           <Card className={classes.root}>
             <CardContent>
