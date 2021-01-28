@@ -91,6 +91,9 @@ export default function Plan({ plan, isLastPlan }) {
     } else {
       executeReduxAction(addTask(newTask));
     }
+    setTaskName("");
+    setDescription("");
+    setDuration("");
   };
 
   const handlePlanNameOnChange = (event) => {
@@ -118,6 +121,11 @@ export default function Plan({ plan, isLastPlan }) {
     
       >
         <Typography className={classes.heading}>{planToString()}</Typography>
+        <div id="video-icon">
+                    <IconButton>
+                      <VideocamIcon />
+                    </IconButton>
+                  </div>
       </AccordionSummary>
       <AccordionDetails >
         <div className="new-plan-container">
@@ -131,11 +139,7 @@ export default function Plan({ plan, isLastPlan }) {
                     value={planName}
                     onChange={handlePlanNameOnChange}
                   />
-                  <div id="video-icon">
-                    <IconButton>
-                      <VideocamIcon />
-                    </IconButton>
-                  </div>
+                  
                 </form>
               </div>
               <br></br>
