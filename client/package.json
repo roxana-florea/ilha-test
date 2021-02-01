@@ -20,8 +20,7 @@
     "react-scroll": "^1.8.1",
     "react-user-avatar": "^1.10.0",
     "redux": "^4.0.5",
-    "web-vitals": "^0.2.4",
-    "react-user-avatar": "^1.10.0"
+    "web-vitals": "^0.2.4"
   },
   "scripts": {
     "start": "react-scripts start",
