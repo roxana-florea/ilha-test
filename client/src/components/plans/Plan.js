@@ -49,7 +49,7 @@ export default function Plan({ plan, isExpanded, toggleExpanded }) {
   const classes = useStyles();
 
   const executeReduxAction = useDispatch();
-  const tasks = useSelector((state) => state.tasksReducer);
+  const tasks = useSelector((state) => state.plansReducer)[plan.id].tasks;
 
   const openCloseAccordion = () => {
     toggleExpanded(plan.id);
@@ -60,17 +60,21 @@ export default function Plan({ plan, isExpanded, toggleExpanded }) {
   };
 
   const planToString = () => {
-    const name = planName || 'New plan';
-    const planTasks = tasks.filter((task) => task.planId === plan.id);
-    const duration = planTasks.reduce((accumulator, currentValue) => {
-      return accumulator + parseInt(currentValue.duration);
-    }, 0);
-    const parts = planTasks.length;
+    // const name = planName || 'New plan';
+    // const planTasks = plan.tasks;
+    // const duration = planTasks.values().reduce((accumulator, currentValue) => {
+    //   return accumulator + parseInt(currentValue.duration);
+    // }, 0);
+    // const parts = planTasks.length;
 
-    return `${name}, ${duration} min  / ${parts} parts`;
+    // return `${name}, ${duration} min  / ${parts} parts`;
   };
 
   const addCurrentTask = () => {
+
+console.log(tasks);
+
+
     const newTask = {
       id: nanoid(),
       planId: plan.id,
@@ -108,6 +112,14 @@ export default function Plan({ plan, isExpanded, toggleExpanded }) {
   const handleDurationOnChange = (event) => {
     setDuration(event.target.value);
   };
+
+  const returnTasks = () =>{
+    const vals = Object.keys(tasks).map(function(key) {
+      return tasks[key];
+  });
+  return vals;
+  }
+
 
   React.useEffect(() => {
     setExpanded(isExpanded);
@@ -173,7 +185,7 @@ export default function Plan({ plan, isExpanded, toggleExpanded }) {
                   </IconButton>
                 </form>
                 <TasksTable
-                  tasks={tasks.filter((task) => task.planId === plan.id)}
+                  tasks={returnTasks().filter((task) => task.planId === plan.id)}
                 />
               </div>
             </CardContent>

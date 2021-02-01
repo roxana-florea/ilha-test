@@ -34,7 +34,7 @@ export default function TasksTable({ tasks }) {
 
 
     const deleteCurrentTask = (task) => {
-        executeReduxAction(deleteTask(task.id));
+        executeReduxAction(deleteTask(task));
     }
 
     const editTask = (task) => {

@@ -31,8 +31,8 @@ import UserAvatar from 'react-user-avatar';
 import Avatar from '@material-ui/core/Avatar';
 
 
-import UserProfile from '../userProfile/UserProfile';
-import photo from '../images/userIconMale.jpg';
+// import UserProfile from '../userProfile/UserProfile';
+// import photo from '../images/userIconMale.jpg';
 import './Dashboard.css';
 
 const drawerWidth = 200;

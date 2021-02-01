@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './UserProfile.css';
 import userIconM from '../images/userIconMale.jpg';
 import badgeIcon from '../images/badgeIcon.png';
-import musicNoteBar from '../images/musicNoteBar.png';
+// import musicNoteBar from '../images/musicNoteBar.png';
 
 class UserProfile extends Component {
 
