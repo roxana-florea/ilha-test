@@ -17,7 +17,6 @@ import { nanoid } from 'nanoid';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles({
@@ -35,6 +34,11 @@ const useStyles = makeStyles({
   },
   pos: {
     marginBottom: 12,
+  },
+  'accordion-summary-content': {
+    display: 'flex',
+    width: '100%',
+    'justify-content': 'space-between',
   },
 });
 
@@ -88,9 +92,9 @@ export default function Plan({ plan, isExpanded, toggleExpanded }) {
     } else {
       executeReduxAction(addTask(newTask));
     }
-    setTaskName("");
-    setDescription("");
-    setDuration("");
+    setTaskName('');
+    setDescription('');
+    setDuration('');
   };
 
   const handlePlanNameOnChange = (event) => {
@@ -115,76 +119,74 @@ export default function Plan({ plan, isExpanded, toggleExpanded }) {
 
   return (
     <Accordion expanded={expanded} onChange={openCloseAccordion}>
-      <AccordionSummary
-        expandIcon={<ExpandMoreIcon />}
-        aria-controls="panel1a-content"
-        id="panel1a-header"
-      >
-        <Typography className={classes.heading}>{planToString()}</Typography>
-        <div id="video-icon">
-                    <IconButton>
-                      <VideocamIcon />
-                    </IconButton>
-                  </div>
+      <AccordionSummary>
+        <div className={classes['accordion-summary-content']}>
+          <Typography className={classes.heading}>{planToString()}</Typography>
+          <div>
+            <IconButton onClick={(event) => event.stopPropagation()}>
+              <VideocamIcon />
+            </IconButton>
+            <IconButton onClick={deleteCurrentPlan}>
+              <DeleteIcon />
+            </IconButton>
+          </div>
+        </div>
       </AccordionSummary>
       <AccordionDetails>
-        <div className="new-plan-container">
-          <Card className={classes.root}>
-            <CardContent>
-              <div>
-                <form className={classes.root} noValidate autoComplete="off">
-                  <TextField
-                    id="standard-basic"
-                    label="Add a plan title"
-                    value={planName}
-                    onChange={handlePlanNameOnChange}
-                  />
-                  
-                </form>
-              </div>
-              <br></br>
-              <div>
-                <form className={classes.root} noValidate autoComplete="off">
-                  <TextField
-                    id="outlined-basic"
-                    label="Task"
-                    variant="outlined"
-                    value={taskName}
-                    onChange={handleTaskNameOnChange}
-                  />
-                  <TextField
-                    id="outlined-textarea"
-                    label="Description"
-                    multiline
-                    variant="outlined"
-                    value={description}
-                    onChange={handleDescriptionOnChange}
-                  />
-                  <TextField
-                    id="outlined-number"
-                    label="Duration"
-                    variant="outlined"
-                    type="number"
-                    value={duration}
-                    onChange={handleDurationOnChange}
-                  />
-                  <IconButton aria-label="add" onClick={addCurrentTask}>
-                    <AddCircleOutlineIcon />
-                  </IconButton>
-                </form>
-                <TasksTable
-                  tasks={tasks.filter((task) => task.planId === plan.id)}
+        <Card className={classes.root}>
+          <CardContent>
+            <div>
+              <form className={classes.root} noValidate autoComplete="off">
+                <TextField
+                  id="standard-basic"
+                  label="Add a plan title"
+                  value={planName}
+                  onChange={handlePlanNameOnChange}
                 />
-              </div>
-            </CardContent>
+              </form>
+            </div>
+            <br></br>
+            <div>
+              <form className={classes.root} noValidate autoComplete="off">
+                <TextField
+                  id="outlined-basic"
+                  label="Task"
+                  variant="outlined"
+                  value={taskName}
+                  onChange={handleTaskNameOnChange}
+                />
+                <TextField
+                  id="outlined-textarea"
+                  label="Description"
+                  multiline
+                  variant="outlined"
+                  value={description}
+                  onChange={handleDescriptionOnChange}
+                />
+                <TextField
+                  id="outlined-number"
+                  label="Duration"
+                  variant="outlined"
+                  type="number"
+                  value={duration}
+                  onChange={handleDurationOnChange}
+                />
+                <IconButton aria-label="add" onClick={addCurrentTask}>
+                  <AddCircleOutlineIcon />
+                </IconButton>
+              </form>
+              <TasksTable
+                tasks={tasks.filter((task) => task.planId === plan.id)}
+              />
+            </div>
+          </CardContent>
 
-            <IconButton aria-label="delete">
-              <DeleteIcon onClick={deleteCurrentPlan} />
-            </IconButton>
+          <IconButton aria-label="delete">
+            <DeleteIcon onClick={deleteCurrentPlan} />
+          </IconButton>
 
-            {warningMessage ? <Warning /> : ''}
-          </Card>
-        </div>
+          {warningMessage ? <Warning /> : ''}
+        </Card>
       </AccordionDetails>
     </Accordion>
   );
