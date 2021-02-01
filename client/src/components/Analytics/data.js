@@ -38,32 +38,68 @@
 
   export const confidence = [
     {
-      date: 1993, tvNews: 19, church: 29, military: 1,
+      date: 1, tvNews: 19, church: 29, military: 1,
     }, {
-      date: 1995, tvNews: 13, church: 32, military: 4,
+      date: 2, tvNews: 13, church: 32, military: 3,
     }, {
-      date: 1997, tvNews: 14, church: 35, military: 2.5,
+      date: 3, tvNews: 14, church: 35, military: 2.5,
     }, {
-      date: 1999, tvNews: 13, church: 32, military: 2,
+      date: 4, tvNews: 13, church: 32, military: 2,
     }, {
-      date: 2001, tvNews: 15, church: 28, military: 1,
+      date: 5, tvNews: 15, church: 28, military: 1,
     }, {
-      date: 2003, tvNews: 16, church: 27, military: 3,
+      date: 6, tvNews: 16, church: 27, military: 3,
     }, {
-      date: 2006, tvNews: 12, church: 28, military: 2.5,
+      date: 7, tvNews: 12, church: 28, military: 2.5,
     }, {
-      date: 2008, tvNews: 11, church: 26, military: 4,
+      date: 8, tvNews: 11, church: 26, military: 2,
     }, {
-      date: 2010, tvNews: 10, church: 25, military: 1.3,
+      date: 9, tvNews: 10, church: 25, military: 1.3,
     }, {
-      date: 2012, tvNews: 11, church: 25, military: 1,
+      date: 10, tvNews: 11, church: 25, military: 1,
     }, {
-      date: 2014, tvNews: 10, church: 25, military: 3,
+      date: 11, tvNews: 10, church: 25, military: 3,
     }, {
-      date: 2016, tvNews: 8, church: 20, military: 2,
+      date: 12, tvNews: 8, church: 20, military: 2,
     }, {
-      date: 2018, tvNews: 10, church: 20, military: 0,
+      date: 13, tvNews: 10, church: 20, military: 0,
     },
+    {
+      date: 14, tvNews: 19, church: 29, military: 1,
+    }, {
+      date: 15, tvNews: 13, church: 32, military: 4,
+    }, {
+      date: 16, tvNews: 14, church: 35, military: 2.5,
+    }, {
+      date: 17, tvNews: 13, church: 32, military: 2,
+    }, {
+      date: 18, tvNews: 15, church: 28, military: 1,
+    }, {
+      date: 19, tvNews: 16, church: 27, military: 3,
+    }, {
+      date: 20, tvNews: 12, church: 28, military: 2.5,
+    }, {
+      date: 21, tvNews: 11, church: 26, military: 4,
+    }, {
+      date: 22, tvNews: 10, church: 25, military: 1.3,
+    }, {
+      date: 23, tvNews: 11, church: 25, military: 1,
+    }, {
+      date: 24, tvNews: 10, church: 25, military: 3,
+    }, {
+      date: 25, tvNews: 8, church: 20, military: 2,
+    }, {
+      date: 26, tvNews: 10, church: 20, military: 0,
+    },
+    {
+      date: 27, tvNews: 19, church: 29, military: 1,
+    }, {
+      date: 28, tvNews: 13, church: 32, military: 4,
+    }, {
+      date: 29, tvNews: 14, church: 35, military: 2.5,
+    }, {
+      date: 30, tvNews: 13, church: 32, military: 2,
+    }
   ];
   
 
