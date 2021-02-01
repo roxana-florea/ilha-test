@@ -31,8 +31,8 @@ import UserAvatar from 'react-user-avatar';
 import Avatar from '@material-ui/core/Avatar';
 
 
-// import UserProfile from '../Dashboard/UserProfile/UserProfile';
-// import photo from '../Images/userIconMale.jpg';
+import UserProfile from '../userProfile/UserProfile';
+import photo from '../images/userIconMale.jpg';
 import './Dashboard.css';
 
 const drawerWidth = 200;
@@ -104,7 +104,6 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexGrow: 1,
     padding: theme.spacing(3),
-    // justifyContent: 'center',
     marginTop: 50,
     flexDirection: 'column',
     alignItems: 'center',

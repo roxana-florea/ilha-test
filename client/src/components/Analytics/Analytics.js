@@ -93,18 +93,19 @@ class Analytics extends React.PureComponent {
   render() {
     const { data: chartData } = this.state;
     const { classes } = this.props;
+    const dailyAverage = (data.reduce((a,b)=> a + b.military, 0))/ data.length;
 
-
+    
     return (
       <div className='analytics-container'>
       <div className="chart-container">
         <Paper elevation={3}>
           <div className="chart-buttons">
-            <ButtonGroup size="small" aria-label="small outlined button group">
+            {/* <ButtonGroup size="small" aria-label="small outlined button group">
               <Button>Day</Button>
               <Button>Week</Button>
               <Button>Month</Button>
-            </ButtonGroup>
+            </ButtonGroup> */}
           </div>
           <Chart
             data={chartData}
@@ -113,7 +114,7 @@ class Analytics extends React.PureComponent {
           >
             <ArgumentAxis tickFormat={format} />
             <ValueAxis
-              max={10}
+              // max={15}
               labelComponent={ValueLabel}
             />
 
@@ -137,10 +138,10 @@ class Analytics extends React.PureComponent {
       <div className='paper-container'>
         <Paper className="paper">
           <Typography>Daily average</Typography>
-          <Typography variant='h4' style={{textAlign:'center'}}>2,5 h</Typography>
+          <Typography variant='h4' style={{textAlign:'center'}}>{dailyAverage.toFixed(2)} h</Typography>
         </Paper>
         <Paper className="paper">
-        <Typography>Most played instrument</Typography>
+        <Typography>Most played song</Typography>
         <Typography variant='h3' style={{textAlign:'center'}}>🎸</Typography>
         </Paper>
       </div>
