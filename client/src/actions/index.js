@@ -19,10 +19,14 @@ export const addTask = (taskObj) => {
     }
 }
 
-export const deleteTask = (taskId) => {
+export const deleteTask = (taskObj) => {
     return {
         type: 'DELETE_TASK',
-        value: taskId
+        value: taskObj
     }
 }
+
+
+
+
 

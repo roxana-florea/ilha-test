@@ -30,6 +30,7 @@ export default function Plans() {
     const newPlan = {
       id: nanoid(),
       name: 'New plan',
+      tasks:{}
     };
     executeReduxAction(addPlan(newPlan));
     setExpandedPlan(newPlan);
@@ -40,8 +41,7 @@ export default function Plans() {
     if (expandedPlan && expandedPlan.id === idPlan) {
       setExpandedPlan(null);
     } else {
-      const plan = plans.find((plan) => plan.id === idPlan);
-      setExpandedPlan(plan);
+      setExpandedPlan(plans[idPlan]);
     }
   };
 
@@ -51,7 +51,7 @@ export default function Plans() {
         <div className="empty-plan-container">
           <Card className={classes.root}>
             <CardContent>
-              {plans.length > 0 ? (
+              {Object.values(plans).length > 0 ? (
                 ''
               ) : (
                 <Typography
@@ -77,7 +77,7 @@ export default function Plans() {
           </Card>
         </div>
       </div>
-      {plans.map((plan, key) => (
+      {Object.values(plans).map((plan, key) => (
         <Plan
           key={plan.id}
           plan={plan}
