@@ -53,6 +53,8 @@ export default function Plan({ plan, isExpanded, toggleExpanded }) {
   const classes = useStyles();
 
   const executeReduxAction = useDispatch();
+
+  //зачем загружать таски если они хранятся в plan
   const tasks = useSelector((state) => state.plansReducer)[plan.id].tasks;
 
   const openCloseAccordion = () => {
@@ -64,13 +66,16 @@ export default function Plan({ plan, isExpanded, toggleExpanded }) {
   };
 
   const planToString = () => {
-    // const name = planName || 'New plan';
-    // const planTasks = plan.tasks;
-    // const duration = planTasks.values().reduce((accumulator, currentValue) => {
-    //   return accumulator + parseInt(currentValue.duration);
-    // }, 0);
-    // const parts = planTasks.length;
-    // return `${name}, ${duration} min  / ${parts} parts`;
+    const name = planName || 'New plan';
+    const planTasks = plan.tasks;
+    const duration = Object.values(planTasks).reduce(
+      (accumulator, currentValue) => {
+        return accumulator + parseInt(currentValue.duration);
+      },
+      0
+    );
+    const parts = Object.values(planTasks).length;
+    return `${name}, ${duration} min  / ${parts} parts`;
   };
 
   const addCurrentTask = () => {
