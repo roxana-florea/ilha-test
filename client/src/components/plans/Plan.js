@@ -10,7 +10,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import VideocamIcon from '@material-ui/icons/Videocam';
 import './Plans.css';
 import { deletePlan } from '../../actions';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { addTask } from '../../actions';
 import Warning from './messages/Warning';
 import { nanoid } from 'nanoid';
@@ -53,7 +53,6 @@ export default function Plan({ plan, isExpanded, toggleExpanded }) {
   const classes = useStyles();
 
   const executeReduxAction = useDispatch();
-  const tasks = useSelector((state) => state.plansReducer)[plan.id].tasks;
 
   const openCloseAccordion = () => {
     toggleExpanded(plan.id);
@@ -64,21 +63,19 @@ export default function Plan({ plan, isExpanded, toggleExpanded }) {
   };
 
   const planToString = () => {
-    // const name = planName || 'New plan';
-    // const planTasks = plan.tasks;
-    // const duration = planTasks.values().reduce((accumulator, currentValue) => {
-    //   return accumulator + parseInt(currentValue.duration);
-    // }, 0);
-    // const parts = planTasks.length;
-
-    // return `${name}, ${duration} min  / ${parts} parts`;
+    const name = planName || 'New plan';
+    const planTasks = plan.tasks;
+    const duration = Object.values(planTasks).reduce(
+      (accumulator, currentValue) => {
+        return accumulator + parseInt(currentValue.duration);
+      },
+      0
+    );
+    const parts = Object.keys(planTasks).length;
+    return `${name}, ${duration} min  / ${parts} parts`;
   };
 
   const addCurrentTask = () => {
-
-console.log(tasks);
-
-
     const newTask = {
       id: nanoid(),
       planId: plan.id,
@@ -117,14 +114,6 @@ console.log(tasks);
     setDuration(event.target.value);
   };
 
-  const returnTasks = () =>{
-    const vals = Object.keys(tasks).map(function(key) {
-      return tasks[key];
-  });
-  return vals;
-  }
-
-
   React.useEffect(() => {
     setExpanded(isExpanded);
   }, [isExpanded]);
@@ -145,7 +134,6 @@ console.log(tasks);
         </div>
       </AccordionSummary>
       <AccordionDetails>
-
         <div className="new-plan-container">
           <Card className={classes.root}>
             <CardContent>
@@ -157,7 +145,6 @@ console.log(tasks);
                     value={planName}
                     onChange={handlePlanNameOnChange}
                   />
-                  
                 </form>
               </div>
               <br></br>
@@ -190,64 +177,15 @@ console.log(tasks);
                     <AddCircleOutlineIcon />
                   </IconButton>
                 </form>
-                <TasksTable
-                  tasks={returnTasks().filter((task) => task.planId === plan.id)}
-
-        <Card className={classes.root}>
-          <CardContent>
-            <div>
-              <form className={classes.root} noValidate autoComplete="off">
-                <TextField
-                  id="standard-basic"
-                  label="Add a plan title"
-                  value={planName}
-                  onChange={handlePlanNameOnChange}
-
-                />
-              </form>
-            </div>
-            <br></br>
-            <div>
-              <form className={classes.root} noValidate autoComplete="off">
-                <TextField
-                  id="outlined-basic"
-                  label="Task"
-                  variant="outlined"
-                  value={taskName}
-                  onChange={handleTaskNameOnChange}
-                />
-                <TextField
-                  id="outlined-textarea"
-                  label="Description"
-                  multiline
-                  variant="outlined"
-                  value={description}
-                  onChange={handleDescriptionOnChange}
-                />
-                <TextField
-                  id="outlined-number"
-                  label="Duration"
-                  variant="outlined"
-                  type="number"
-                  value={duration}
-                  onChange={handleDurationOnChange}
-                />
-                <IconButton aria-label="add" onClick={addCurrentTask}>
-                  <AddCircleOutlineIcon />
-                </IconButton>
-              </form>
-              <TasksTable
-                tasks={tasks.filter((task) => task.planId === plan.id)}
-              />
-            </div>
-          </CardContent>
-
-          <IconButton aria-label="delete">
-            <DeleteIcon onClick={deleteCurrentPlan} />
-          </IconButton>
-
-          {warningMessage ? <Warning /> : ''}
-        </Card>
+                <TasksTable tasks={plan.tasks} />
+              </div>
+            </CardContent>
+            <IconButton aria-label="delete">
+              <DeleteIcon onClick={deleteCurrentPlan} />
+            </IconButton>
+            {warningMessage ? <Warning /> : ''}
+          </Card>
+        </div>
       </AccordionDetails>
     </Accordion>
   );
