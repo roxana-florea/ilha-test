@@ -71,7 +71,7 @@ export default function Plan({ plan, isExpanded, toggleExpanded }) {
       },
       0
     );
-    const parts = Object.values(planTasks).length;
+    const parts = Object.keys(planTasks).length;
     return `${name}, ${duration} min  / ${parts} parts`;
   };
 
@@ -177,7 +177,7 @@ export default function Plan({ plan, isExpanded, toggleExpanded }) {
                     <AddCircleOutlineIcon />
                   </IconButton>
                 </form>
-                <TasksTable tasks={Object.values(plan.tasks)} />
+                <TasksTable tasks={plan.tasks} />
               </div>
             </CardContent>
             <IconButton aria-label="delete">

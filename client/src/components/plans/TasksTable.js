@@ -56,7 +56,7 @@ export default function TasksTable({ tasks }) {
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
-          {tasks.length <= 0 ? (
+          {Object.keys(tasks).length <= 0 ? (
             ''
           ) : (
             <TableRow>
@@ -68,7 +68,7 @@ export default function TasksTable({ tasks }) {
           )}
         </TableHead>
         <TableBody>
-          {tasks.map((task) => (
+          {Object.values(tasks).map((task) => (
             <TableRow key={task.name}>
               <TableCell component="th" scope="row">
                 {taskEditable === task.id ? (
