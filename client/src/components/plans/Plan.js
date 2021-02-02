@@ -70,14 +70,11 @@ export default function Plan({ plan, isExpanded, toggleExpanded }) {
     //   return accumulator + parseInt(currentValue.duration);
     // }, 0);
     // const parts = planTasks.length;
-
     // return `${name}, ${duration} min  / ${parts} parts`;
   };
 
   const addCurrentTask = () => {
-
-console.log(tasks);
-
+    console.log(tasks);
 
     const newTask = {
       id: nanoid(),
@@ -117,13 +114,12 @@ console.log(tasks);
     setDuration(event.target.value);
   };
 
-  const returnTasks = () =>{
-    const vals = Object.keys(tasks).map(function(key) {
+  const returnTasks = () => {
+    const vals = Object.keys(tasks).map(function (key) {
       return tasks[key];
-  });
-  return vals;
-  }
-
+    });
+    return vals;
+  };
 
   React.useEffect(() => {
     setExpanded(isExpanded);
@@ -145,7 +141,6 @@ console.log(tasks);
         </div>
       </AccordionSummary>
       <AccordionDetails>
-
         <div className="new-plan-container">
           <Card className={classes.root}>
             <CardContent>
@@ -157,7 +152,6 @@ console.log(tasks);
                     value={planName}
                     onChange={handlePlanNameOnChange}
                   />
-                  
                 </form>
               </div>
               <br></br>
@@ -191,63 +185,19 @@ console.log(tasks);
                   </IconButton>
                 </form>
                 <TasksTable
-                  tasks={returnTasks().filter((task) => task.planId === plan.id)}
-
-        <Card className={classes.root}>
-          <CardContent>
-            <div>
-              <form className={classes.root} noValidate autoComplete="off">
-                <TextField
-                  id="standard-basic"
-                  label="Add a plan title"
-                  value={planName}
-                  onChange={handlePlanNameOnChange}
-
+                  tasks={returnTasks().filter(
+                    (task) => task.planId === plan.id
+                  )}
                 />
-              </form>
-            </div>
-            <br></br>
-            <div>
-              <form className={classes.root} noValidate autoComplete="off">
-                <TextField
-                  id="outlined-basic"
-                  label="Task"
-                  variant="outlined"
-                  value={taskName}
-                  onChange={handleTaskNameOnChange}
-                />
-                <TextField
-                  id="outlined-textarea"
-                  label="Description"
-                  multiline
-                  variant="outlined"
-                  value={description}
-                  onChange={handleDescriptionOnChange}
-                />
-                <TextField
-                  id="outlined-number"
-                  label="Duration"
-                  variant="outlined"
-                  type="number"
-                  value={duration}
-                  onChange={handleDurationOnChange}
-                />
-                <IconButton aria-label="add" onClick={addCurrentTask}>
-                  <AddCircleOutlineIcon />
-                </IconButton>
-              </form>
-              <TasksTable
-                tasks={tasks.filter((task) => task.planId === plan.id)}
-              />
-            </div>
-          </CardContent>
+              </div>
+            </CardContent>
 
-          <IconButton aria-label="delete">
-            <DeleteIcon onClick={deleteCurrentPlan} />
-          </IconButton>
-
-          {warningMessage ? <Warning /> : ''}
-        </Card>
+            <IconButton aria-label="delete">
+              <DeleteIcon onClick={deleteCurrentPlan} />
+            </IconButton>
+            {warningMessage ? <Warning /> : ''}
+          </Card>
+        </div>
       </AccordionDetails>
     </Accordion>
   );
