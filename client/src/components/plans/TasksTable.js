@@ -118,21 +118,21 @@ export default function TasksTable({ tasks }) {
               </TableCell>
               <TableCell align="right">
                 {taskEditable === task.id ? (
-                  <IconButton>
+                  <IconButton onClick={() => saveTask(task)}>
                     {' '}
-                    <CheckCircleIcon onClick={() => saveTask(task)} />
+                    <CheckCircleIcon />
                   </IconButton>
                 ) : (
-                  <IconButton aria-label="check">
-                    <EditIcon
-                      id="edit-task-icon"
-                      onClick={() => editTask(task)}
-                    />
+                  <IconButton aria-label="check" onClick={() => editTask(task)}>
+                    <EditIcon id="edit-task-icon" />
                   </IconButton>
                 )}
 
-                <IconButton aria-label="delete">
-                  <DeleteIcon onClick={() => deleteCurrentTask(task)} />
+                <IconButton
+                  aria-label="delete"
+                  onClick={() => deleteCurrentTask(task)}
+                >
+                  <DeleteIcon />
                 </IconButton>
               </TableCell>
             </TableRow>
