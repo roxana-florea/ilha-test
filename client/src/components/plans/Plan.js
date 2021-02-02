@@ -10,7 +10,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import VideocamIcon from '@material-ui/icons/Videocam';
 import './Plans.css';
 import { deletePlan } from '../../actions';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { addTask } from '../../actions';
 import Warning from './messages/Warning';
 import { nanoid } from 'nanoid';
@@ -54,9 +54,6 @@ export default function Plan({ plan, isExpanded, toggleExpanded }) {
 
   const executeReduxAction = useDispatch();
 
-  //зачем загружать таски если они хранятся в plan
-  const tasks = useSelector((state) => state.plansReducer)[plan.id].tasks;
-
   const openCloseAccordion = () => {
     toggleExpanded(plan.id);
   };
@@ -79,8 +76,6 @@ export default function Plan({ plan, isExpanded, toggleExpanded }) {
   };
 
   const addCurrentTask = () => {
-    console.log(tasks);
-
     const newTask = {
       id: nanoid(),
       planId: plan.id,
@@ -117,13 +112,6 @@ export default function Plan({ plan, isExpanded, toggleExpanded }) {
 
   const handleDurationOnChange = (event) => {
     setDuration(event.target.value);
-  };
-
-  const returnTasks = () => {
-    const vals = Object.keys(tasks).map(function (key) {
-      return tasks[key];
-    });
-    return vals;
   };
 
   React.useEffect(() => {
@@ -189,14 +177,9 @@ export default function Plan({ plan, isExpanded, toggleExpanded }) {
                     <AddCircleOutlineIcon />
                   </IconButton>
                 </form>
-                <TasksTable
-                  tasks={returnTasks().filter(
-                    (task) => task.planId === plan.id
-                  )}
-                />
+                <TasksTable tasks={Object.values(plan.tasks)} />
               </div>
             </CardContent>
-
             <IconButton aria-label="delete">
               <DeleteIcon onClick={deleteCurrentPlan} />
             </IconButton>
