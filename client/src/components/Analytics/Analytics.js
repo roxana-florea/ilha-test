@@ -11,9 +11,7 @@ import {
 import { withStyles } from '@material-ui/core/styles';
 import { Animation } from '@devexpress/dx-react-chart';
 import { confidence as data } from './data';
-// import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-// import ButtonGroup from '@material-ui/core/ButtonGroup';
 import './Analytics.css';
 
 
@@ -100,13 +98,6 @@ class Analytics extends React.PureComponent {
       <div className='analytics-container'>
       <div className="chart-container">
         <Paper elevation={3}>
-          <div className="chart-buttons">
-            {/* <ButtonGroup size="small" aria-label="small outlined button group">
-              <Button>Day</Button>
-              <Button>Week</Button>
-              <Button>Month</Button>
-            </ButtonGroup> */}
-          </div>
           <Chart
             data={chartData}
             className={classes.chart}

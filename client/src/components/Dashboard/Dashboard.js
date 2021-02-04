@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -129,6 +129,28 @@ export default function MiniDrawer() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(true);
 
+  ///////////////////// make drawer close when screen is small
+const setSmall = () => {
+    setOpen(false);
+}
+
+const setLarge = () => {
+    setOpen(true);
+}
+
+useEffect(()=>{
+  const mediaQuery = window.matchMedia('(min-width: 768px)');
+  
+  mediaQuery.addListener((mq) => {
+    if (mq.matches) {
+      setLarge()
+    } else {
+      setSmall()
+    }
+  });
+})
+
+
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -176,12 +198,14 @@ export default function MiniDrawer() {
         className={clsx(classes.drawer, {
           [classes.drawerOpen]: open,
           [classes.drawerClose]: !open,
+             
         })}
         classes={{
           paper: clsx({
             [classes.drawerOpen]: open,
             [classes.drawerClose]: !open,
           }),
+
         }}
 
       >
