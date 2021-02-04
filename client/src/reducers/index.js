@@ -1,11 +1,9 @@
 import plansReducer from './plans';
-import tasksReducer from './tasks';
 
 import {combineReducers} from 'redux';
 
 const allReducers = combineReducers({
-    plansReducer: plansReducer,
-    tasksReducer: tasksReducer
+    plansReducer: plansReducer
 });
 
 export default allReducers;

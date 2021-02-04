@@ -10,14 +10,13 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import VideocamIcon from '@material-ui/icons/Videocam';
 import './Plans.css';
 import { deletePlan } from '../../actions';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { addTask } from '../../actions';
 import Warning from './messages/Warning';
 import { nanoid } from 'nanoid';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles({
@@ -36,6 +35,11 @@ const useStyles = makeStyles({
   pos: {
     marginBottom: 12,
   },
+  'accordion-summary-content': {
+    display: 'flex',
+    width: '100%',
+    'justify-content': 'space-between',
+  },
 });
 
 export default function Plan({ plan, isExpanded, toggleExpanded }) {
@@ -49,7 +53,6 @@ export default function Plan({ plan, isExpanded, toggleExpanded }) {
   const classes = useStyles();
 
   const executeReduxAction = useDispatch();
-  const tasks = useSelector((state) => state.tasksReducer);
 
   const openCloseAccordion = () => {
     toggleExpanded(plan.id);
@@ -61,12 +64,14 @@ export default function Plan({ plan, isExpanded, toggleExpanded }) {
 
   const planToString = () => {
     const name = planName || 'New plan';
-    const planTasks = tasks.filter((task) => task.planId === plan.id);
-    const duration = planTasks.reduce((accumulator, currentValue) => {
-      return accumulator + parseInt(currentValue.duration);
-    }, 0);
-    const parts = planTasks.length;
-
+    const planTasks = plan.tasks;
+    const duration = Object.values(planTasks).reduce(
+      (accumulator, currentValue) => {
+        return accumulator + parseInt(currentValue.duration);
+      },
+      0
+    );
+    const parts = Object.keys(planTasks).length;
     return `${name}, ${duration} min  / ${parts} parts`;
   };
 
@@ -88,9 +93,9 @@ export default function Plan({ plan, isExpanded, toggleExpanded }) {
     } else {
       executeReduxAction(addTask(newTask));
     }
-    setTaskName("");
-    setDescription("");
-    setDuration("");
+    setTaskName('');
+    setDescription('');
+    setDuration('');
   };
 
   const handlePlanNameOnChange = (event) => {
@@ -115,17 +120,18 @@ export default function Plan({ plan, isExpanded, toggleExpanded }) {
 
   return (
     <Accordion expanded={expanded} onChange={openCloseAccordion}>
-      <AccordionSummary
-        expandIcon={<ExpandMoreIcon />}
-        aria-controls="panel1a-content"
-        id="panel1a-header"
-      >
-        <Typography className={classes.heading}>{planToString()}</Typography>
-        <div id="video-icon">
-                    <IconButton>
-                      <VideocamIcon />
-                    </IconButton>
-                  </div>
+      <AccordionSummary>
+        <div className={classes['accordion-summary-content']}>
+          <Typography className={classes.heading}>{planToString()}</Typography>
+          <div>
+            <IconButton onClick={(event) => event.stopPropagation()}>
+              <VideocamIcon />
+            </IconButton>
+            <IconButton onClick={deleteCurrentPlan}>
+              <DeleteIcon />
+            </IconButton>
+          </div>
+        </div>
       </AccordionSummary>
       <AccordionDetails>
         <div className="new-plan-container">
@@ -139,7 +145,6 @@ export default function Plan({ plan, isExpanded, toggleExpanded }) {
                     value={planName}
                     onChange={handlePlanNameOnChange}
                   />
-                  
                 </form>
               </div>
               <br></br>
@@ -172,16 +177,12 @@ export default function Plan({ plan, isExpanded, toggleExpanded }) {
                     <AddCircleOutlineIcon />
                   </IconButton>
                 </form>
-                <TasksTable
-                  tasks={tasks.filter((task) => task.planId === plan.id)}
-                />
+                <TasksTable tasks={plan.tasks} />
               </div>
             </CardContent>
-
             <IconButton aria-label="delete">
               <DeleteIcon onClick={deleteCurrentPlan} />
             </IconButton>
-
             {warningMessage ? <Warning /> : ''}
           </Card>
         </div>
