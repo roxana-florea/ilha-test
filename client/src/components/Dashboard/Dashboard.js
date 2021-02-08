@@ -29,6 +29,7 @@ import Analytics from '../analytics/Analytics.js';
 import Plans from '../plans/Plans.js';
 import UserAvatar from 'react-user-avatar';
 import Avatar from '@material-ui/core/Avatar';
+import Analytics2 from '../analytics/Analytics2.js';
 
 
 // import UserProfile from '../userProfile/UserProfile';
@@ -107,6 +108,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 50,
     flexDirection: 'column',
     alignItems: 'center',
+    width: '50%'
 
   },
 
@@ -270,7 +272,8 @@ useEffect(()=>{
       </Drawer>
       <main className={classes.content}>
 
-        <Analytics />
+        {/* <Analytics /> */}
+        <Analytics2/>
         <Plans />
 
 

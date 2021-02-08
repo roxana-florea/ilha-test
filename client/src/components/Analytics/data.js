@@ -62,7 +62,7 @@
     }, {
       date: 12, tvNews: 8, church: 20, military: 2,
     }, {
-      date: 13, tvNews: 10, church: 20, military: 0,
+      date: 13, tvNews: 10, church: 20, military: 0.5,
     },
     {
       date: 14, tvNews: 19, church: 29, military: 1,
