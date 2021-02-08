@@ -1,23 +1,8 @@
 /* @media only screen and (max-width:1920px){
-    .chart-container{
-        position: absolute;
-        top:12vh;
-        right: 4vw;
-        width:75vw;
-        height:54vh;
-        overflow-x: hidden;
-        overflow-y: hidden;
-        z-index: -1;
-    }
-    .chart-buttons{
-        text-align: center;
-        margin-bottom: 2vh;
-    } 
+   
 }
 @media only screen and (max-width:1366px){
-     .chart-container{
-        height: 90vh;
-    } 
+    
 } */
 
 .paper {
@@ -30,24 +15,32 @@
     margin-left: 10%;
 }
 
+.chart-paper {
+   padding: 2%;
+   display: flex;
+   flex-direction: column;
+   position: relative;
+}
+
 .paper-container{
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+ 
 }
 
 .analytics-container {
     display: flex;
-    flex-wrap: wrap;
+    justify-content: center;
    
+}
+
+.download-btn {
+    width: 20%;
 }
       
 
 
 /* @media only screen and (min-width:540px) and (max-width:1024px){
-    .chart-container{
-        width: 75vw;
-        height: 90vh;
-        right:3vw
-    }
+    
 } */
