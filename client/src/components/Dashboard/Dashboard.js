@@ -29,8 +29,7 @@ import logo from '../images/logo_White_NT.png';
 import Plans from '../plans/Plans.js';
 import UserAvatar from 'react-user-avatar';
 import Avatar from '@material-ui/core/Avatar';
-import Analytics2 from '../Analytics/Analytics2.js';
-
+import Analytics2 from '../analytics/Analytics2.js';
 
 // import UserProfile from '../userProfile/UserProfile';
 // import photo from '../images/userIconMale.jpg';
@@ -41,7 +40,6 @@ const drawerWidth = 200;
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
-
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
@@ -49,7 +47,6 @@ const useStyles = makeStyles((theme) => ({
     transition: theme.transitions.create(['width', 'margin'], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
-
     }),
   },
   appBarShift: {
@@ -70,8 +67,6 @@ const useStyles = makeStyles((theme) => ({
     width: drawerWidth,
     flexShrink: 0,
     whiteSpace: 'nowrap',
-
-
   },
   drawerOpen: {
     width: drawerWidth,
@@ -108,22 +103,18 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 50,
     flexDirection: 'column',
     alignItems: 'center',
-    width: '50%'
-
+    width: '50%',
   },
 
   button: {
     backgroundColor: 'rgb(233, 42, 138)',
     marginLeft: '90%',
     position: 'absolute',
-
-  }
+  },
 }));
 
 function HomeIcon(props) {
-  return (
-    <MenuIcon />
-  );
+  return <MenuIcon />;
 }
 
 export default function MiniDrawer() {
@@ -132,26 +123,25 @@ export default function MiniDrawer() {
   const [open, setOpen] = React.useState(true);
 
   ///////////////////// make drawer close when screen is small
-const setSmall = () => {
+  const setSmall = () => {
     setOpen(false);
-}
+  };
 
-const setLarge = () => {
+  const setLarge = () => {
     setOpen(true);
-}
+  };
 
-useEffect(()=>{
-  const mediaQuery = window.matchMedia('(min-width: 768px)');
-  
-  mediaQuery.addListener((mq) => {
-    if (mq.matches) {
-      setLarge()
-    } else {
-      setSmall()
-    }
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(min-width: 768px)');
+
+    mediaQuery.addListener((mq) => {
+      if (mq.matches) {
+        setLarge();
+      } else {
+        setSmall();
+      }
+    });
   });
-})
-
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -183,101 +173,111 @@ useEffect(()=>{
             <HomeIcon />
           </IconButton>
           <Typography variant="h6" noWrap>
-            <div className='logo-container'>
-              <img src={logo} alt='ilha logo' />
+            <div className="logo-container">
+              <img src={logo} alt="ilha logo" />
               <p>ILHA</p>
             </div>
           </Typography>
           <Button variant="contained" className={classes.button}>
             <VideoCallIcon />
           </Button>
-
         </Toolbar>
-
       </AppBar>
       <Drawer
         variant="permanent"
         className={clsx(classes.drawer, {
           [classes.drawerOpen]: open,
           [classes.drawerClose]: !open,
-             
         })}
         classes={{
           paper: clsx({
             [classes.drawerOpen]: open,
             [classes.drawerClose]: !open,
           }),
-
         }}
-
       >
         <div className={classes.toolbar}>
           <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+            {theme.direction === 'rtl' ? (
+              <ChevronRightIcon />
+            ) : (
+              <ChevronLeftIcon />
+            )}
           </IconButton>
         </div>
 
         {/* { open ? <UserProfile/> : <img src={photo} id='logo-image'/> } */}
 
-
-        <div className={classes.root}>
-
-        </div>
+        <div className={classes.root}></div>
         <List>
-        <ListItem button>
-        {open ? <UserAvatar size="120" name="Jane Doe" color="#a8a8a8" className="user-profile"/> :
-        
-           <ListItemIcon><Avatar alt="Jane Doe" src="/static/images/avatar/1.jpg" className="small-avatar" /></ListItemIcon>
-          
-          }
-            
-            
+          <ListItem button>
+            {open ? (
+              <UserAvatar
+                size="120"
+                name="Jane Doe"
+                color="#a8a8a8"
+                className="user-profile"
+              />
+            ) : (
+              <ListItemIcon>
+                <Avatar
+                  alt="Jane Doe"
+                  src="/static/images/avatar/1.jpg"
+                  className="small-avatar"
+                />
+              </ListItemIcon>
+            )}
           </ListItem>
-
 
           <Divider />
           <ListItem button>
-            <ListItemIcon><AccountCircleIcon /></ListItemIcon>
+            <ListItemIcon>
+              <AccountCircleIcon />
+            </ListItemIcon>
             <ListItemText primary={'My Profile'} />
           </ListItem>
 
           <ListItem button>
-            <ListItemIcon><DashboardIcon /></ListItemIcon>
+            <ListItemIcon>
+              <DashboardIcon />
+            </ListItemIcon>
             <ListItemText primary={'Dashboard'} />
           </ListItem>
 
           <ListItem button>
-            <ListItemIcon><MailIcon /></ListItemIcon>
+            <ListItemIcon>
+              <MailIcon />
+            </ListItemIcon>
             <ListItemText primary={'Messages'} />
           </ListItem>
 
           <ListItem button>
-            <ListItemIcon><EventIcon /></ListItemIcon>
+            <ListItemIcon>
+              <EventIcon />
+            </ListItemIcon>
             <ListItemText primary={'Agenda'} />
           </ListItem>
 
           <ListItem button>
-            <ListItemIcon><LibraryBooksIcon /></ListItemIcon>
+            <ListItemIcon>
+              <LibraryBooksIcon />
+            </ListItemIcon>
             <ListItemText primary={'Files'} />
           </ListItem>
 
           <ListItem button>
-            <ListItemIcon><ExitToAppIcon /></ListItemIcon>
+            <ListItemIcon>
+              <ExitToAppIcon />
+            </ListItemIcon>
             <ListItemText primary={'Log out'} />
           </ListItem>
-
         </List>
         <Divider />
-
       </Drawer>
       <main className={classes.content}>
-
         {/* <Analytics /> */}
-        <Analytics2/>
+        <Analytics2 />
         <Plans />
-
-
-
       </main>
     </div>
   );
