@@ -9,10 +9,11 @@ import TasksTable from './TasksTable';
 import DeleteIcon from '@material-ui/icons/Delete';
 import VideocamIcon from '@material-ui/icons/Videocam';
 import './Plans.css';
-import { deletePlan } from '../../actions';
 import { useDispatch } from 'react-redux';
 import { addTask } from '../../actions';
 import Warning from './messages/Warning';
+import Delete from './messages/Delete';
+
 import { nanoid } from 'nanoid';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
@@ -48,6 +49,9 @@ export default function Plan({ plan, isExpanded, toggleExpanded }) {
   const [description, setDescription] = React.useState('');
   const [duration, setDuration] = React.useState('');
   const [warningMessage, setWarningMessage] = React.useState(false);
+  const [deleteWarningMessage, setDeleteWarningMessage] = React.useState(false);
+
+
   const [expanded, setExpanded] = React.useState(false);
 
   const classes = useStyles();
@@ -59,8 +63,9 @@ export default function Plan({ plan, isExpanded, toggleExpanded }) {
   };
 
   const deleteCurrentPlan = () => {
-    executeReduxAction(deletePlan(plan.id));
+    setDeleteWarningMessage(!deleteWarningMessage);
   };
+
 
   const planToString = () => {
     const name = planName || 'New plan';
@@ -127,7 +132,7 @@ export default function Plan({ plan, isExpanded, toggleExpanded }) {
             <IconButton onClick={(event) => event.stopPropagation()}>
               <VideocamIcon />
             </IconButton>
-            <IconButton onClick={deleteCurrentPlan}>
+            <IconButton onClick={deleteCurrentPlan} >
               <DeleteIcon />
             </IconButton>
           </div>
@@ -180,10 +185,10 @@ export default function Plan({ plan, isExpanded, toggleExpanded }) {
                 <TasksTable tasks={plan.tasks} />
               </div>
             </CardContent>
-            <IconButton aria-label="delete">
-              <DeleteIcon onClick={deleteCurrentPlan} />
-            </IconButton>
+
             {warningMessage ? <Warning /> : ''}
+            {deleteWarningMessage ? <Delete planId={plan.id} /> : ''}
+
           </Card>
         </div>
       </AccordionDetails>

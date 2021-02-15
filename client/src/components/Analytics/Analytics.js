@@ -14,7 +14,6 @@ import { confidence as data } from './data';
 import Typography from '@material-ui/core/Typography';
 import './Analytics.css';
 
-
 const format = () => tick => tick;
 
 const legendStyles = () => ({
@@ -79,6 +78,7 @@ const TitleText = withStyles(titleStyles)(({ classes, ...props }) => (
   <Title.Text {...props} className={classes.title} />
 ));
 
+
 class Analytics extends React.PureComponent {
   constructor(props) {
     super(props);
@@ -87,6 +87,8 @@ class Analytics extends React.PureComponent {
       data,
     };
   }
+
+
 
   render() {
     const { data: chartData } = this.state;
@@ -97,7 +99,7 @@ class Analytics extends React.PureComponent {
     return (
       <div className='analytics-container'>
       <div className="chart-container">
-        <Paper elevation={3}>
+        <Paper elevation={3} >
           <Chart
             data={chartData}
             className={classes.chart}
@@ -109,7 +111,6 @@ class Analytics extends React.PureComponent {
               labelComponent={ValueLabel}
             />
 
-           
             <LineSeries
               name="Time studied"
               valueField="military"  //y axis
