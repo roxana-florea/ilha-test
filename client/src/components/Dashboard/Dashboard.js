@@ -117,6 +117,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: 'rgb(233, 42, 138)',
     marginLeft: '90%',
     position: 'absolute',
+    top: '20%'
 
   }
 }));
@@ -189,9 +190,9 @@ useEffect(()=>{
               <p>ILHA</p>
             </div>
           </Typography>
-          <Button variant="contained" className={classes.button}>
-            <Link to='/Video'><VideoCallIcon /></Link>
-          </Button>
+          <Link to='/Video'><Button variant="contained" className={classes.button}>
+            <VideoCallIcon />
+          </Button></Link>
 
         </Toolbar>
 
