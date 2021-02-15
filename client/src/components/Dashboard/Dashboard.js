@@ -25,11 +25,11 @@ import VideoCallIcon from '@material-ui/icons/VideoCall';
 import Button from '@material-ui/core/Button';
 // import Paper from '@material-ui/core/Paper';
 import logo from '../images/logo_White_NT.png';
-import Analytics from '../Analytics/Analytics.js';
+// import Analytics from '../Analytics/Analytics.js';
 import Plans from '../plans/Plans.js';
 import UserAvatar from 'react-user-avatar';
 import Avatar from '@material-ui/core/Avatar';
-
+import Analytics2 from '../Analytics/Analytics2.js';
 
 
 // import UserProfile from '../userProfile/UserProfile';
@@ -273,7 +273,7 @@ useEffect(()=>{
       <main className={classes.content}>
 
         {/* <Analytics /> */}
-        <Analytics/>
+        <Analytics2/>
         <Plans />
 
 
