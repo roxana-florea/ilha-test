@@ -7,6 +7,6 @@ app.listen(port, (err) => {
         console.log("Error occured");
     }
     else{
-        console.log("Successfuly connected to nothing!!");
+        console.log(`Successfuly connected to to port: ${port}`);
     }
 })

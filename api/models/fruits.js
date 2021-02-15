@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost:27017/fruits', { useNewUrlParser: true, useUnifiedTopology: true  });
 
+mongoose.connect('mongodb://localhost:27017/fruits', { useNewUrlParser: true, useUnifiedTopology: true  });
 
 const fruitsSchema = new mongoose.Schema ({
     name: {
@@ -25,5 +25,3 @@ const fruit = new Fruit ({
 });
 
 fruit.save().then(console.log("banana saved"));
-
-
