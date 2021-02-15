@@ -111,6 +111,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: 'rgb(233, 42, 138)',
     marginLeft: '90%',
     position: 'absolute',
+    top: '20%',
   },
 }));
 
@@ -179,11 +180,11 @@ export default function MiniDrawer() {
               <p>ILHA</p>
             </div>
           </Typography>
-          <Button variant="contained" className={classes.button}>
-            <Link to="/Video">
+          <Link to="/Video">
+            <Button variant="contained" className={classes.button}>
               <VideoCallIcon />
-            </Link>
-          </Button>
+            </Button>
+          </Link>
         </Toolbar>
       </AppBar>
       <Drawer
