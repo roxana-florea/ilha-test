@@ -9,8 +9,9 @@ router.route('/').get((req, res) => {
 
 router.route('/').post((req, res) => {
   const planName = req.body.planName;
+  const tasks = req.body.tasks;
 //   plan.date = Date.parse(req.body.date);
-  const newPlan = new Plan({planName});
+  const newPlan = new Plan({planName, tasks});
 
   newPlan.save()
   .then(() => res.json('Plan added!'))
@@ -43,15 +44,16 @@ router.route('/:id').delete((req, res) => {
 router.route('/:id').put((req, res) => {
   Plan.findById(req.params.id)
     .then(plan => {
-      plan.username = req.body.username;
-     
-      plan.date = Date.parse(req.body.date);
-
+      plan.plaName = req.body.planName;
       plan.save()
         .then(() => res.json('plan updated!'))
         .catch(err => res.status(400).json('Error: ' + err));
     })
     .catch(err => res.status(400).json('Error: ' + err));
 });
+
+
+     
+
 
 module.exports = router;
