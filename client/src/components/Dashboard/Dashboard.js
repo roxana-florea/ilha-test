@@ -29,7 +29,7 @@ import logo from '../images/logo_White_NT.png';
 import Plans from '../plans/Plans.js';
 import UserAvatar from 'react-user-avatar';
 import Avatar from '@material-ui/core/Avatar';
-import Analytics2 from '../analytics/Analytics2.js';
+import Analytics2 from '../Analytics/Analytics2.js';
 import { Link } from 'react-router-dom';
 
 // import UserProfile from '../userProfile/UserProfile';
