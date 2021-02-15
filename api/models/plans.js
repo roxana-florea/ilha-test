@@ -8,7 +8,7 @@ const planSchema = new Schema(
 
     {
         planName: { type: String, required: true },
-        tasks: [{ type: String, enum: taskSchema }]
+        tasks: [taskSchema]
     },
 
     {
