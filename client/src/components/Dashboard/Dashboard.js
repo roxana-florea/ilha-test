@@ -30,6 +30,7 @@ import Plans from '../plans/Plans.js';
 import UserAvatar from 'react-user-avatar';
 import Avatar from '@material-ui/core/Avatar';
 import Analytics2 from '../analytics/Analytics2.js';
+import { Link } from 'react-router-dom';
 
 // import UserProfile from '../userProfile/UserProfile';
 // import photo from '../images/userIconMale.jpg';
@@ -179,7 +180,9 @@ export default function MiniDrawer() {
             </div>
           </Typography>
           <Button variant="contained" className={classes.button}>
-            <VideoCallIcon />
+            <Link to="/Video">
+              <VideoCallIcon />
+            </Link>
           </Button>
         </Toolbar>
       </AppBar>
