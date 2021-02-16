@@ -10,8 +10,8 @@ const Video = () => {
 
   const start = () => {
     const peer = new Peer({
-      host: 'localhost',
-      port: 5000,
+      host: 'https://d1c6493c1d92.ngrok.io/',
+      // port: 5000,
       path: '/peerjs',
     });
     peer.on('open', (id) => {
@@ -35,8 +35,8 @@ const Video = () => {
 
   const connect = () => {
     const peer = new Peer({
-      host: 'localhost',
-      port: 5000,
+      host: 'https://d1c6493c1d92.ngrok.io/',
+      // port: 5000,
       path: '/peerjs',
     });
 
