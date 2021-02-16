@@ -1,30 +1,6 @@
 import axios from 'axios';
 
 
-// export const addPlan = (planObj) => {
-
-
-
-
-
-
-//   return (dispatch) => {
-//     return axios
-//       .post('http://localhost:5000/plans', planObj)
-//       .then(res => {
-//         dispatch(addPlan(res.data));
-//       })
-//       .catch(err => {
-//         dispatch(console.log("error"));
-//       });
-
-
-// }
-
-
-
-
-
 export const addPlan = (planObj) => {
   console.log(planObj);
 
@@ -41,37 +17,6 @@ export const addPlan = (planObj) => {
       })
   }
 }
-
-
-
-
-
-//   return dispatch => {
-
-
-//     axios.post('http://localhost:5000/plans', 
-//             planObj
-//         )
-
-//         .then(res => {
-//             dispatch(console.log("success"));
-//         })
-//         .catch(err => {
-//             dispatch(console.log(planObj));
-//         });
-
-// };
-
-// }
-
-// export const addPlan = (planObj) => {
-//   return {
-//     type: 'ADD_PLAN',
-//     value: planObj,
-//   };
-// };
-
-
 
 
 

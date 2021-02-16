@@ -29,7 +29,7 @@ export default function Plans() {
   const addNewPlan = () => {
     const newPlan = {
       id: nanoid(),
-      name: 'New plan',
+      planName: 'New plan',
       tasks:{}
     };
     executeReduxAction(addPlan(newPlan));
