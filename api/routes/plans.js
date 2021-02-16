@@ -11,20 +11,14 @@ router.route('/').get((req, res) => {
 
 //adding the plan
 router.route('/').post((req, res) => {
-    console.log("hello");
-    console.log(req.body);
-    const planName = req.body.name;
-    console.log(planName);
-    const tasks = [req.body.tasks];
-    console.log(tasks);
+
+    const planName = req.body.planName;
+    const tasks = req.body.tasks;
     //   plan.date = Date.parse(req.body.date);
     const newPlan = new Plan({ planName, tasks });
-    console.log(newPlan);
 
     newPlan.save()
         .then(() => res.json('Plan added!'))
-
-
         .catch(err => res.status(400).json('error is here' + err));
 
 });
