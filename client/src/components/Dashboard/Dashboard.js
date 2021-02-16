@@ -32,11 +32,12 @@ import Avatar from '@material-ui/core/Avatar';
 import Analytics2 from '../Analytics/Analytics2.js';
 import { Link } from 'react-router-dom';
 
-// import UserProfile from '../userProfile/UserProfile';
-// import photo from '../images/userIconMale.jpg';
+import MenuItem from '@material-ui/core/MenuItem';
+import Menu from '@material-ui/core/Menu';
+
 import './Dashboard.css';
 
-const drawerWidth = 200;
+const drawerWidth = 180;
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -119,170 +120,220 @@ function HomeIcon(props) {
   return <MenuIcon />;
 }
 
-export default function MiniDrawer() {
-  const classes = useStyles();
-  const theme = useTheme();
-  const [open, setOpen] = React.useState(true);
+  export default function MiniDrawer() {
+    const classes = useStyles();
+    const theme = useTheme();
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const [selectedIndex, setSelectedIndex] = React.useState(1);
+    const [open, setOpen] = React.useState(true);
 
-  ///////////////////// make drawer close when screen is small
-  const setSmall = () => {
-    setOpen(false);
-  };
+    ///////////////////// make drawer close when screen is small
+    const setSmall = () => {
+      setOpen(false);
+    };
 
-  const setLarge = () => {
-    setOpen(true);
-  };
+    const setLarge = () => {
+      setOpen(true);
+    };
 
-  useEffect(() => {
-    const mediaQuery = window.matchMedia('(min-width: 768px)');
+    useEffect(() => {
+      const mediaQuery = window.matchMedia('(min-width: 768px)');
 
-    mediaQuery.addListener((mq) => {
-      if (mq.matches) {
-        setLarge();
-      } else {
-        setSmall();
-      }
+      mediaQuery.addListener((mq) => {
+        if (mq.matches) {
+          setLarge();
+        } else {
+          setSmall();
+        }
+      });
     });
-  });
 
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
+    const options = [
+      <UserAvatar
+      size="120"
+      name="Jane Doe"
+      color="#a8a8a8"
+      className="user-profile"
+    />,
+      '[ Change Profile Picture ]',
+      '[ Settings ]',
+      'Cancel',
+    ];
 
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
+    ////////////////Pop-Out Window for User Avatar
+    const handleClickListItem = (event) => {
+      setAnchorEl(event.currentTarget);
+    };
+  
+    const handleMenuItemClick = (event, index) => {
+      setSelectedIndex(index);
+      setAnchorEl(null);
+    };
+  
+    const handleClose = () => {
+      setAnchorEl(null);
+    };
 
-  return (
-    <div className={classes.root}>
-      <CssBaseline />
-      <AppBar
-        position="fixed"
-        className={clsx(classes.appBar, {
-          [classes.appBarShift]: open,
-        })}
-      >
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            className={clsx(classes.menuButton, {
-              [classes.hide]: open,
-            })}
-          >
-            <HomeIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap>
-            <div className="logo-container">
-              <img src={logo} alt="ilha logo" />
-              <p>ILHA</p>
-            </div>
-          </Typography>
-          <Link to="/Video">
-            <Button variant="contained" className={classes.button}>
-              <VideoCallIcon />
-            </Button>
-          </Link>
-        </Toolbar>
-      </AppBar>
-      <Drawer
-        variant="permanent"
-        className={clsx(classes.drawer, {
-          [classes.drawerOpen]: open,
-          [classes.drawerClose]: !open,
-        })}
-        classes={{
-          paper: clsx({
+    const handleDrawerOpen = () => {
+      setOpen(true);
+    };
+
+    const handleDrawerClose = () => {
+      setOpen(false);
+    };
+
+    return (
+      <div className={classes.root}>
+        <CssBaseline />
+        <AppBar
+          position="fixed"
+          className={clsx(classes.appBar, {
+            [classes.appBarShift]: open,
+          })}
+        >
+          <Toolbar>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              onClick={handleDrawerOpen}
+              edge="start"
+              className={clsx(classes.menuButton, {
+                [classes.hide]: open,
+              })}
+            >
+              <HomeIcon />
+            </IconButton>
+            <Typography variant="h6" noWrap>
+              <div className="logo-container">
+                <img src={logo} alt="ilha logo" />
+                <p>ILHA</p>
+              </div>
+            </Typography>
+            <Link to="/Video">
+              <Button variant="contained" className={classes.button}>
+                <VideoCallIcon />
+              </Button>
+            </Link>
+          </Toolbar>
+        </AppBar>
+        <Drawer
+          variant="permanent"
+          className={clsx(classes.drawer, {
             [classes.drawerOpen]: open,
             [classes.drawerClose]: !open,
-          }),
-        }}
-      >
-        <div className={classes.toolbar}>
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'rtl' ? (
-              <ChevronRightIcon />
-            ) : (
-              <ChevronLeftIcon />
-            )}
-          </IconButton>
-        </div>
+          })}
+          classes={{
+            paper: clsx({
+              [classes.drawerOpen]: open,
+              [classes.drawerClose]: !open,
+            }),
+          }}
+        >
+          <div className={classes.toolbar}>
+            <IconButton onClick={handleDrawerClose}>
+              {theme.direction === 'rtl' ? (
+                <ChevronRightIcon />
+              ) : (
+                  <ChevronLeftIcon />
+                )}
+            </IconButton>
+          </div>
 
-        {/* { open ? <UserProfile/> : <img src={photo} id='logo-image'/> } */}
-
-        <div className={classes.root}></div>
-        <List>
-          <ListItem button>
-            {open ? (
-              <UserAvatar
-                size="120"
-                name="Jane Doe"
-                color="#a8a8a8"
-                className="user-profile"
-              />
-            ) : (
-              <ListItemIcon>
-                <Avatar
-                  alt="Jane Doe"
-                  src="/static/images/avatar/1.jpg"
-                  className="small-avatar"
+          <div className={classes.root}></div>
+          <List component="nav" aria-label="Device settings">
+            <ListItem button
+            aria-haspopup="true"
+            aria-controls="lock-menu"
+            aria-label="when device is locked"
+            onClick={handleClickListItem}
+            >
+              {open ? (
+                <UserAvatar
+                  size="120"
+                  name="Jane Doe"
+                  color="#a8a8a8"
+                  className="user-profile"
                 />
+              ) : (
+                  <ListItemIcon>
+                    <Avatar
+                      alt="Jane Doe"
+                      src="/static/images/avatar/1.jpg"
+                      className="small-avatar"
+                      onClick={handleClickListItem}
+                    />
+                  </ListItemIcon>
+                )}
+            </ListItem>
+
+            <Divider />
+            <ListItem button>
+              <ListItemIcon>
+                <AccountCircleIcon />
               </ListItemIcon>
-            )}
-          </ListItem>
+              <ListItemText primary={'My Profile'} />
+            </ListItem>
 
+            <ListItem button>
+              <ListItemIcon>
+                <DashboardIcon />
+              </ListItemIcon>
+              <ListItemText primary={'Dashboard'} />
+            </ListItem>
+
+            <ListItem button>
+              <ListItemIcon>
+                <MailIcon />
+              </ListItemIcon>
+              <ListItemText primary={'Messages'} />
+            </ListItem>
+
+            <ListItem button>
+              <ListItemIcon>
+                <EventIcon />
+              </ListItemIcon>
+              <ListItemText primary={'Agenda'} />
+            </ListItem>
+
+            <ListItem button>
+              <ListItemIcon>
+                <LibraryBooksIcon />
+              </ListItemIcon>
+              <ListItemText primary={'Files'} />
+            </ListItem>
+
+            <ListItem button>
+              <ListItemIcon>
+                <ExitToAppIcon />
+              </ListItemIcon>
+              <ListItemText primary={'Log out'} />
+            </ListItem>
+          </List>
+          <Menu
+        id="lock-menu"
+        anchorEl={anchorEl}
+        keepMounted
+        open={Boolean(anchorEl)}
+        onClose={handleClose}
+      >
+        {options.map((option, index) => (
+          <MenuItem
+            key={option}
+            disabled={index === 0}
+            selected={index === selectedIndex}
+            onClick={(event) => handleMenuItemClick(event, index)}
+          >
+            {option}
+          </MenuItem>
+        ))}
+      </Menu>
           <Divider />
-          <ListItem button>
-            <ListItemIcon>
-              <AccountCircleIcon />
-            </ListItemIcon>
-            <ListItemText primary={'My Profile'} />
-          </ListItem>
-
-          <ListItem button>
-            <ListItemIcon>
-              <DashboardIcon />
-            </ListItemIcon>
-            <ListItemText primary={'Dashboard'} />
-          </ListItem>
-
-          <ListItem button>
-            <ListItemIcon>
-              <MailIcon />
-            </ListItemIcon>
-            <ListItemText primary={'Messages'} />
-          </ListItem>
-
-          <ListItem button>
-            <ListItemIcon>
-              <EventIcon />
-            </ListItemIcon>
-            <ListItemText primary={'Agenda'} />
-          </ListItem>
-
-          <ListItem button>
-            <ListItemIcon>
-              <LibraryBooksIcon />
-            </ListItemIcon>
-            <ListItemText primary={'Files'} />
-          </ListItem>
-
-          <ListItem button>
-            <ListItemIcon>
-              <ExitToAppIcon />
-            </ListItemIcon>
-            <ListItemText primary={'Log out'} />
-          </ListItem>
-        </List>
-        <Divider />
-      </Drawer>
-      <main className={classes.content}>
-        {/* <Analytics /> */}
-        <Analytics2 />
-        <Plans />
-      </main>
-    </div>
-  );
-}
+        </Drawer>
+        <main className={classes.content}>
+          {/* <Analytics /> */}
+          <Analytics2 />
+          <Plans />
+        </main>
+      </div>
+    );
+  }
