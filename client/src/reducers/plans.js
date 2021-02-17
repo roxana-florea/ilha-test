@@ -1,28 +1,27 @@
-const plansReducer = (state = {}, action) => {
-  const plansObj = { ...state };
+const plansReducer = (state = [], action) => {
+  const plansArr = [...state] ;
 
   switch (action.type) {
     case 'ADD_PLAN':
-      plansObj[action.value.id] = action.value;
-      return plansObj;
+      plansArr.push(action.value);
+      return plansArr;
 
     case 'DELETE_PLAN':
-      delete plansObj[action.value];
-      return plansObj;
+      return plansArr.filter(plan => plan._id !== action.value);
 
     case 'ADD_TASK':
-      plansObj[action.value.planId].tasks[action.value.id] = action.value;
-      return plansObj;
+      plansArr[action.value.planId].tasks[action.value.id] = action.value;
+      return plansArr;
 
     case 'DELETE_TASK':
-      const planToDeleteTask = plansObj[action.value.planId];
+      const planToDeleteTask = plansArr[action.value.planId];
       delete planToDeleteTask.tasks[action.value.id];
-      return plansObj;
+      return plansArr;
 
     case 'UPDATE_TASK':
-      const planToUpdateTask = plansObj[action.value.planId];
+      const planToUpdateTask = plansArr[action.value.planId];
       planToUpdateTask.tasks[action.value.id] = action.value;
-      return plansObj;
+      return plansArr;
 
     default:
       return state;

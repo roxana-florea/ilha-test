@@ -18,7 +18,7 @@ router.route('/').post((req, res) => {
     const newPlan = new Plan({ planName, tasks });
 
     newPlan.save()
-        .then(() => res.json('Plan added!'))
+        .then(() => res.json(newPlan))
         .catch(err => res.status(400).json('error is here' + err));
 
 });
