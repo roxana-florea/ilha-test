@@ -2,6 +2,8 @@ import React from 'react';
 import { useState } from 'react';
 import useVideo from './useVideo';
 import './Video.css'
+import WidgetsIcon from '@material-ui/icons/Widgets';
+import styled from 'styled-components';
 
 const Video = () => {
   const [incomingVideoId, setIncomingVideoId] = useState(null);
@@ -14,7 +16,18 @@ const Video = () => {
     incomingVideoRef,
   } = useVideo();
 
-
+const widgetButton= styled.button`
+        position: absolute;
+        top: 90%;
+        left: 95%;
+        color: grey;
+        background-color: white;
+        box-shadow: 0px 0px 5px 5px grey;
+        border-radius: 100%;
+        width: 3%;
+        height: auto;
+        padding: 0.5%;
+`
   return (
     <div>
       <video muted autoPlay={true} ref={myVideoRef}
@@ -46,6 +59,10 @@ const Video = () => {
         Connect
       </button>
       </div>
+      <widgetButton>
+      <WidgetsIcon 
+      />
+      </widgetButton>
       <div>
       <video muted autoPlay={true} ref={incomingVideoRef}
         style={{
