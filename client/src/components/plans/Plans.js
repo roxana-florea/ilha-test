@@ -28,20 +28,20 @@ export default function Plans() {
 
   const addNewPlan = () => {
     const newPlan = {
-      id: nanoid(),
-      name: 'New plan',
-      tasks:{}
+      planName: 'New plan ' + Math.floor(Date.now() / 1000)
+      ,
+      tasks:[]
     };
     executeReduxAction(addPlan(newPlan));
     setExpandedPlan(newPlan);
     scroll.scrollToBottom();
   };
 
-  const toggleExpanded = (idPlan) => {
-    if (expandedPlan && expandedPlan.id === idPlan) {
+  const toggleExpanded = (plan) => {
+    if (expandedPlan && expandedPlan.planName === plan.planName) {
       setExpandedPlan(null);
     } else {
-      setExpandedPlan(plans[idPlan]);
+      setExpandedPlan(plan);
     }
   };
 
@@ -51,7 +51,7 @@ export default function Plans() {
         <div className="empty-plan-container">
           <Card className={classes.root}>
             <CardContent>
-              {Object.values(plans).length > 0 ? (
+              {plans.length > 0 ? (
                 ''
               ) : (
                 <Typography
@@ -77,11 +77,11 @@ export default function Plans() {
           </Card>
         </div>
       </div>
-      {Object.values(plans).map((plan, key) => (
+      {plans.map((plan, key) => (
         <Plan
-          key={plan.id}
+          key={plan._id}
           plan={plan}
-          isExpanded={expandedPlan && plan.id === expandedPlan.id}
+          isExpanded={expandedPlan && plan.planName === expandedPlan.planName}
           toggleExpanded={toggleExpanded}
         />
       ))}

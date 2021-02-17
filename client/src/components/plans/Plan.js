@@ -59,7 +59,7 @@ export default function Plan({ plan, isExpanded, toggleExpanded }) {
   const executeReduxAction = useDispatch();
 
   const openCloseAccordion = () => {
-    toggleExpanded(plan.id);
+    toggleExpanded(plan._id);
   };
 
   const deleteCurrentPlan = () => {
@@ -69,21 +69,21 @@ export default function Plan({ plan, isExpanded, toggleExpanded }) {
 
   const planToString = () => {
     const name = planName || 'New plan';
+
     const planTasks = plan.tasks;
-    const duration = Object.values(planTasks).reduce(
+    const duration = planTasks.reduce(
       (accumulator, currentValue) => {
         return accumulator + parseInt(currentValue.duration);
       },
       0
     );
-    const parts = Object.keys(planTasks).length;
+    const parts = planTasks.length;
     return `${name}, ${duration} min  / ${parts} parts`;
   };
 
   const addCurrentTask = () => {
     const newTask = {
-      id: nanoid(),
-      planId: plan.id,
+      planId: plan._id,
       name: taskName,
       description: description,
       duration: duration,
@@ -187,7 +187,7 @@ export default function Plan({ plan, isExpanded, toggleExpanded }) {
             </CardContent>
 
             {warningMessage ? <Warning /> : ''}
-            {deleteWarningMessage ? <Delete planId={plan.id} /> : ''}
+            {deleteWarningMessage ? <Delete planId={plan._id} /> : ''}
 
           </Card>
         </div>

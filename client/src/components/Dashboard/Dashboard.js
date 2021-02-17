@@ -32,11 +32,12 @@ import Avatar from '@material-ui/core/Avatar';
 import Analytics2 from '../analytics/Analytics2.js';
 import { Link } from 'react-router-dom';
 
-// import UserProfile from '../userProfile/UserProfile';
-// import photo from '../images/userIconMale.jpg';
+import MenuItem from '@material-ui/core/MenuItem';
+import Menu from '@material-ui/core/Menu';
+
 import './Dashboard.css';
 
-const drawerWidth = 200;
+const drawerWidth = 180;
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -109,8 +110,9 @@ const useStyles = makeStyles((theme) => ({
 
   button: {
     backgroundColor: 'rgb(233, 42, 138)',
-    marginLeft: '90%',
+    marginLeft: '85%',
     position: 'absolute',
+    top: '20%',
   },
 }));
 
@@ -121,6 +123,8 @@ function HomeIcon(props) {
 export default function MiniDrawer() {
   const classes = useStyles();
   const theme = useTheme();
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [selectedIndex, setSelectedIndex] = React.useState(1);
   const [open, setOpen] = React.useState(true);
 
   ///////////////////// make drawer close when screen is small
@@ -143,6 +147,32 @@ export default function MiniDrawer() {
       }
     });
   });
+
+  const options = [
+    <UserAvatar
+      size="120"
+      name="Jane Doe"
+      color="#a8a8a8"
+      className="user-profile"
+    />,
+    '[ Change Profile Picture ]',
+    '[ Settings ]',
+    'Cancel',
+  ];
+
+  ////////////////Pop-Out Window for User Avatar
+  const handleClickListItem = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleMenuItemClick = (event, index) => {
+    setSelectedIndex(index);
+    setAnchorEl(null);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -179,11 +209,11 @@ export default function MiniDrawer() {
               <p>ILHA</p>
             </div>
           </Typography>
-          <Button variant="contained" className={classes.button}>
-            <Link to="/Video">
+          <Link to="/Video" target="_blank">
+            <Button variant="contained" className={classes.button}>
               <VideoCallIcon />
-            </Link>
-          </Button>
+            </Button>
+          </Link>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -209,11 +239,15 @@ export default function MiniDrawer() {
           </IconButton>
         </div>
 
-        {/* { open ? <UserProfile/> : <img src={photo} id='logo-image'/> } */}
-
         <div className={classes.root}></div>
-        <List>
-          <ListItem button>
+        <List component="nav" aria-label="Device settings">
+          <ListItem
+            button
+            aria-haspopup="true"
+            aria-controls="lock-menu"
+            aria-label="when device is locked"
+            onClick={handleClickListItem}
+          >
             {open ? (
               <UserAvatar
                 size="120"
@@ -227,6 +261,7 @@ export default function MiniDrawer() {
                   alt="Jane Doe"
                   src="/static/images/avatar/1.jpg"
                   className="small-avatar"
+                  onClick={handleClickListItem}
                 />
               </ListItemIcon>
             )}
@@ -275,6 +310,24 @@ export default function MiniDrawer() {
             <ListItemText primary={'Log out'} />
           </ListItem>
         </List>
+        <Menu
+          id="lock-menu"
+          anchorEl={anchorEl}
+          keepMounted
+          open={Boolean(anchorEl)}
+          onClose={handleClose}
+        >
+          {options.map((option, index) => (
+            <MenuItem
+              key={option}
+              disabled={index === 0}
+              selected={index === selectedIndex}
+              onClick={(event) => handleMenuItemClick(event, index)}
+            >
+              {option}
+            </MenuItem>
+          ))}
+        </Menu>
         <Divider />
       </Drawer>
       <main className={classes.content}>
