@@ -5,7 +5,8 @@ const Schema = mongoose.Schema;
 const taskSchema = new Schema({
   taskName: { type: String, required: false },
   description: { type: String, required: false },
-  duration: { type: Number, required: false }
+  duration: { type: Number, required: false },
+  planId: { type: String, required: false}
 }, 
 );
 

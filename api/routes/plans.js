@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const Plan = require('../models/plans');
+const Task = require('../models/tasks');
 
 router.route('/').get((req, res) => {
     Plan.find()
@@ -80,19 +81,41 @@ router.route('/:plan_id/tasks/:task_id').delete((req, res) => {
 
 
 
-
+//add task
 router.route('/:plan_id/tasks').post((req, res) => {
-    Plan.find().update(
+    const taskName = req.body.taskName;
+    const taskDescription = req.body.description;///name from ejs
+    const taskDuration = req.body.duration;
 
-        {"_id": req.params.plan_id},
-        { "$push": { "tasks": req.body } },
-         
-
-
-    ).then(() => res.json('Task added!'))
-        .catch(err => res.status(400).json('Error: ' + err));
+    const task = new Task({
+      taskName: taskName,
+      description: taskDescription,
+      duration: taskDuration, 
+      planId: req.params.plan_id
+    });
+    
+    Plan.findOne({_id: req.params.plan_id}, (err,foundPlan)=>{
+      foundPlan.tasks.push(task)
+      foundPlan.save()
+    .then(() => res.json(task))
+     .catch(err => res.status(400).json('error is here' + err));
+      
+    })
 
 });
+
+// router.route('/:plan_id/tasks').post((req, res) => {
+//     const taskName = req.body.taskName;
+//     const taskDescription = req.body.description;
+//     const taskDuration = req.body.duration;
+//     const newTask = new Task({ taskName, taskDescription, taskDuration });
+//     console.log(newTask);
+//     Plan.find().update(
+//         { "_id": req.params.plan_id },
+//         { "$push": { "tasks": req.body } },
+//     ).then(() => res.json(newTask))
+//         .catch(err => res.status(400).json('Error: ' + err));
+// });
 
 
 

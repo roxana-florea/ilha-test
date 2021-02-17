@@ -20,13 +20,6 @@ export const addPlan = (planObjWithoutId) => {
 
 
 
-// export const deletePlan = (planId) => {
-//   return {
-//     type: 'DELETE_PLAN',
-//     value: planId,
-//   };
-// };
-
 
 export const deletePlan = (planId) => {
   console.log(planId);
@@ -46,11 +39,21 @@ export const deletePlan = (planId) => {
 }
 
 
-export const addTask = (taskObj) => {
-  return {
-    type: 'ADD_TASK',
-    value: taskObj,
-  };
+export const addTask = (task) => {
+  console.log(task)
+  return dispatch => { //return function
+    return axios
+      .post(`http://localhost:5000/plans/${task.planId}/tasks`, task) //return post request response
+      .then((objectFromHell) => { //pass data in as a parameter, call the callback, dispatch the action. 
+        console.log(objectFromHell);
+
+        dispatch({
+          type: 'ADD_TASK',
+          value: objectFromHell.data
+        })
+      })
+  }
+
 };
 
 export const deleteTask = (taskObj) => {
