@@ -13,8 +13,6 @@ import { useDispatch } from 'react-redux';
 import { addTask } from '../../actions';
 import Warning from './messages/Warning';
 import Delete from './messages/Delete';
-
-import { nanoid } from 'nanoid';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
@@ -84,7 +82,7 @@ export default function Plan({ plan, isExpanded, toggleExpanded }) {
   const addCurrentTask = () => {
     const newTask = {
       planId: plan._id,
-      name: taskName,
+      taskName: taskName,
       description: description,
       duration: duration,
     };
