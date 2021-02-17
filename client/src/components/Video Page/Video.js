@@ -18,7 +18,7 @@ const Video = () => {
     incomingVideoRef,
   } = useVideo();
 
-const WidgetButton= styled.button`
+  const WidgetButton= styled.button`
         position: absolute;
         top: 90%;
         left: 95%;
@@ -37,14 +37,14 @@ const WidgetButton= styled.button`
         }`
 
   const ControlContainer= styled.div`
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    width: 10vw;
-    position: absolute;
-    top: 90%;
-    left: 45%;
-    `
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        width: 10vw;
+        position: absolute;
+        top: 90%;
+        left: 45%;
+        `
   const MicButton= styled.button`
         display:flex;
         justify-content:center;
@@ -76,7 +76,7 @@ const WidgetButton= styled.button`
           transform: scale(1.2);
           cursor: pointer;
         }`
-  
+
   return (
     <div>
       <video muted autoPlay={true} ref={myVideoRef}
@@ -93,45 +93,43 @@ const WidgetButton= styled.button`
         </video>
 
         <div style={{position:'absolute', top:'87%'}}>
-      <p>{myVideoId}</p>
-      <button onClick={start}>Start</button>
-      <input
-        onChange={(event) => {
-          setIncomingVideoId(event.target.value);
-        }}
-      />
-      <button
-        onClick={() => {
+          <p>{myVideoId}</p>
+          <button onClick={start}>Start</button>
+          <input
+            onChange={(event) => {
+            setIncomingVideoId(event.target.value);
+          }}
+          />
+        <button
+          onClick={() => {
           connect(incomingVideoId);
         }}
-      >
+        >
         Connect
-      </button>
-      </div>
-      <WidgetButton>
-      <WidgetsIcon style={{
-        color: 'rgb(39, 25, 90)',
-        alignSelf:'center'
-      }}
-      />
-      </WidgetButton>
-      <ControlContainer>
+        </button>
+        </div>
+        <WidgetButton>
+        <WidgetsIcon style={{
+          color: 'rgb(39, 25, 90)',
+          alignSelf:'center'
+        }}
+        />
+        </WidgetButton>
+        <ControlContainer>
         <MicButton>
-          <MicIcon
-          style={{
+          <MicIcon style={{
             color: 'rgb(39, 25, 90)',
             alignSelf:'center'
           }}
           /></MicButton>
-        <RecordButton>
-          <StopIcon
-          style={{
+          <RecordButton>
+          <StopIcon   style={{
             color: 'rgb(39, 25, 90)',
             alignSelf:'center'
           }}
           />
           </RecordButton>
-      </ControlContainer>
+        </ControlContainer>
       <div>
       <video muted autoPlay={true} ref={incomingVideoRef}
         style={{
