@@ -4,6 +4,8 @@ import useVideo from './useVideo';
 import './Video.css'
 import WidgetsIcon from '@material-ui/icons/Widgets';
 import styled from 'styled-components';
+import MicIcon from '@material-ui/icons/Mic';
+import StopIcon from '@material-ui/icons/Stop';
 
 const Video = () => {
   const [incomingVideoId, setIncomingVideoId] = useState(null);
@@ -16,18 +18,65 @@ const Video = () => {
     incomingVideoRef,
   } = useVideo();
 
-const widgetButton= styled.button`
+const WidgetButton= styled.button`
         position: absolute;
         top: 90%;
         left: 95%;
         color: grey;
         background-color: white;
-        box-shadow: 0px 0px 5px 5px grey;
+        box-shadow: 0px 0px 5px 2px grey;
         border-radius: 100%;
-        width: 3%;
-        height: auto;
-        padding: 0.5%;
-`
+        border: none;
+        width: 3vw;
+        height: 3vw;
+        opacity: 0.8;
+
+        &:hover{
+          transform: scale(1.2);
+          cursor: pointer;
+        }`
+
+  const ControlContainer= styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 10vw;
+    position: absolute;
+    top: 90%;
+    left: 45%;
+    `
+  const MicButton= styled.button`
+        display:flex;
+        justify-content:center;
+        background-color: white;
+        box-shadow: 0px 0px 5px 2px grey;
+        border-radius: 100%;
+        border: none;
+        width: 3vw;
+        height: 3vw;
+        opacity: 0.8;
+
+        &:hover{
+          transform: scale(1.2);
+          cursor: pointer;
+        }`
+
+  const RecordButton= styled.button`
+        display:flex;
+        justify-content:center;
+        background-color: rgb(177, 27, 27);
+        box-shadow: 0px 0px 5px 2px grey;
+        border-radius: 100%;
+        border: none;
+        width: 3vw;
+        height: 3vw;
+        opacity: 0.8;
+
+        &:hover{
+          transform: scale(1.2);
+          cursor: pointer;
+        }`
+  
   return (
     <div>
       <video muted autoPlay={true} ref={myVideoRef}
@@ -59,10 +108,30 @@ const widgetButton= styled.button`
         Connect
       </button>
       </div>
-      <widgetButton>
-      <WidgetsIcon 
+      <WidgetButton>
+      <WidgetsIcon style={{
+        color: 'rgb(39, 25, 90)',
+        alignSelf:'center'
+      }}
       />
-      </widgetButton>
+      </WidgetButton>
+      <ControlContainer>
+        <MicButton>
+          <MicIcon
+          style={{
+            color: 'rgb(39, 25, 90)',
+            alignSelf:'center'
+          }}
+          /></MicButton>
+        <RecordButton>
+          <StopIcon
+          style={{
+            color: 'rgb(39, 25, 90)',
+            alignSelf:'center'
+          }}
+          />
+          </RecordButton>
+      </ControlContainer>
       <div>
       <video muted autoPlay={true} ref={incomingVideoRef}
         style={{
