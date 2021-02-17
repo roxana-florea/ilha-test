@@ -110,7 +110,7 @@ const useStyles = makeStyles((theme) => ({
 
   button: {
     backgroundColor: 'rgb(233, 42, 138)',
-    marginLeft: '90%',
+    marginLeft: '85%',
     position: 'absolute',
     top: '20%',
   },

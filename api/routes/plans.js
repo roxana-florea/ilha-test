@@ -7,7 +7,11 @@ router.route('/').get((req, res) => {
         .catch(err => res.status(400).json('Error: ' + err));
 });
 
+
+
+//adding the plan
 router.route('/').post((req, res) => {
+
     const planName = req.body.planName;
     const tasks = req.body.tasks;
     //   plan.date = Date.parse(req.body.date);
@@ -15,20 +19,20 @@ router.route('/').post((req, res) => {
 
     newPlan.save()
         .then(() => res.json('Plan added!'))
-        .catch(err => res.status(400).json('Error: ' + err));
+        .catch(err => res.status(400).json('error is here' + err));
 
 });
 
 
 
-
+//display all the plans
 router.route('/:id').get((req, res) => {
     Plan.findById(req.params.id)
         .then(plan => res.json(plan))
         .catch(err => res.status(400).json('Error: ' + err));
 });
 
-
+//deleting a plan
 router.route('/:id').delete((req, res) => {
     Plan.findByIdAndDelete(req.params.id)
         .then(() => res.json('Plan deleted.'))
@@ -52,17 +56,19 @@ router.route('/:id').put((req, res) => {
         .catch(err => res.status(400).json('Error: ' + err));
 });
 
+
+//updating task
 router.route('/:plan_id/tasks/:task_id').put((req, res) => {
     Plan.findById(req.params.plan_id).update(
 
         { "tasks._id": req.params.task_id },
         { "$set": { "tasks.$": req.body } }
-        
+
     ).then(() => res.json('Task updated!'))
         .catch(err => res.status(400).json('Error: ' + err));
 });
 
-
+// deleting task
 router.route('/:plan_id/tasks/:task_id').delete((req, res) => {
     Plan.findByIdAndDelete(req.params.plan_id).update(
 
@@ -71,5 +77,29 @@ router.route('/:plan_id/tasks/:task_id').delete((req, res) => {
     ).then(() => res.json('Task deleted.'))
         .catch(err => res.status(400).json('Error: ' + err));
 });
+
+
+
+
+router.route('/:plan_id/tasks').post((req, res) => {
+    Plan.find().update(
+
+        {"_id": req.params.plan_id},
+        { "$push": { "tasks": req.body } },
+         
+
+
+    ).then(() => res.json('Task added!'))
+        .catch(err => res.status(400).json('Error: ' + err));
+
+});
+
+
+
+
+
+
+
+
 
 module.exports = router;
