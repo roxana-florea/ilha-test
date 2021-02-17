@@ -209,7 +209,7 @@ function HomeIcon(props) {
                 <p>ILHA</p>
               </div>
             </Typography>
-            <Link to="/Video">
+            <Link to="/Video" target='_blank'>
               <Button variant="contained" className={classes.button}>
                 <VideoCallIcon />
               </Button>
