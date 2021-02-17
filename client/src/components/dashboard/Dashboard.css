@@ -1,0 +1,59 @@
+img {
+    width: 100px;
+    height: 50px;
+    padding: 0;
+}
+
+p {
+    margin-top: 0;
+    padding: 5px;
+}
+
+.logo-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 0;
+    width: 200px;
+    height: 50px;
+    position: fixed;
+    margin-top: -20px;
+    
+}
+
+#logo-image {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    margin-left: 15px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+.makeStyles-drawerOpen-7{
+    background-color: rgb(255, 255, 255) !important;
+}
+
+.makeStyles-button-11{
+    background-color: rgb(255, 255, 255) !important;
+}
+
+.user-profile-pic{
+    background-color: yellow;
+}
+
+.user-profile{
+    display: flex;
+    justify-content: center;
+    margin:2vh;
+    flex-direction: column;
+}
+
+.makeStyles-drawerClose-8{
+    background-color: rgb(255, 255, 255) !important;
+}
+
+.small-avatar{
+    margin-top:2vh;
+    margin-bottom: 2vh;
+
+}
