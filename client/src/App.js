@@ -1,4 +1,4 @@
-import Dashboard from './components/Dashboard/Dashboard';
+import Dashboard from './components/dashboard/Dashboard';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Video from './components/Video Page/Video';
 
