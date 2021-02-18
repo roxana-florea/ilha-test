@@ -1,10 +1,11 @@
 import './Plans.css';
 import React from 'react';
+import {useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Plan from './Plan';
 import { useSelector, useDispatch } from 'react-redux';
-import { addPlan } from '../../actions';
+import { addPlan, loadPlans } from '../../actions';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
@@ -48,6 +49,11 @@ export default function Plans() {
       setExpandedPlan(plan);
     }
   };
+
+  useEffect(() => {
+    const actionToExecute = loadPlans();
+    executeReduxAction(actionToExecute);
+  }, []);
 
   return (
     <div className={classes.root}>

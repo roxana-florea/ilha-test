@@ -2,6 +2,23 @@ import axios from 'axios';
 
 
 
+
+export const loadPlans = () => {
+  return dispatch => { //return function
+    return axios                           // request plan
+      .get('http://localhost:5000/plans') //return post request response
+      //response
+      .then((allPlansArray) => { //pass data in as a parameter, call the callback, dispatch the action. 
+        dispatch({
+          type: 'LOAD_PLANS',
+          value: allPlansArray.data
+        })
+      })
+  }
+};
+
+
+
 export const addPlan = (planObjWithoutId) => {
   return dispatch => { //return function
     return axios                           // request plan
@@ -50,7 +67,6 @@ export const addTask = (task) => {
 
 
 export const deleteTask = (task) => {
-  console.log(task)
   return dispatch => { //return function
     return axios
       .delete(`http://localhost:5000/plans/${task.planId}/tasks/${task._id}`) //return delete request response
@@ -66,17 +82,14 @@ export const deleteTask = (task) => {
 
 
 
+
+
 export const updateTask = (task) => {
-  console.log('i am task')
-  console.log(task);
+console.log(task)
   return dispatch => { //return function
     return axios
-      .put(`http://localhost:5000/plans/${task.planId}/tasks/${task.id}`, task) //return put request response
-      .then((responseFromHell) => { //pass data in as a parameter, call the callback, dispatch the action.
-        // console.log('I am from hell'+ responseFromHell.data.filter(task => task._id === task.id))
-        console.log('i am task from hell')
-        console.log(responseFromHell)
-        
+      .put(`http://localhost:5000/plans/${task.planId}/tasks/${task._id}`, task) //return put request response
+      .then((responseFromHell) => { //pass data in as a parameter, call the callback, dispatch the action. 
         dispatch({
           type: 'UPDATE_TASK',
           value: task

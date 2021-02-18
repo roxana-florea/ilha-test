@@ -8,6 +8,11 @@ router.route('/').get((req, res) => {
         .catch(err => res.status(400).json('Error: ' + err));
 });
 
+router.route('/').delete((req, res) => {
+    Plan.remove()
+        .then(plans => res.json("All removed"))
+        .catch(err => res.status(400).json('Error: ' + err));
+});
 
 
 //adding the plan
@@ -66,10 +71,10 @@ router.route('/:plan_id/tasks/:task_id').put((req, res) => {
         { "$set": { "tasks.$": req.body } }
 
     )
-    .then(() => {
-       Plan.findOne({_id: req.params.plan_id}, (err,foundPlan)=>{
-            res.json(foundPlan.tasks)  // attempt to grab the task with new id
-       })
+    .then(() => { res.send('Task updated!')
+    //    Plan.findOne({_id: req.params.plan_id}, (err,foundPlan)=>{
+    //         res.json(foundPlan.tasks)  // attempt to grab the task with new id
+    //    })
     })
     .catch(err => res.status(400).json('Error: ' + err));
 });
