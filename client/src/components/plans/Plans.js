@@ -2,7 +2,6 @@ import './Plans.css';
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import { nanoid } from 'nanoid';
 import Plan from './Plan';
 import { useSelector, useDispatch } from 'react-redux';
 import { addPlan } from '../../actions';
@@ -32,7 +31,12 @@ export default function Plans() {
       ,
       tasks:[]
     };
-    executeReduxAction(addPlan(newPlan));
+
+    const actionToExecute = addPlan(newPlan);
+    executeReduxAction(actionToExecute);
+
+
+
     setExpandedPlan(newPlan);
     scroll.scrollToBottom();
   };
