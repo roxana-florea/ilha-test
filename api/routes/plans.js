@@ -8,6 +8,11 @@ router.route('/').get((req, res) => {
         .catch(err => res.status(400).json('Error: ' + err));
 });
 
+router.route('/').delete((req, res) => {
+    Plan.remove()
+        .then(plans => res.json("All removed"))
+        .catch(err => res.status(400).json('Error: ' + err));
+});
 
 
 //adding the plan

@@ -42,7 +42,7 @@ const useStyles = makeStyles({
 });
 
 export default function Plan({ plan, isExpanded, toggleExpanded }) {
-  const [planName, setPlanName] = React.useState('');
+  const [planName, setPlanName] = React.useState(plan.planName);
   const [taskName, setTaskName] = React.useState('');
   const [description, setDescription] = React.useState('');
   const [duration, setDuration] = React.useState('');
@@ -57,7 +57,7 @@ export default function Plan({ plan, isExpanded, toggleExpanded }) {
   const executeReduxAction = useDispatch();
 
   const openCloseAccordion = () => {
-    toggleExpanded(plan._id);
+    toggleExpanded(plan);
   };
 
   const deleteCurrentPlan = () => {
