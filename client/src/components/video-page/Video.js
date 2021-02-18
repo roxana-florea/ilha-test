@@ -81,14 +81,16 @@ const Video = () => {
     <div>
       <video muted autoPlay={true} ref={myVideoRef}
         style={{
-            position : "absolute",
+             position : "absolute",
             width: "100%",
-            height: "100%",
-            objectFit: "cover",
-            zIndex: "-2",
-            overflowX:'hidden',
-            overflowY:'hidden'
-        }}
+             height: "100%",
+             objectFit: "cover",
+             zIndex: "-2",
+             overflowX:'hidden',
+             overflowY:'hidden',
+             webkitTransform: "rotateY(180deg)",
+             mozTransform: "rotateY(180deg)"
+         }}
         > 
         </video>
 
@@ -141,7 +143,9 @@ const Video = () => {
           objectFit: "contain",
           zIndex: "-1",
           borderRadius:'15px',
-          boxShadow:'0px 0px 5px 5px grey'
+          boxShadow:'0px 0px 5px 5px grey',
+          webkitTransform: "rotateY(180deg)",
+          mozTransform: "rotateY(180deg)"
       }}
       > 
         </video>

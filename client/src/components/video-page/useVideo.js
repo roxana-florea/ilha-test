@@ -8,7 +8,7 @@ const useVideo = () => {
 
   const getUserMedia = (callback) => {
     navigator.mediaDevices
-      .getUserMedia({ video: true, audio: true })
+      .getUserMedia({ video: {width: 1280, height:720}, audio: true, })
       .then(callback)
       .catch((error) => {
         console.log(`error occured(( ${error.name}`);
