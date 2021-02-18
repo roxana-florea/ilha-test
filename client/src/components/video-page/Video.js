@@ -90,10 +90,12 @@ const Video = () => {
           position: 'absolute',
           width: '100%',
           height: '100%',
-          objectFit: 'contain',
+          objectFit: 'cover',
           zIndex: '-2',
           overflowX: 'hidden',
           overflowY: 'hidden',
+          webkitTransform: 'rotateY(180deg)',
+          mozTransform: 'rotateY(180deg)',
         }}
       ></video>
 
@@ -154,6 +156,8 @@ const Video = () => {
             zIndex: '-1',
             borderRadius: '15px',
             boxShadow: '0px 0px 5px 5px grey',
+            webkitTransform: 'rotateY(180deg)',
+            mozTransform: 'rotateY(180deg)',
           }}
         ></video>
       </div>

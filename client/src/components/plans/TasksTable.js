@@ -44,7 +44,7 @@ export default function TasksTable({ tasks }) {
     const savedTask = {
       id: task._id,
       planId: task.planId,
-      name: taskTitle,
+      taskName: taskTitle,
       description: description,
       duration: duration,
     };
@@ -69,7 +69,7 @@ export default function TasksTable({ tasks }) {
         </TableHead>
         <TableBody>
           {tasks.map((task) => (
-            <TableRow key={task.name}>
+            <TableRow key={task.taskName}>
               <TableCell component="th" scope="row">
                 {taskEditable === task._id ? (
                   <TextField
@@ -81,7 +81,7 @@ export default function TasksTable({ tasks }) {
                     onChange={(ev) => setTaskTitle(ev.target.value)}
                   />
                 ) : (
-                  task.name
+                  task.taskName
                 )}
               </TableCell>
               <TableCell align="right">

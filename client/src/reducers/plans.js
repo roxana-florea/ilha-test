@@ -10,13 +10,18 @@ const plansReducer = (state = [], action) => {
       return plansArr.filter(plan => plan._id !== action.value);
 
     case 'ADD_TASK':
-      plansArr[action.value.planId].tasks[action.value.id] = action.value;
+      const uselessPlan = plansArr.filter(plan => plan._id === action.value.planId);
+      uselessPlan[0].tasks.push(action.value);
+      plansArr.filter(plan => plan._id !== action.value.planId).push(uselessPlan);
+       
       return plansArr;
 
     case 'DELETE_TASK':
-      const planToDeleteTask = plansArr[action.value.planId];
-      delete planToDeleteTask.tasks[action.value.id];
-      return plansArr;
+      const planWhereTaskShouldBeDeleted = plansArr.filter(plan => plan._id === action.value.planId); 
+      planWhereTaskShouldBeDeleted[0].tasks = planWhereTaskShouldBeDeleted[0].tasks.filter (task => task._id !== action.value._id);
+      const plansArrWithoutTheOneWithRemovedTask =  plansArr.filter(plan => plan._id !== action.value.planId)
+      plansArrWithoutTheOneWithRemovedTask.push(planWhereTaskShouldBeDeleted[0]);
+      return plansArrWithoutTheOneWithRemovedTask;
 
     case 'UPDATE_TASK':
       const planToUpdateTask = plansArr[action.value.planId];
