@@ -6,9 +6,11 @@ import WidgetsIcon from '@material-ui/icons/Widgets';
 import styled from 'styled-components';
 import MicIcon from '@material-ui/icons/Mic';
 import StopIcon from '@material-ui/icons/Stop';
+import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 
 const Video = () => {
   const [incomingVideoId, setIncomingVideoId] = useState(null);
+  const [isRecording, setIsRecording] = useState(false);
 
   const {
     start,
@@ -16,6 +18,8 @@ const Video = () => {
     myVideoId,
     myVideoRef,
     incomingVideoRef,
+    startRecording,
+    stopRecording,
   } = useVideo();
 
   const WidgetButton = styled.button`
@@ -80,6 +84,16 @@ const Video = () => {
     }
   `;
 
+  const toggleRecord = () => {
+    if (!isRecording) {
+      startRecording();
+      setIsRecording(true);
+    } else {
+      stopRecording();
+      setIsRecording(false);
+    }
+  };
+
   return (
     <div>
       <video
@@ -132,13 +146,22 @@ const Video = () => {
             }}
           />
         </MicButton>
-        <RecordButton>
-          <StopIcon
-            style={{
-              color: 'rgb(39, 25, 90)',
-              alignSelf: 'center',
-            }}
-          />
+        <RecordButton onClick={toggleRecord}>
+          {isRecording ? (
+            <StopIcon
+              style={{
+                color: 'rgb(39, 25, 90)',
+                alignSelf: 'center',
+              }}
+            />
+          ) : (
+            <FiberManualRecordIcon
+              style={{
+                color: 'rgb(39, 25, 90)',
+                alignSelf: 'center',
+              }}
+            />
+          )}
         </RecordButton>
       </ControlContainer>
       <div>

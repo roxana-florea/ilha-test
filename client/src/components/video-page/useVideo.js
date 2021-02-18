@@ -1,15 +1,25 @@
 import { useState, useRef } from 'react';
 import Peer from 'peerjs';
+import RecordRTCPromisesHandler from 'recordrtc';
+import fileSaver from 'file-saver';
+import moment from 'moment';
 
 const useVideo = () => {
   const myVideoRef = useRef();
   const incomingVideoRef = useRef();
+  const recorederRef = useRef();
   const [myVideoId, setMyVideoId] = useState(null);
 
   const getUserMedia = (callback) => {
     navigator.mediaDevices
-      .getUserMedia({ video: {width: 1280, height:720}, audio: true, })
-      .then(callback)
+      .getUserMedia({ video: { width: 1280, height: 720 }, audio: true })
+      .then((stream) => {
+        callback(stream);
+        let recorder = new RecordRTCPromisesHandler(stream, {
+          type: 'video',
+        });
+        recorederRef.current = recorder;
+      })
       .catch((error) => {
         console.log(`error occured(( ${error.name}`);
       });
@@ -54,7 +64,33 @@ const useVideo = () => {
     });
   };
 
-  return { start, connect, myVideoId, myVideoRef, incomingVideoRef };
+  const startRecording = () => {
+    let recorder = recorederRef.current;
+    recorder.startRecording();
+  };
+
+  const stopRecording = () => {
+    let recorder = recorederRef.current;
+
+    recorder.stopRecording(() => {
+      let blob = recorder.getBlob();
+      fileSaver.saveAs(blob, getFileName('webm'));
+    });
+  };
+
+  const getFileName = (fileExtension) => {
+    return `Ilha-${moment().format('YYYY-MM-DD-hh-mm-ss')}.${fileExtension}`;
+  };
+
+  return {
+    start,
+    connect,
+    myVideoId,
+    myVideoRef,
+    incomingVideoRef,
+    startRecording,
+    stopRecording,
+  };
 };
 
 export default useVideo;
