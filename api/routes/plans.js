@@ -76,7 +76,7 @@ router.route('/:plan_id/tasks/:task_id').delete((req, res) => {
         { "$pull": { tasks: { "_id": req.params.task_id } } }
 
     ).then(() => res.json('Task deleted.'))
-        .catch(err => res.status(400).json('Error: ' + err));
+     .catch(err => res.status(400).json('Error: ' + err));
 });
 
 
@@ -84,7 +84,7 @@ router.route('/:plan_id/tasks/:task_id').delete((req, res) => {
 //add task
 router.route('/:plan_id/tasks').post((req, res) => {
     const taskName = req.body.taskName;
-    const taskDescription = req.body.description;///name from ejs
+    const taskDescription = req.body.description;
     const taskDuration = req.body.duration;
 
     const task = new Task({
@@ -98,7 +98,7 @@ router.route('/:plan_id/tasks').post((req, res) => {
       foundPlan.tasks.push(task)
       foundPlan.save()
     .then(() => res.json(task))
-     .catch(err => res.status(400).json('error is here' + err));
+    .catch(err => res.status(400).json('error is here' + err));
       
     })
 

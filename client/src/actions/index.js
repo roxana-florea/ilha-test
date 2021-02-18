@@ -26,7 +26,7 @@ export const deletePlan = (planId) => {
 
   return dispatch => { //return function
     return axios
-      .delete('http://localhost:5000/plans/'+planId ) //return post request response
+      .delete(`http://localhost:5000/plans/${planId}` ) //return post request response
       .then((data) => { //pass data in as a parameter, call the callback, dispatch the action. 
         console.log(data);
 
@@ -57,6 +57,7 @@ export const addTask = (task) => {
 };
 
 export const deleteTask = (taskObj) => {
+
   return {
     type: 'DELETE_TASK',
     value: taskObj,
