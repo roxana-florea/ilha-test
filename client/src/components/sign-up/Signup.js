@@ -13,9 +13,9 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { useHistory } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch} from 'react-redux';
 
-import { signUp } from '../../redux/actionCreators'
+import { signUp } from '../../redux/actions/AuthActionCreators'
 
 function Copyright() {
     return (
@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
 export default function SignUp() {
     const dispatch = useDispatch();
     const history = useHistory();
-    const { error } = useSelector((state) => state.authentication);
+    // const { error } = useSelector((state) => state.authentication);
     const classes = useStyles();
 
     const [email, setEmail] = useState('');
@@ -141,7 +141,7 @@ export default function SignUp() {
                             />
                         </Grid>
                     </Grid>
-                    {error !== null ? <div>{error}</div> : null}
+                    {/* {error !== null ? <div>{error}</div> : null} */}
                     <Button
                         type="submit"
                         fullWidth

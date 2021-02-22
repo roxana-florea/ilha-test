@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+// const signOut = require('../actions/AuthActionCreators');
 
 const {
     ACCESS_REQUEST,
@@ -10,13 +11,12 @@ const {
     SIGNOUT_REQUEST,
     SIGNOUT_SUCCESS,
     SIGNOUT_FAILED
-} = require('./actionTypes');
+} = require('../actions/AuthActionTypes');
 
 export const validToken = (token) => {
-    console.log(`this is coming from line 16 in reducer: ${token}`);
     let decoded = jwt.decode(token);
-    console.log(decoded);
-    // return new Date(decoded.exp * 1000) > new Date() ? decoded : null;
+    // return new Date(decoded.exp * 2000) > new Date() ? decoded : signOut();
+    return new Date(decoded.exp * 2000) > new Date() ? decoded : null;
 };
 const initState = {
     currentUser: localStorage.getItem('USER-TOKEN')
@@ -55,7 +55,7 @@ const authenticationReducer = function (state = initState, action) {
             return {
                 ...state,
                 loading: false,
-                token: action.payload.user,
+                token: action.payload.token,
                 currentUser: action.payload.user,
                 isAuthenticated: true
             };

@@ -37,9 +37,9 @@ import Menu from '@material-ui/core/Menu';
 
 import './Dashboard.css';
 
-const { signOut } = require('../../redux/actionCreators.js');
+const { signOut } = require('../../redux/actions/AuthActionCreators.js');
 
-const drawerWidth = 180;
+const drawerWidth = 200;
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -74,7 +74,7 @@ const useStyles = makeStyles((theme) => ({
   },
   drawerOpen: {
     width: drawerWidth,
-    backgroundColor: 'rgb(245, 245, 245)',
+    backgroundColor: 'rgb(255, 255, 255)',
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
@@ -86,7 +86,7 @@ const useStyles = makeStyles((theme) => ({
       duration: theme.transitions.duration.leavingScreen,
     }),
     overflowX: 'hidden',
-    backgroundColor: 'rgb(245, 245, 245)',
+    backgroundColor: 'rgb(255, 255, 255)',
     width: theme.spacing(7) + 1,
     [theme.breakpoints.up('sm')]: {
       width: theme.spacing(9) + 1,
@@ -111,7 +111,7 @@ const useStyles = makeStyles((theme) => ({
   },
 
   button: {
-    backgroundColor: 'rgb(233, 42, 138)',
+    backgroundColor: 'rgb(255, 255, 255)',
     marginLeft: '85%',
     position: 'absolute',
     top: '20%',
@@ -320,7 +320,7 @@ export default function MiniDrawer() {
               <ListItemIcon>
                 <ExitToAppIcon />
               </ListItemIcon>
-              <ListItemText primary={'Log out'} />
+              <ListItemText primary={'Sign Out'} />
             </Link>
           </ListItem>
         </List>

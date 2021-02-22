@@ -10,12 +10,12 @@ const {
     SIGNOUT_REQUEST,
     SIGNOUT_SUCCESS,
     SIGNOUT_FAILED
-} = require('./actionTypes');
+} = require('./AuthActionTypes');
 
 //Register
 const registerRequest = () => {
     return {
-        type: REGISTER_REQUEST
+        type: REGISTER_REQUEST,
     };
 };
 
@@ -23,8 +23,8 @@ const registerSuccess = (user) => {
     return {
         type: REGISTER_SUCCESS,
         payload: {
-            user
-        }
+            user,
+        },
     };
 };
 
@@ -41,7 +41,7 @@ export const signUp = (user, history) => {
         axios({
             method: 'post',
             url: '/signUp',
-            data: user
+            data: user,
         })
             .then((res) => {
                 const { data } = res.data;
@@ -50,7 +50,7 @@ export const signUp = (user, history) => {
             })
             .catch(error => {
                 console.log(error);
-                dispatch(registerFail(error));
+                dispatch(registerFail(error))
             });
     };
 };
@@ -96,7 +96,8 @@ export const signIn = (payload, history) => {
                 history.push('/Dashboard');
             })
             .catch((error) => {
-                console.log(error)
+                console.log(`this is coming from the actionCreator line 101:`, error)
+                    window.alert(`Invalid E-mail or Password`) 
                 dispatch(accessFailed(error));
             })
     };
