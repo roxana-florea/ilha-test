@@ -1,13 +1,22 @@
 import Dashboard from './components/dashboard/Dashboard';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Video from './components/video-page/Video';
+import Signin from './components/signin/Signin';
+import Signup from './components/signUp/Signup';
+import { UserRoute } from './components/privateRoute'
+
 
 function App() {
   return (
     <Router>
       <Switch>
-        <Route path="/" exact component={Dashboard} />
+        <Route path="/" exact component={Signin} />
+        <Route path="/Signup" component={Signup} />
+        {/* <Route path="/Dashboard" component={Dashboard} /> */}
         <Route path="/Video" component={Video} />
+        <UserRoute path='/Dashboard'>
+          <Dashboard />
+        </UserRoute>
       </Switch>
     </Router>
   );

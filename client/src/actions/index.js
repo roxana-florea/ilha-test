@@ -69,3 +69,24 @@ export const updateTask = (taskObj) => {
     value: taskObj,
   };
 };
+
+//testing
+
+// export const signIn = (emailPassword) => {
+  // console.log(emailPassword)
+
+//   return dispatch => { //return function
+//     return axios                           // 
+//       .post('http://localhost:5000/login/', emailPassword) //return post request response
+//              //response
+//       .then((backendResponseWithObjectWithEmPass) => { //pass data in as a parameter, call the callback, dispatch the action. 
+//         console.log(backendResponseWithObjectWithEmPass);
+//         dispatch({
+//           type: 'ADD_PLAN',
+//           value: backendResponseWithObjectWithNewId.data
+//         })
+//       })
+//   }
+// }
+
+
