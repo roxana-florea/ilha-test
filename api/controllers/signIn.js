@@ -9,7 +9,6 @@ const signIn = async (req, res, next) => {
         return res.status(400).send({ error: error.message });
 
         const token = await UserServices.signInUser(payload);
-        console.log(`this is in the token: ${token}`)
         res.status(200).json({
             success: true,
             token: token
