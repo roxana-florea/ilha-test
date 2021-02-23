@@ -3,17 +3,13 @@ const User = require('../models/user');
 const getSignedToken = require('../util/signedToken');
 
 async function registerUser(payload) {
-    User.findOne({ email: payload.email })
-        .exec((err, user) => {
-            if (err) {
-              throw new Error({ message: err });
+    return User.find({ email: payload.email })
+        .exec()
+        .then((user) => {
+            if (user.length > 0) {
+                throw new Error('This e-mail has already been registered to an account.');
             }
-      
-            if (user) {
-              return Error({ message: 'This e-mail has already been registered to an account.'});
-            }
-          })
-        return bcrypt
+            return bcrypt
                 .hash(payload.password, 10)
                 .then((hashed) => {
                     const newUser = new User({
@@ -25,9 +21,11 @@ async function registerUser(payload) {
                     return newUser.save();
                 })
                 .catch((error) => {
-                    throw Error(`error from user services register: ${error}`);
-                })
-            };
+                    throw new Error(`error from user services register: ${error}`);
+                    // console.log(error);
+                });
+        });
+}
 
 function signInUser(payload) {
     return User.findOne({ email: payload.email })
@@ -39,19 +37,19 @@ function signInUser(payload) {
                 throw new Error('Incorrect E-mail');
             } else {
                 return bcrypt
-                .compare(payload.password, user.password)
-                .then((res) => {
-                    console.log(res)
-                    if (res) {
-                        const token = getSignedToken(user._id);
-                        return token;
-                    } else {
-                        throw new Error('Invalid Password');
-                    }
-                })
-                .catch((err) => {
-                    throw new Error(`error from user services SignIn: ${err}`)
-                });
+                    .compare(payload.password, user.password)
+                    .then((res) => {
+                        console.log(res)
+                        if (res) {
+                            const token = getSignedToken(user._id);
+                            return token;
+                        } else {
+                            throw new Error('Invalid Password');
+                        }
+                    })
+                    .catch((err) => {
+                        throw new Error(`error from user services SignIn: ${err}`)
+                    });
             }
         });
 

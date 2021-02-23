@@ -7,6 +7,12 @@ const port = process.env.PORT || 5000;
 const cors = require('cors');
 const mongoose = require('mongoose');
 
+//load the routers from other files
+const plansRouter = require('./routes/plans');
+const authRouter = require('./routes/auth');
+const dashboardRouter = require('./routes/dashboard');
+const verifyToken = require('./routes/validate-token');
+
 const dbUrl = process.env.DB_URL;
 
 app.use(cors());
@@ -25,12 +31,6 @@ connection.once('open', () => {
   console.log('MongoDB connection established successfully');
 });
 
-//load the routers from other files
-const plansRouter = require('./routes/plans');
-const authRouter = require('./routes/auth');
-const dashboardRouter = require('./routes/dashboard');
-const verifyToken = require('./routes/validate-token');
-
 //the routers are added as middleware
 app.use('/plans', plansRouter);
 app.use('/', authRouter);
@@ -40,7 +40,7 @@ const server = app.listen(port, (err) => {
   if (err) {
     console.log('Error occured');
   } else {
-    console.log(`Successfuly connected to to port: ${port}`);
+    console.log(`Successfuly connected to port: ${port}`);
   }
 });
 

@@ -13,25 +13,25 @@ const userSchema = new Schema({
         min: 6,
         max: 14
     },
-    roles: [{ 
-        type: String, 
-        enum: [ 'candidate', 'teacher', 'student', 'admin' ]
-    }],
-    profilePictureUrl: String,
-    linkedin: String,
-    spotify: String,
-    itunes : String,
-    soundcloud: String,
-    description: String,
-    workExperience: String,
-    links: [ String ],
-    youtubeVideos: [ String ],
-    awards: [ String ],
-    references: [ String ],
-    interest: [{ type: String, enum: Instruments }],
-    playedInstruments: [{ type: String, enum: Instruments }],
-    languages: [{ type: String, enum: Languages, required: true }],
-    classes: [{ type : Schema.Types.ObjectId, ref : 'Classroom' }]
+    // roles: [{ 
+    //     type: String, 
+    //     enum: [ 'candidate', 'teacher', 'student', 'admin' ]
+    // }],
+    // profilePictureUrl: String,
+    // linkedin: String,
+    // spotify: String,
+    // itunes : String,
+    // soundcloud: String,
+    // description: String,
+    // workExperience: String,
+    // links: [ String ],
+    // youtubeVideos: [ String ],
+    // awards: [ String ],
+    // references: [ String ],
+    // interest: [{ type: String, enum: Instruments }],
+    // playedInstruments: [{ type: String, enum: Instruments }],
+    // languages: [{ type: String, enum: Languages, required: true }],
+    // classes: [{ type : Schema.Types.ObjectId, ref : 'Classroom' }]
 }, { timestamps: true });
 
 const User = mongoose.model('User', userSchema);
