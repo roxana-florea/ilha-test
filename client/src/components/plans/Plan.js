@@ -13,12 +13,14 @@ import { useDispatch } from 'react-redux';
 import { addTask } from '../../actions';
 import Warning from './messages/Warning';
 import Delete from './messages/Delete';
-
 import { nanoid } from 'nanoid';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
+import CheckIcon from '@material-ui/icons/Check';
+import ClearIcon from '@material-ui/icons/Clear';
+import EditIcon from '@material-ui/icons/Edit';
 
 const useStyles = makeStyles({
   root: {
@@ -45,6 +47,8 @@ const useStyles = makeStyles({
 
 export default function Plan({ plan, isExpanded, toggleExpanded }) {
   const [planName, setPlanName] = React.useState('');
+  const [isPlanNameEditable, setPlanNameEditable] = React.useState(false);
+
   const [taskName, setTaskName] = React.useState('');
   const [description, setDescription] = React.useState('');
   const [duration, setDuration] = React.useState('');
@@ -105,6 +109,7 @@ export default function Plan({ plan, isExpanded, toggleExpanded }) {
 
   const handlePlanNameOnChange = (event) => {
     setPlanName(event.target.value);
+    setPlanNameEditable(true);
   };
 
   const handleTaskNameOnChange = (event) => {
@@ -144,12 +149,26 @@ export default function Plan({ plan, isExpanded, toggleExpanded }) {
             <CardContent>
               <div>
                 <form className={classes.root} noValidate autoComplete="off">
+
+
                   <TextField
                     id="standard-basic"
                     label="Add a plan title"
                     value={planName}
                     onChange={handlePlanNameOnChange}
                   />
+
+
+                  {isPlanNameEditable ? <IconButton><CheckIcon /></IconButton> : '' }
+                  {/* <IconButton>
+                    <CheckIcon />
+                  </IconButton>
+                  <IconButton>
+                    <ClearIcon />
+                  </IconButton>
+                  <IconButton>
+                    <EditIcon />
+                  </IconButton> */}
                 </form>
               </div>
               <br></br>
