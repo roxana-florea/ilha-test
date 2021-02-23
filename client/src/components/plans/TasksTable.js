@@ -34,17 +34,17 @@ export default function TasksTable({ tasks }) {
   };
 
   const editTask = (task) => {
-    setTaskTitle(task.name);
+    setTaskTitle(task.taskName);
     setDescription(task.description);
     setDuration(task.duration);
-    setTaskEditable(task.id);
+    setTaskEditable(task._id);
   };
 
   const saveTask = (task) => {
     const savedTask = {
-      id: task.id,
+      _id: task._id,
       planId: task.planId,
-      name: taskTitle,
+      taskName: taskTitle,
       description: description,
       duration: duration,
     };
@@ -56,7 +56,7 @@ export default function TasksTable({ tasks }) {
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
-          {Object.keys(tasks).length <= 0 ? (
+          {tasks.length <= 0 ? (
             ''
           ) : (
             <TableRow>
@@ -68,10 +68,10 @@ export default function TasksTable({ tasks }) {
           )}
         </TableHead>
         <TableBody>
-          {Object.values(tasks).map((task) => (
-            <TableRow key={task.name}>
+          {tasks.map((task) => (
+            <TableRow key={task.taskName}>
               <TableCell component="th" scope="row">
-                {taskEditable === task.id ? (
+                {taskEditable === task._id ? (
                   <TextField
                     id="outlined-basic"
                     label="Task"
@@ -81,11 +81,11 @@ export default function TasksTable({ tasks }) {
                     onChange={(ev) => setTaskTitle(ev.target.value)}
                   />
                 ) : (
-                  task.name
+                  task.taskName
                 )}
               </TableCell>
               <TableCell align="right">
-                {taskEditable === task.id ? (
+                {taskEditable === task._id ? (
                   <TextField
                     id="outlined-textarea"
                     label="Description"
@@ -100,7 +100,7 @@ export default function TasksTable({ tasks }) {
                 )}
               </TableCell>
               <TableCell align="right">
-                {taskEditable === task.id ? (
+                {taskEditable === task._id ? (
                   <TextField
                     id="outlined-number"
                     label="Duration"
@@ -117,7 +117,7 @@ export default function TasksTable({ tasks }) {
                 )}
               </TableCell>
               <TableCell align="right">
-                {taskEditable === task.id ? (
+                {taskEditable === task._id ? (
                   <IconButton onClick={() => saveTask(task)}>
                     {' '}
                     <CheckCircleIcon />

@@ -10,24 +10,20 @@ import { useDispatch } from 'react-redux';
 
 
 
-export default function Delete(planId) {
+export default function Delete( {planId} ) {
   const [open, setOpen] = React.useState(true);
 
   // const handleClickOpen = () => {
   //   setOpen(true);
   // };
+  const executeReduxAction = useDispatch();
 
   const handleClose = () => {
-    executeReduxAction(deletePlan(planId));
-
     setOpen(false);
 
-
-      
-    
+    executeReduxAction(deletePlan(planId));
   };
 
-  const executeReduxAction = useDispatch();
 
 
   return (

@@ -1,11 +1,11 @@
 import './Plans.css';
 import React from 'react';
+import {useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import { nanoid } from 'nanoid';
 import Plan from './Plan';
 import { useSelector, useDispatch } from 'react-redux';
-import { addPlan } from '../../actions';
+import { addPlan, loadPlans } from '../../actions';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
@@ -28,22 +28,31 @@ export default function Plans() {
 
   const addNewPlan = () => {
     const newPlan = {
-      id: nanoid(),
-      name: 'New plan',
-      tasks:{}
+      planName: 'New plan ' + (Date.now()),
+      tasks:[]
     };
-    executeReduxAction(addPlan(newPlan));
+
+    const actionToExecute = addPlan(newPlan);
+    executeReduxAction(actionToExecute);
+
+
+
     setExpandedPlan(newPlan);
     scroll.scrollToBottom();
   };
 
-  const toggleExpanded = (idPlan) => {
-    if (expandedPlan && expandedPlan.id === idPlan) {
+  const toggleExpanded = (plan) => {
+    if (expandedPlan && expandedPlan.planName === plan.planName) {
       setExpandedPlan(null);
     } else {
-      setExpandedPlan(plans[idPlan]);
+      setExpandedPlan(plan);
     }
   };
+
+  useEffect(() => {
+    const actionToExecute = loadPlans();
+    executeReduxAction(actionToExecute);
+  }, []);
 
   return (
     <div className={classes.root}>
@@ -51,7 +60,7 @@ export default function Plans() {
         <div className="empty-plan-container">
           <Card className={classes.root}>
             <CardContent>
-              {Object.values(plans).length > 0 ? (
+              {plans.length > 0 ? (
                 ''
               ) : (
                 <Typography
@@ -77,11 +86,11 @@ export default function Plans() {
           </Card>
         </div>
       </div>
-      {Object.values(plans).map((plan, key) => (
+      {plans.map((plan, key) => (
         <Plan
-          key={plan.id}
+          key={plan._id}
           plan={plan}
-          isExpanded={expandedPlan && plan.id === expandedPlan.id}
+          isExpanded={expandedPlan && plan.planName === expandedPlan.planName}
           toggleExpanded={toggleExpanded}
         />
       ))}
