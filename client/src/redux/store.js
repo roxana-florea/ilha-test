@@ -2,9 +2,9 @@ import { combineReducers, applyMiddleware, createStore, compose } from 'redux';
 import thunk from 'redux-thunk';
 
 import plansReducer from '../reducers/plans';
-import authenticationReducer from './reducers/AuthReducer';
+import authenticationReducer from './reducers/AuthReducer'; ///check this!!!!
 
-export const createRootReducer = () => 
+const createRootReducer = () => 
     combineReducers({
         authentication: authenticationReducer,
         plansReducer: plansReducer

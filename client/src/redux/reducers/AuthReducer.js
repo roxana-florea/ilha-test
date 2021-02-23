@@ -27,7 +27,7 @@ const initState = {
         : null,
     error: '',
     loading: false,
-    isAuthenticated: false
+    isAuthenticated: false,
 };
 
 const authenticationReducer = function (state = initState, action) {
@@ -38,7 +38,7 @@ const authenticationReducer = function (state = initState, action) {
             return {
                 ...state,
                 loading: true,
-                isAuthenticated: false
+                isAuthenticated: false,
             };
         case ACCESS_DENIED:
         case REGISTER_FAILED:
@@ -48,7 +48,7 @@ const authenticationReducer = function (state = initState, action) {
                 loading: false,
                 error: action.payload,
                 currentUser: null,
-                isAuthenticated: false
+                isAuthenticated: false,
             };
         case REGISTER_SUCCESS:
         case ACCESS_APPROVED:
@@ -57,7 +57,7 @@ const authenticationReducer = function (state = initState, action) {
                 loading: false,
                 token: action.payload.token,
                 currentUser: action.payload.user,
-                isAuthenticated: true
+                isAuthenticated: true,
             };
         case SIGNOUT_SUCCESS:
             localStorage.removeItem('USER-TOKEN');

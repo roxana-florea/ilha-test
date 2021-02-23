@@ -13,7 +13,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { useHistory } from 'react-router-dom';
-import { useDispatch} from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import { signUp } from '../../redux/actions/AuthActionCreators'
 
@@ -56,20 +56,30 @@ export default function SignUp() {
     // const { error } = useSelector((state) => state.authentication);
     const classes = useStyles();
 
+    const [firstname, setFirstName] = useState('');
+    const [lastname, setLastName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
+    const handleFirstNameChange = (event) => {
+        setFirstName(event.target.value);
+    };
+
+    const handleLastNameChange = (event) => {
+        setLastName(event.target.value);
+    };
+
     const handleEmailChange = (event) => {
         setEmail(event.target.value);
-    };
+    }
 
     const handlePasswordChange = (event) => {
         setPassword(event.target.value);
-    }
+    };
 
     const handleSignUpClick = (event) => {
         event.preventDefault();
-        dispatch(signUp({ email, password }, history));
+        dispatch(signUp({ firstname, lastname, email, password }, history));
     };
 
     return (
@@ -94,6 +104,8 @@ export default function SignUp() {
                                 id="firstname"
                                 label="First Name"
                                 autoFocus
+                                value={firstname}
+                                onChange={handleFirstNameChange}
                             />
                         </Grid>
                         <Grid item xs={12} sm={6}>
@@ -105,6 +117,8 @@ export default function SignUp() {
                                 label="Last Name"
                                 name="lastname"
                                 autoComplete="lname"
+                                value={lastname}
+                                onChange={handleLastNameChange}
                             />
                         </Grid>
                         <Grid item xs={12}>

@@ -48,7 +48,7 @@ export const signUp = (user, history) => {
                 dispatch(registerSuccess(data));
                 history.push('/');
             })
-            .catch(error => {
+            .catch((error) => {
                 console.log(error);
                 dispatch(registerFail(error))
             });
@@ -66,7 +66,7 @@ const accessApproved = (token) => {
     return {
         type: ACCESS_APPROVED,
         payload: {
-            token
+            token,
         }
     };
 };
@@ -80,24 +80,22 @@ const accessFailed = (error) => {
 
 export const signIn = (payload, history) => {
     return function (dispatch) {
-        dispatch(accessRequest());
+        dispatch(accessRequest); //check this!!!!!!
         axios({
             method: 'post',
             url: '/signIn',
             data: payload,
             headers: {
-                Authorization: `Bearer ${localStorage.getItem('USER-TOKEN')}`
+                Authorization: `Bearer ${localStorage.getItem('USER-TOKEN')}`,
             }
         })
             .then((response) => {
-                const token = response.data;
+                const {token} = response.data;
                 localStorage.setItem('USER-TOKEN', token);
                 dispatch(accessApproved(token));
                 history.push('/Dashboard');
             })
             .catch((error) => {
-                console.log(`this is coming from the actionCreator line 101:`, error)
-                    window.alert(`Invalid E-mail or Password`) 
                 dispatch(accessFailed(error));
             })
     };
