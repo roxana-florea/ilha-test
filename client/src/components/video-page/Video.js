@@ -8,6 +8,9 @@ import MicIcon from '@material-ui/icons/Mic';
 import StopIcon from '@material-ui/icons/Stop';
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 
+
+
+
 const Video = () => {
   const [incomingVideoId, setIncomingVideoId] = useState(null);
   const [isRecording, setIsRecording] = useState(false);
@@ -23,6 +26,9 @@ const Video = () => {
   } = useVideo();
 
   const WidgetButton = styled.button`
+  @media (max-width: 1920px){
+    display: flex;
+    justify-content: center;
     position: absolute;
     top: 90%;
     left: 95%;
@@ -34,7 +40,17 @@ const Video = () => {
     width: 3vw;
     height: 3vw;
     opacity: 0.8;
-
+  }
+  @media (max-width: 1279px){
+    left: 90%;
+    width: 5vw;
+    height: 5vw;
+  }
+  @media(max-width:811px){
+    left: 90%;
+    width: 8vw;
+    height: 8vw;
+  }
     &:hover {
       transform: scale(1.2);
       cursor: pointer;
@@ -42,6 +58,7 @@ const Video = () => {
   `;
 
   const ControlContainer = styled.div`
+  @media (max-width: 1920px){
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -49,8 +66,17 @@ const Video = () => {
     position: absolute;
     top: 90%;
     left: 45%;
+  }
+  @media (max-width: 1279px){
+    width: 15vw;
+  }
+  @media(max-width:811px){
+    width: 20vw;
+  }
+
   `;
   const MicButton = styled.button`
+  @media (max-width: 1920px){
     display: flex;
     justify-content: center;
     background-color: white;
@@ -60,7 +86,17 @@ const Video = () => {
     width: 3vw;
     height: 3vw;
     opacity: 0.8;
-
+  }
+  @media (max-width: 1279px){
+    left: 90%;
+    width: 5vw;
+    height: 5vw;
+  }
+  @media(max-width:811px){
+    left: 90%;
+    width: 8vw;
+    height: 8vw;
+  }
     &:hover {
       transform: scale(1.2);
       cursor: pointer;
@@ -68,6 +104,7 @@ const Video = () => {
   `;
 
   const RecordButton = styled.button`
+  @media (max-width: 1920px){
     display: flex;
     justify-content: center;
     background-color: rgb(177, 27, 27);
@@ -77,7 +114,17 @@ const Video = () => {
     width: 3vw;
     height: 3vw;
     opacity: 0.8;
-
+  }
+  @media (max-width: 1279px){
+    left: 90%;
+    width: 5vw;
+    height: 5vw;
+  }
+  @media(max-width:811px){
+    left: 90%;
+    width: 8vw;
+    height: 8vw;
+  }
     &:hover {
       transform: scale(1.2);
       cursor: pointer;
@@ -93,7 +140,7 @@ const Video = () => {
       setIsRecording(false);
     }
   };
-
+  
   return (
     <div>
       <video
@@ -125,15 +172,18 @@ const Video = () => {
           onClick={() => {
             connect(incomingVideoId);
           }}
-        >
+        > 
           Connect
         </button>
       </div>
       <WidgetButton>
+     
         <WidgetsIcon
           style={{
             color: 'rgb(39, 25, 90)',
             alignSelf: 'center',
+            width: '70%',
+            height: '70%',
           }}
         />
       </WidgetButton>
@@ -143,6 +193,8 @@ const Video = () => {
             style={{
               color: 'rgb(39, 25, 90)',
               alignSelf: 'center',
+              width: '70%',
+              height: '70%'
             }}
           />
         </MicButton>
@@ -152,6 +204,8 @@ const Video = () => {
               style={{
                 color: 'rgb(39, 25, 90)',
                 alignSelf: 'center',
+                width: '70%',
+                height: '70%'
               }}
             />
           ) : (
@@ -159,6 +213,8 @@ const Video = () => {
               style={{
                 color: 'rgb(39, 25, 90)',
                 alignSelf: 'center',
+                width: '70%',
+                height: '70%'
               }}
             />
           )}
