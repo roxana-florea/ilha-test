@@ -15,7 +15,6 @@ const {
 
 export const validToken = (token) => {
     let decoded = jwt.decode(token);
-    // return new Date(decoded.exp * 2000) > new Date() ? decoded : signOut();
     return new Date(decoded.exp * 2000) > new Date() ? decoded : null;
 };
 const initState = {

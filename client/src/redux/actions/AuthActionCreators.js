@@ -49,7 +49,8 @@ export const signUp = (user, history) => {
                 history.push('/');
             })
             .catch((error) => {
-                console.log(error);
+                if (error)
+                window.alert('400: ALL fields are required.')
                 dispatch(registerFail(error))
             });
     };
@@ -80,7 +81,7 @@ const accessFailed = (error) => {
 
 export const signIn = (payload, history) => {
     return function (dispatch) {
-        dispatch(accessRequest); //check this!!!!!!
+        dispatch(accessRequest);
         axios({
             method: 'post',
             url: '/signIn',
@@ -96,6 +97,8 @@ export const signIn = (payload, history) => {
                 history.push('/Dashboard');
             })
             .catch((error) => {
+                if (error)
+                window.alert('401: Invalid E-mail or password')
                 dispatch(accessFailed(error));
             })
     };

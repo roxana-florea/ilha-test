@@ -12,7 +12,7 @@ import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import { useDispatch} from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 const { signIn } = require('../../redux/actions/AuthActionCreators');
 
@@ -64,7 +64,6 @@ export default function Signin() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const history = useHistory();
-  // const { error } = useSelector((state) => state.authentication);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -81,8 +80,6 @@ export default function Signin() {
     event.preventDefault();
     dispatch(signIn({ email, password }, history));
   }
-
-  //   const executeReduxAction = useDispatch();
 
   return (
     <Grid container component="main" className={classes.root}>
@@ -127,7 +124,6 @@ export default function Signin() {
               control={<Checkbox value="remember" color="secondary" />}
               label="Remember me"
             />
-            {/* {error !== null ? <div className='error'>{error}</div> : null} */}
             <Button
               type="submit"
               fullWidth
