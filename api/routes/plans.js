@@ -63,25 +63,32 @@ router.route('/:id').put((req, res) => {
 });
 
 
-//updating task
+// updating task
 router.route('/:plan_id/tasks/:task_id').put((req, res) => {
-    Plan.findById(req.params.plan_id).update(
+    Plan.findById(req.params.plan_id).updateOne(
 
         { "tasks._id": req.params.task_id },
         { "$set": { "tasks.$": req.body } }
 
-    ).then(() => res.json('Task updated!'))
-        .catch(err => res.status(400).json('Error: ' + err));
+    )
+    .then(() => { res.send('Task updated!')
+    //    Plan.findOne({_id: req.params.plan_id}, (err,foundPlan)=>{
+    //         res.json(foundPlan.tasks)  // attempt to grab the task with new id
+    //    })
+    })
+    .catch(err => res.status(400).json('Error: ' + err));
 });
+
+
+
+
 
 // deleting task
 router.route('/:plan_id/tasks/:task_id').delete((req, res) => {
-    Plan.findByIdAndDelete(req.params.plan_id).update(
-
-        { "$pull": { tasks: { "_id": req.params.task_id } } }
-
-    ).then(() => res.json('Task deleted.'))
-        .catch(err => res.status(400).json('Error: ' + err));
+    Plan.findByIdAndDelete(req.params.plan_id).update({ "$pull": { tasks: { "_id": req.params.task_id } } }
+)
+    .then(() => res.json('Task deleted.'))
+     .catch(err => res.status(400).json('Error: ' + err));
 });
 
 
@@ -89,7 +96,7 @@ router.route('/:plan_id/tasks/:task_id').delete((req, res) => {
 //add task
 router.route('/:plan_id/tasks').post((req, res) => {
     const taskName = req.body.taskName;
-    const taskDescription = req.body.description;///name from ejs
+    const taskDescription = req.body.description;
     const taskDuration = req.body.duration;
 
     const task = new Task({
@@ -103,7 +110,7 @@ router.route('/:plan_id/tasks').post((req, res) => {
       foundPlan.tasks.push(task)
       foundPlan.save()
     .then(() => res.json(task))
-     .catch(err => res.status(400).json('error is here' + err));
+    .catch(err => res.status(400).json('error is here' + err));
       
     })
 

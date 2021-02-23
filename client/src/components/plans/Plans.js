@@ -1,6 +1,5 @@
 import './Plans.css';
 import React from 'react';
-
 import {useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
