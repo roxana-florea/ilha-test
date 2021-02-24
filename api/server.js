@@ -11,7 +11,6 @@ const mongoose = require('mongoose');
 const plansRouter = require('./routes/plans');
 const authRouter = require('./routes/auth');
 const dashboardRouter = require('./routes/dashboard');
-const verifyToken = require('./routes/validate-token');
 
 const dbUrl = process.env.DB_URL;
 
@@ -34,7 +33,7 @@ connection.once('open', () => {
 //the routers are added as middleware
 app.use('/plans', plansRouter);
 app.use('/', authRouter);
-app.use('Dashboard/', verifyToken, dashboardRouter);
+app.use('Dashboard/', dashboardRouter);
 
 const server = app.listen(port, (err) => {
   if (err) {

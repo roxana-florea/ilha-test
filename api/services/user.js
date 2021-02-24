@@ -21,8 +21,7 @@ async function registerUser(payload) {
                     return newUser.save();
                 })
                 .catch((error) => {
-                    throw new Error(`error from user services register: ${error}`);
-                    // console.log(error);
+                    throw new Error(error.message);
                 });
         });
 }
@@ -31,9 +30,7 @@ function signInUser(payload) {
     return User.findOne({ email: payload.email })
         .exec()
         .then((user) => {
-            console.log([user])
             if (!user) {
-                console.log(user)
                 throw new Error('Incorrect E-mail');
             } else {
                 return bcrypt
@@ -48,7 +45,7 @@ function signInUser(payload) {
                         }
                     })
                     .catch((err) => {
-                        throw new Error(`error from user services SignIn: ${err}`)
+                        throw new Error(err.message)
                     });
             }
         });

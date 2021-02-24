@@ -1,13 +1,8 @@
-const { loginValidation } = require('../validation')
 const UserServices = require('../services/user');
 
-const signIn = async (req, res, next) => {
-    try{
+const signIn = async (req, res) => {
+    try {
         const payload = req.body;
-        // const { error } = loginValidation(payload);
-        // if (error)
-        // return res.status(400).send({ error: error.message });
-
         const token = await UserServices.signInUser(payload);
         res.status(200).json({
             success: true,
@@ -15,7 +10,9 @@ const signIn = async (req, res, next) => {
         });
     } catch (error) {
         console.log(error)
-        // next()
+        if (error !== null) {
+            res.sendStatus(401)
+        }
     }
 };
 
