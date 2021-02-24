@@ -140,7 +140,7 @@ export default function SignUp() {
                                 required
                                 fullWidth
                                 name="password"
-                                label="Password"
+                                label="Password must be between 6 and 14 characters"
                                 type="password"
                                 id="password"
                                 autoComplete="current-password"
@@ -160,7 +160,7 @@ export default function SignUp() {
                         type="submit"
                         fullWidth
                         variant="contained"
-                        color="primary"
+                        color="secondary"
                         className={classes.submit}
                         onClick={handleSignUpClick}
                     >

@@ -61,6 +61,11 @@ const useStyles = makeStyles((theme) => ({
       duration: theme.transitions.duration.enteringScreen,
     }),
   },
+  selectedMenu: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
   menuButton: {
     marginRight: 36,
   },
@@ -332,6 +337,7 @@ export default function MiniDrawer() {
           onClose={handleClose}
         >
           {options.map((option, index) => (
+            <div className={classes.selectedMenu}>
             <MenuItem
               key={option}
               disabled={index === 0}
@@ -340,6 +346,7 @@ export default function MiniDrawer() {
             >
               {option}
             </MenuItem>
+        </div>
           ))}
         </Menu>
         <Divider />
