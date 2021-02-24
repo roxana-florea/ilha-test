@@ -23,13 +23,11 @@ import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import VideoCallIcon from '@material-ui/icons/VideoCall';
 import Button from '@material-ui/core/Button';
-// import Paper from '@material-ui/core/Paper';
 import logo from '../images/logo_White_NT.png';
-// import Analytics from '../Analytics/Analytics.js';
 import Plans from '../plans/Plans.js';
 import UserAvatar from 'react-user-avatar';
 import Avatar from '@material-ui/core/Avatar';
-import Analytics2 from '../analytics/Analytics2.js';
+import Analytics2 from '../Analytics/Analytics2.js';
 import { Link } from 'react-router-dom';
 
 import MenuItem from '@material-ui/core/MenuItem';

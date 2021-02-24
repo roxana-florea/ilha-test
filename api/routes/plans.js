@@ -30,6 +30,17 @@ router.route('/').post((req, res) => {
 });
 
 
+// updating plan title
+router.route('/:plan_id').put((req, res) => {
+    Plan.findById(req.params.plan_id).updateOne(
+        { "$set": { "planName": req.body.planName } }
+    )
+    .then(() => { res.send('Plan title updated!')
+    })
+    .catch(err => res.status(400).json('Error: ' + err));
+});
+
+
 
 //display all the plans
 router.route('/:id').get((req, res) => {
@@ -128,13 +139,6 @@ router.route('/:plan_id/tasks').post((req, res) => {
 //     ).then(() => res.json(newTask))
 //         .catch(err => res.status(400).json('Error: ' + err));
 // });
-
-
-
-
-
-
-
 
 
 module.exports = router;

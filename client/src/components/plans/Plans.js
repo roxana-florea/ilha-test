@@ -28,8 +28,7 @@ export default function Plans() {
 
   const addNewPlan = () => {
     const newPlan = {
-      planName: 'New plan ' + Math.floor(Date.now() / 1000)
-      ,
+      planName: 'New plan ' + (Date.now()),
       tasks:[]
     };
 

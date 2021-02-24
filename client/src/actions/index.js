@@ -97,3 +97,17 @@ console.log(task)
       })
   }
 };
+
+
+export const updatePlanTitle = (plan) => {
+    return dispatch => { //return function
+      return axios
+        .put(`http://localhost:5000/plans/${plan._id}`, plan) //return put request response
+        .then((responseFromHell) => { //pass data in as a parameter, call the callback, dispatch the action. 
+          dispatch({
+            type: 'UPDATE_PLAN_TITLE',
+            value: plan
+          })
+        })
+    }
+  };
