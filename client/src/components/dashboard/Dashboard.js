@@ -27,15 +27,17 @@ import logo from '../images/logo_White_NT.png';
 import Plans from '../plans/Plans.js';
 import UserAvatar from 'react-user-avatar';
 import Avatar from '@material-ui/core/Avatar';
-import Analytics2 from '../Analytics/Analytics2.js';
-import { Link } from 'react-router-dom';
-
+import Analytics2 from '../analytics/Analytics2.js';
+import { Link, useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 
 import './Dashboard.css';
 
-const drawerWidth = 180;
+const { signOut } = require('../../redux/actions/AuthActionCreators.js');
+
+const drawerWidth = 200;
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -57,6 +59,11 @@ const useStyles = makeStyles((theme) => ({
       duration: theme.transitions.duration.enteringScreen,
     }),
   },
+  selectedMenu: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
   menuButton: {
     marginRight: 36,
   },
@@ -70,7 +77,7 @@ const useStyles = makeStyles((theme) => ({
   },
   drawerOpen: {
     width: drawerWidth,
-    backgroundColor: 'rgb(233, 42, 138)',
+    backgroundColor: 'rgb(255, 255, 255)',
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
@@ -82,7 +89,7 @@ const useStyles = makeStyles((theme) => ({
       duration: theme.transitions.duration.leavingScreen,
     }),
     overflowX: 'hidden',
-    backgroundColor: 'rgb(233, 42, 138)',
+    backgroundColor: 'rgb(255, 255, 255)',
     width: theme.spacing(7) + 1,
     [theme.breakpoints.up('sm')]: {
       width: theme.spacing(9) + 1,
@@ -107,7 +114,7 @@ const useStyles = makeStyles((theme) => ({
   },
 
   button: {
-    backgroundColor: 'rgb(233, 42, 138)',
+    backgroundColor: 'rgb(255, 255, 255)',
     marginLeft: '85%',
     position: 'absolute',
     top: '20%',
@@ -121,9 +128,16 @@ function HomeIcon(props) {
 export default function MiniDrawer() {
   const classes = useStyles();
   const theme = useTheme();
+  const dispatch = useDispatch();
+  const history = useHistory();
+  // const { currentUser } = useSelector((state) => state.authentication);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [selectedIndex, setSelectedIndex] = React.useState(1);
   const [open, setOpen] = React.useState(true);
+
+  const handleSignOut = () => {
+    dispatch(signOut(history));
+  };
 
   ///////////////////// make drawer close when screen is small
   const setSmall = () => {
@@ -232,8 +246,8 @@ export default function MiniDrawer() {
             {theme.direction === 'rtl' ? (
               <ChevronRightIcon />
             ) : (
-              <ChevronLeftIcon />
-            )}
+                <ChevronLeftIcon />
+              )}
           </IconButton>
         </div>
 
@@ -254,15 +268,15 @@ export default function MiniDrawer() {
                 className="user-profile"
               />
             ) : (
-              <ListItemIcon>
-                <Avatar
-                  alt="Jane Doe"
-                  src="/static/images/avatar/1.jpg"
-                  className="small-avatar"
-                  onClick={handleClickListItem}
-                />
-              </ListItemIcon>
-            )}
+                <ListItemIcon>
+                  <Avatar
+                    alt="Jane Doe"
+                    src="/static/images/avatar/1.jpg"
+                    className="small-avatar"
+                    onClick={handleClickListItem}
+                  />
+                </ListItemIcon>
+              )}
           </ListItem>
 
           <Divider />
@@ -301,11 +315,16 @@ export default function MiniDrawer() {
             <ListItemText primary={'Files'} />
           </ListItem>
 
-          <ListItem button>
-            <ListItemIcon>
-              <ExitToAppIcon />
-            </ListItemIcon>
-            <ListItemText primary={'Log out'} />
+          <ListItem
+            button
+            onClick={handleSignOut}
+          >
+            <Link to='/'>
+              <ListItemIcon>
+                <ExitToAppIcon />
+              </ListItemIcon>
+              <ListItemText primary={'Sign Out'} />
+            </Link>
           </ListItem>
         </List>
         <Menu
@@ -316,6 +335,7 @@ export default function MiniDrawer() {
           onClose={handleClose}
         >
           {options.map((option, index) => (
+            <div className={classes.selectedMenu}>
             <MenuItem
               key={option}
               disabled={index === 0}
@@ -324,6 +344,7 @@ export default function MiniDrawer() {
             >
               {option}
             </MenuItem>
+        </div>
           ))}
         </Menu>
         <Divider />
