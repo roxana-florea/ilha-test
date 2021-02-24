@@ -5,6 +5,7 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import { confidence } from './data';
 import { saveAs } from 'file-saver';
+import './Analytics.css'
 
 
 const daysOfMonth = confidence.map(item => item.date);
@@ -59,7 +60,6 @@ class LineChart  extends Component  {
      <button className='download-btn' onClick={this.saveCanvas}>Download as PNG</button>
       <Line id="stackD" width={700} height={300} data={data} options={options}  responsive={true}
 />
-      
       </Paper>
 
       <div className='paper-container'>

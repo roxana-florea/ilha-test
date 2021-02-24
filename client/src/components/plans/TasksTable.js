@@ -34,7 +34,7 @@ export default function TasksTable({ tasks }) {
   };
 
   const editTask = (task) => {
-    setTaskTitle(task.name);
+    setTaskTitle(task.taskName);
     setDescription(task.description);
     setDuration(task.duration);
     setTaskEditable(task._id);
@@ -42,7 +42,7 @@ export default function TasksTable({ tasks }) {
 
   const saveTask = (task) => {
     const savedTask = {
-      id: task._id,
+      _id: task._id,
       planId: task.planId,
       taskName: taskTitle,
       description: description,
