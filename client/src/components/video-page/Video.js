@@ -40,6 +40,7 @@ const Video = () => {
     width: 3vw;
     height: 3vw;
     opacity: 0.8;
+    outline: none;
   }
   @media (max-width: 1279px){
     left: 90%;
@@ -86,6 +87,7 @@ const Video = () => {
     width: 3vw;
     height: 3vw;
     opacity: 0.8;
+    outline: none;
   }
   @media (max-width: 1279px){
     left: 90%;
@@ -114,6 +116,7 @@ const Video = () => {
     width: 3vw;
     height: 3vw;
     opacity: 0.8;
+    outline: none;
   }
   @media (max-width: 1279px){
     left: 90%;
