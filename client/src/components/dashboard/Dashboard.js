@@ -29,7 +29,7 @@ import UserAvatar from 'react-user-avatar';
 import Avatar from '@material-ui/core/Avatar';
 import Analytics2 from '../analytics/Analytics2.js';
 import { Link, useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 
@@ -37,7 +37,7 @@ import './Dashboard.css';
 
 const { signOut } = require('../../redux/actions/AuthActionCreators.js');
 
-const drawerWidth = 200;
+const drawerWidth = 180;
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -63,6 +63,16 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+  },
+  userProfile: {
+    marginBottom: -9
+  },
+  userName: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    fontSize: 16,
+    paddingBottom: 10
   },
   menuButton: {
     marginRight: 36,
@@ -128,6 +138,7 @@ function HomeIcon(props) {
 export default function MiniDrawer() {
   const classes = useStyles();
   const theme = useTheme();
+  const userName = useSelector(state => state.authentication.username);
   const dispatch = useDispatch();
   const history = useHistory();
   // const { currentUser } = useSelector((state) => state.authentication);
@@ -163,7 +174,7 @@ export default function MiniDrawer() {
   const options = [
     <UserAvatar
       size="120"
-      name="Jane Doe"
+      name={userName}
       color="#a8a8a8"
       className="user-profile"
     />,
@@ -261,16 +272,18 @@ export default function MiniDrawer() {
             onClick={handleClickListItem}
           >
             {open ? (
+              <div className={classes.userProfile}>
               <UserAvatar
                 size="120"
-                name="Jane Doe"
+                name={userName}
                 color="#a8a8a8"
                 className="user-profile"
               />
+              </div>
             ) : (
                 <ListItemIcon>
                   <Avatar
-                    alt="Jane Doe"
+                    alt={userName}
                     src="/static/images/avatar/1.jpg"
                     className="small-avatar"
                     onClick={handleClickListItem}
@@ -278,7 +291,9 @@ export default function MiniDrawer() {
                 </ListItemIcon>
               )}
           </ListItem>
-
+          <div className={classes.userName}>
+              {userName}
+          </div>
           <Divider />
           <ListItem button>
             <ListItemIcon>

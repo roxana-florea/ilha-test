@@ -14,6 +14,8 @@ const createRootReducer = () =>
         authentication: {
             currentUser: null,
             token: '',
+            username: '',
+            userId: '',
             error: '',
             loading: false,
             isAuthenticated: false

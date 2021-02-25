@@ -33,13 +33,14 @@ function signInUser(payload) {
             if (!user) {
                 throw new Error('Incorrect E-mail');
             } else {
+                const username = user.firstname;
                 return bcrypt
                     .compare(payload.password, user.password)
                     .then((res) => {
-                        console.log(res)
                         if (res) {
                             const token = getSignedToken(user._id);
-                            return token;
+                            const userId = user._id;
+                            return {token, username, userId};
                         } else {
                             throw new Error('Invalid Password');
                         }
