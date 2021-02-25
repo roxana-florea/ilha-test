@@ -14,25 +14,27 @@ const {
 
 export const validToken = (token) => {
     let decoded = jwt.decode(token);
-    return new Date(decoded.exp * 2000) > new Date() ? decoded : null;
+    return new Date(decoded.exp * 1000) > new Date() ? decoded : null;
 };
 
 const initState = {
-    currentUser: localStorage.getItem('USER-TOKEN')
-        ? validToken(localStorage.getItem('USER-TOKEN'))
+    currentUser: localStorage.getItem('USERTOKEN')
+        ? validToken(localStorage.getItem('USERTOKEN'))
         : null,
-    token: localStorage.getItem('USER-TOKEN')
-        ? localStorage.getItem('USER-TOKEN')
+    token: localStorage.getItem('USERTOKEN')
+        ? localStorage.getItem('USERTOKEN')
         : null,
-    username: localStorage.getItem('USER-TOKEN')
-        ? localStorage.getItem('USER-NAME')
+    username: localStorage.getItem('USERTOKEN')
+        ? localStorage.getItem('USERNAME')
         : null,
-    userId: localStorage.getItem('USER-TOKEN')
-        ? localStorage.getItem('USER-ID')
+    userId: localStorage.getItem('USERTOKEN')
+        ? localStorage.getItem('USERID')
         : null,
     error: "",
     loading: false,
-    isAuthenticated: false,
+    isAuthenticated: localStorage.getItem('USERTOKEN')
+        ? true
+        : false,
 };
 
 const authenticationReducer = function (state = initState, action) {
@@ -67,7 +69,9 @@ const authenticationReducer = function (state = initState, action) {
                 isAuthenticated: true,
             };
         case SIGNOUT_SUCCESS:
-            localStorage.removeItem('USER-TOKEN');
+            localStorage.removeItem('USERTOKEN');
+            localStorage.removeItem('USERNAME');
+            localStorage.removeItem('USERID');
             return {
                 ...state,
                 isAuthenticated: false,
