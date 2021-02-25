@@ -33,12 +33,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import VideoDialog from '../video-page/VideoDialog';
+import Badges from '../badges/Badges';
 
 import './Dashboard.css';
 
 const { signOut } = require('../../redux/actions/AuthActionCreators.js');
 
-const drawerWidth = 180;
+const drawerWidth = 185;
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -184,6 +185,7 @@ export default function MiniDrawer() {
     />,
     '[ Change Profile Picture ]',
     '[ Settings ]',
+    '[See Badges]',
     'Cancel',
   ];
 
@@ -306,6 +308,7 @@ export default function MiniDrawer() {
                   color="#a8a8a8"
                   className="user-profile"
                 />
+                <Badges />
               </div>
             ) : (
               <ListItemIcon>
@@ -320,49 +323,59 @@ export default function MiniDrawer() {
           </ListItem>
           <div className={classes.userName}>{userName}</div>
           <Divider />
-          <ListItem button>
-            <ListItemIcon>
-              <AccountCircleIcon />
-            </ListItemIcon>
-            <ListItemText primary={'My Profile'} />
-          </ListItem>
+          <Link to="/myProfile" className="menu-link">
+            <ListItem button>
+              <ListItemIcon>
+                <AccountCircleIcon />
+              </ListItemIcon>
+              <ListItemText primary={'My Profile'} />
+            </ListItem>
+          </Link>
 
-          <ListItem button>
-            <ListItemIcon>
-              <DashboardIcon />
-            </ListItemIcon>
-            <ListItemText primary={'Dashboard'} />
-          </ListItem>
+          <Link to="/Dashboard" className="menu-link">
+            <ListItem button>
+              <ListItemIcon>
+                <DashboardIcon />
+              </ListItemIcon>
+              <ListItemText primary={'Dashboard'} />
+            </ListItem>
+          </Link>
 
-          <ListItem button>
-            <ListItemIcon>
-              <MailIcon />
-            </ListItemIcon>
-            <ListItemText primary={'Messages'} />
-          </ListItem>
+          <Link to="/Messages" className="menu-link">
+            <ListItem button>
+              <ListItemIcon>
+                <MailIcon />
+              </ListItemIcon>
+              <ListItemText primary={'Messages'} />
+            </ListItem>
+          </Link>
 
-          <ListItem button>
-            <ListItemIcon>
-              <EventIcon />
-            </ListItemIcon>
-            <ListItemText primary={'Agenda'} />
-          </ListItem>
+          <Link to="/agenda" className="menu-link">
+            <ListItem button>
+              <ListItemIcon>
+                <EventIcon />
+              </ListItemIcon>
+              <ListItemText primary={'Agenda'} />
+            </ListItem>
+          </Link>
 
-          <ListItem button>
-            <ListItemIcon>
-              <LibraryBooksIcon />
-            </ListItemIcon>
-            <ListItemText primary={'Files'} />
-          </ListItem>
+          <Link to="/files" className="menu-link">
+            <ListItem button>
+              <ListItemIcon>
+                <LibraryBooksIcon />
+              </ListItemIcon>
+              <ListItemText primary={'Files'} />
+            </ListItem>
+          </Link>
 
-          <ListItem button onClick={handleSignOut}>
-            <Link to="/">
+          <Link to="/" className="menu-link">
+            <ListItem button onClick={handleSignOut}>
               <ListItemIcon>
                 <ExitToAppIcon />
               </ListItemIcon>
               <ListItemText primary={'Sign Out'} />
-            </Link>
-          </ListItem>
+            </ListItem>
+          </Link>
         </List>
         <Menu
           id="lock-menu"
@@ -387,7 +400,6 @@ export default function MiniDrawer() {
         <Divider />
       </Drawer>
       <main className={classes.content}>
-        {/* <Analytics /> */}
         <Analytics2 />
         <Plans />
       </main>

@@ -11,6 +11,7 @@ import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 const Video = (props) => {
   const [incomingVideoId, setIncomingVideoId] = useState(null);
   const [isRecording, setIsRecording] = useState(false);
+  const [popup, setPopUp] = useState(false);
 
   const roomId = props.match.params.roomId;
 
@@ -143,6 +144,45 @@ const Video = (props) => {
     }
   };
 
+  const WidegetPopUp = styled.div`
+    @keyframes fadeInX {
+      from {
+        width: 0vw;
+      }
+      to {
+        width: 20vw;
+      }
+    }
+    @keyframes fadeInY {
+      from {
+        height: 0vh;
+      }
+      to {
+        height: 40vh;
+      }
+    }
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    text-shadow: 0px 0px 10px black;
+    color: white;
+    top: 3%;
+    right: 1%;
+    width: 20vw;
+    height: 40vh;
+    border-radius: 15px;
+    box-shadow: 0px 0px 5px 5px grey;
+    animation-name: fadeInX, fadeInY;
+    animation-duration: 0.2s;
+  `;
+  const test4 = () => {
+    if (popup) {
+      setPopUp(false);
+    } else {
+      setPopUp(true);
+    }
+  };
+
   return (
     <div>
       <video
@@ -178,7 +218,14 @@ const Video = (props) => {
           Connect
         </button>
       </div>
-      <WidgetButton>
+      {popup ? (
+        <WidegetPopUp>
+          <p>PLANS</p>
+        </WidegetPopUp>
+      ) : (
+        <WidegetPopUp style={{ display: 'none' }}></WidegetPopUp>
+      )}
+      <WidgetButton onClick={test4}>
         <WidgetsIcon
           style={{
             color: 'rgb(39, 25, 90)',
