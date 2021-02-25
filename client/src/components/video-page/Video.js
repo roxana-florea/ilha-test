@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import useVideo from './useVideo';
 import './Video.css';
 import WidgetsIcon from '@material-ui/icons/Widgets';
@@ -8,50 +8,50 @@ import MicIcon from '@material-ui/icons/Mic';
 import StopIcon from '@material-ui/icons/Stop';
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 
-
-
-
-const Video = () => {
+const Video = (props) => {
   const [incomingVideoId, setIncomingVideoId] = useState(null);
   const [isRecording, setIsRecording] = useState(false);
+
+  const roomId = props.match.params.roomId;
 
   const {
     start,
     connect,
-    myVideoId,
     myVideoRef,
     incomingVideoRef,
     startRecording,
     stopRecording,
-  } = useVideo();
+  } = useVideo(roomId);
+
+  useEffect(start, []);
 
   const WidgetButton = styled.button`
-  @media (max-width: 1920px){
-    display: flex;
-    justify-content: center;
-    position: absolute;
-    top: 90%;
-    left: 95%;
-    color: grey;
-    background-color: white;
-    box-shadow: 0px 0px 5px 2px grey;
-    border-radius: 100%;
-    border: none;
-    width: 3vw;
-    height: 3vw;
-    opacity: 0.8;
-    outline: none;
-  }
-  @media (max-width: 1279px){
-    left: 90%;
-    width: 5vw;
-    height: 5vw;
-  }
-  @media(max-width:811px){
-    left: 90%;
-    width: 8vw;
-    height: 8vw;
-  }
+    @media (max-width: 1920px) {
+      display: flex;
+      justify-content: center;
+      position: absolute;
+      top: 90%;
+      left: 95%;
+      color: grey;
+      background-color: white;
+      box-shadow: 0px 0px 5px 2px grey;
+      border-radius: 100%;
+      border: none;
+      width: 3vw;
+      height: 3vw;
+      opacity: 0.8;
+      outline: none;
+    }
+    @media (max-width: 1279px) {
+      left: 90%;
+      width: 5vw;
+      height: 5vw;
+    }
+    @media (max-width: 811px) {
+      left: 90%;
+      width: 8vw;
+      height: 8vw;
+    }
     &:hover {
       transform: scale(1.2);
       cursor: pointer;
@@ -59,46 +59,45 @@ const Video = () => {
   `;
 
   const ControlContainer = styled.div`
-  @media (max-width: 1920px){
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    width: 10vw;
-    position: absolute;
-    top: 90%;
-    left: 45%;
-  }
-  @media (max-width: 1279px){
-    width: 15vw;
-  }
-  @media(max-width:811px){
-    width: 20vw;
-  }
-
+    @media (max-width: 1920px) {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      width: 10vw;
+      position: absolute;
+      top: 90%;
+      left: 45%;
+    }
+    @media (max-width: 1279px) {
+      width: 15vw;
+    }
+    @media (max-width: 811px) {
+      width: 20vw;
+    }
   `;
   const MicButton = styled.button`
-  @media (max-width: 1920px){
-    display: flex;
-    justify-content: center;
-    background-color: white;
-    box-shadow: 0px 0px 5px 2px grey;
-    border-radius: 100%;
-    border: none;
-    width: 3vw;
-    height: 3vw;
-    opacity: 0.8;
-    outline: none;
-  }
-  @media (max-width: 1279px){
-    left: 90%;
-    width: 5vw;
-    height: 5vw;
-  }
-  @media(max-width:811px){
-    left: 90%;
-    width: 8vw;
-    height: 8vw;
-  }
+    @media (max-width: 1920px) {
+      display: flex;
+      justify-content: center;
+      background-color: white;
+      box-shadow: 0px 0px 5px 2px grey;
+      border-radius: 100%;
+      border: none;
+      width: 3vw;
+      height: 3vw;
+      opacity: 0.8;
+      outline: none;
+    }
+    @media (max-width: 1279px) {
+      left: 90%;
+      width: 5vw;
+      height: 5vw;
+    }
+    @media (max-width: 811px) {
+      left: 90%;
+      width: 8vw;
+      height: 8vw;
+    }
     &:hover {
       transform: scale(1.2);
       cursor: pointer;
@@ -106,28 +105,28 @@ const Video = () => {
   `;
 
   const RecordButton = styled.button`
-  @media (max-width: 1920px){
-    display: flex;
-    justify-content: center;
-    background-color: rgb(177, 27, 27);
-    box-shadow: 0px 0px 5px 2px grey;
-    border-radius: 100%;
-    border: none;
-    width: 3vw;
-    height: 3vw;
-    opacity: 0.8;
-    outline: none;
-  }
-  @media (max-width: 1279px){
-    left: 90%;
-    width: 5vw;
-    height: 5vw;
-  }
-  @media(max-width:811px){
-    left: 90%;
-    width: 8vw;
-    height: 8vw;
-  }
+    @media (max-width: 1920px) {
+      display: flex;
+      justify-content: center;
+      background-color: rgb(177, 27, 27);
+      box-shadow: 0px 0px 5px 2px grey;
+      border-radius: 100%;
+      border: none;
+      width: 3vw;
+      height: 3vw;
+      opacity: 0.8;
+      outline: none;
+    }
+    @media (max-width: 1279px) {
+      left: 90%;
+      width: 5vw;
+      height: 5vw;
+    }
+    @media (max-width: 811px) {
+      left: 90%;
+      width: 8vw;
+      height: 8vw;
+    }
     &:hover {
       transform: scale(1.2);
       cursor: pointer;
@@ -143,7 +142,7 @@ const Video = () => {
       setIsRecording(false);
     }
   };
-  
+
   return (
     <div>
       <video
@@ -164,7 +163,7 @@ const Video = () => {
       ></video>
 
       <div style={{ position: 'absolute', top: '87%' }}>
-        <p>{myVideoId}</p>
+        <p>{roomId}</p>
         <button onClick={start}>Start</button>
         <input
           onChange={(event) => {
@@ -175,12 +174,11 @@ const Video = () => {
           onClick={() => {
             connect(incomingVideoId);
           }}
-        > 
+        >
           Connect
         </button>
       </div>
       <WidgetButton>
-     
         <WidgetsIcon
           style={{
             color: 'rgb(39, 25, 90)',
@@ -197,7 +195,7 @@ const Video = () => {
               color: 'rgb(39, 25, 90)',
               alignSelf: 'center',
               width: '70%',
-              height: '70%'
+              height: '70%',
             }}
           />
         </MicButton>
@@ -208,7 +206,7 @@ const Video = () => {
                 color: 'rgb(39, 25, 90)',
                 alignSelf: 'center',
                 width: '70%',
-                height: '70%'
+                height: '70%',
               }}
             />
           ) : (
@@ -217,7 +215,7 @@ const Video = () => {
                 color: 'rgb(39, 25, 90)',
                 alignSelf: 'center',
                 width: '70%',
-                height: '70%'
+                height: '70%',
               }}
             />
           )}

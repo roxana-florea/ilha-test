@@ -32,6 +32,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
+import VideoDialog from '../video-page/VideoDialog';
 
 import './Dashboard.css';
 
@@ -65,14 +66,14 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
   },
   userProfile: {
-    marginBottom: -9
+    marginBottom: -9,
   },
   userName: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
     fontSize: 16,
-    paddingBottom: 10
+    paddingBottom: 10,
   },
   menuButton: {
     marginRight: 36,
@@ -138,13 +139,16 @@ function HomeIcon(props) {
 export default function MiniDrawer() {
   const classes = useStyles();
   const theme = useTheme();
-  const userName = useSelector(state => state.authentication.username);
+  const userName = useSelector((state) => state.authentication.username);
+  const userId = useSelector((state) => state.authentication.userId);
   const dispatch = useDispatch();
   const history = useHistory();
   // const { currentUser } = useSelector((state) => state.authentication);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [selectedIndex, setSelectedIndex] = React.useState(1);
   const [open, setOpen] = React.useState(true);
+  const [openVideoDialog, setOpenVideoDialog] = React.useState(false);
+  const [selectedVideoAction, setSelectedVideoAction] = React.useState('open');
 
   const handleSignOut = () => {
     dispatch(signOut(history));
@@ -205,6 +209,15 @@ export default function MiniDrawer() {
     setOpen(false);
   };
 
+  const handleClickOpenVideoroom = () => {
+    setOpenVideoDialog(true);
+  };
+
+  const handleCloseVideoDialog = (value) => {
+    setOpenVideoDialog(false);
+    setSelectedVideoAction(value);
+  };
+
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -232,11 +245,25 @@ export default function MiniDrawer() {
               <p>ILHA</p>
             </div>
           </Typography>
-          <Link to="/Video" target="_blank">
+
+          {/* <Link to={`/videoroom/${userId}`} target="_blank">
             <Button variant="contained" className={classes.button}>
               <VideoCallIcon />
             </Button>
-          </Link>
+          </Link> */}
+
+          <Button
+            variant="contained"
+            className={classes.button}
+            onClick={handleClickOpenVideoroom}
+          >
+            <VideoCallIcon />
+          </Button>
+          <VideoDialog
+            selectedValue={selectedVideoAction}
+            open={openVideoDialog}
+            onClose={handleCloseVideoDialog}
+          />
         </Toolbar>
       </AppBar>
       <Drawer
@@ -257,8 +284,8 @@ export default function MiniDrawer() {
             {theme.direction === 'rtl' ? (
               <ChevronRightIcon />
             ) : (
-                <ChevronLeftIcon />
-              )}
+              <ChevronLeftIcon />
+            )}
           </IconButton>
         </div>
 
@@ -273,27 +300,25 @@ export default function MiniDrawer() {
           >
             {open ? (
               <div className={classes.userProfile}>
-              <UserAvatar
-                size="120"
-                name={userName}
-                color="#a8a8a8"
-                className="user-profile"
-              />
+                <UserAvatar
+                  size="120"
+                  name={userName}
+                  color="#a8a8a8"
+                  className="user-profile"
+                />
               </div>
             ) : (
-                <ListItemIcon>
-                  <Avatar
-                    alt={userName}
-                    src="/static/images/avatar/1.jpg"
-                    className="small-avatar"
-                    onClick={handleClickListItem}
-                  />
-                </ListItemIcon>
-              )}
+              <ListItemIcon>
+                <Avatar
+                  alt={userName}
+                  src="/static/images/avatar/1.jpg"
+                  className="small-avatar"
+                  onClick={handleClickListItem}
+                />
+              </ListItemIcon>
+            )}
           </ListItem>
-          <div className={classes.userName}>
-              {userName}
-          </div>
+          <div className={classes.userName}>{userName}</div>
           <Divider />
           <ListItem button>
             <ListItemIcon>
@@ -330,11 +355,8 @@ export default function MiniDrawer() {
             <ListItemText primary={'Files'} />
           </ListItem>
 
-          <ListItem
-            button
-            onClick={handleSignOut}
-          >
-            <Link to='/'>
+          <ListItem button onClick={handleSignOut}>
+            <Link to="/">
               <ListItemIcon>
                 <ExitToAppIcon />
               </ListItemIcon>
@@ -351,15 +373,15 @@ export default function MiniDrawer() {
         >
           {options.map((option, index) => (
             <div className={classes.selectedMenu}>
-            <MenuItem
-              key={option}
-              disabled={index === 0}
-              selected={index === selectedIndex}
-              onClick={(event) => handleMenuItemClick(event, index)}
-            >
-              {option}
-            </MenuItem>
-        </div>
+              <MenuItem
+                key={option}
+                disabled={index === 0}
+                selected={index === selectedIndex}
+                onClick={(event) => handleMenuItemClick(event, index)}
+              >
+                {option}
+              </MenuItem>
+            </div>
           ))}
         </Menu>
         <Divider />

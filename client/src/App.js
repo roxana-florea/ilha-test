@@ -4,8 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Video from './components/video-page/Video';
 import Signin from './components/signin/Signin';
 import Signup from './components/sign-up/Signup';
-import { UserRoute } from './components/PrivateRoute'
-
+import { UserRoute } from './components/PrivateRoute';
 
 function App() {
   return (
@@ -14,10 +13,10 @@ function App() {
         <Route path="/" exact component={Signin} />
         <Route path="/signup" component={Signup} />
         {/* <Route path="/Dashboard" component={Dashboard} /> */}
-        <Route path="/Video" component={Video} />
-        <UserRoute path='/Dashboard'>
+        <UserRoute path="/Dashboard">
           <Dashboard />
         </UserRoute>
+        <UserRoute path="/videoroom/:roomId" component={Video} />
       </Switch>
     </Router>
   );
