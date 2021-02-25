@@ -32,6 +32,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
+import Badges from '../badges/Badges';
 
 import './Dashboard.css';
 
@@ -180,6 +181,7 @@ export default function MiniDrawer() {
     />,
     '[ Change Profile Picture ]',
     '[ Settings ]',
+    '[See Badges]',
     'Cancel',
   ];
 
@@ -279,6 +281,7 @@ export default function MiniDrawer() {
                 color="#a8a8a8"
                 className="user-profile"
               />
+              <Badges/>
               </div>
             ) : (
                 <ListItemIcon>
@@ -365,7 +368,6 @@ export default function MiniDrawer() {
         <Divider />
       </Drawer>
       <main className={classes.content}>
-        {/* <Analytics /> */}
         <Analytics2 />
         <Plans />
       </main>
