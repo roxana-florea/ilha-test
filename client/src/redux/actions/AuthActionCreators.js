@@ -51,7 +51,7 @@ export const signUp = (user, history) => {
             .catch((error) => {
                 if (error)
                 window.alert('400: ALL fields are required.')
-                dispatch(registerFail(error))
+                dispatch(registerFail(error))/// Check errors!!!!!
             });
     };
 };
@@ -63,11 +63,13 @@ const accessRequest = () => {
     };
 };
 
-const accessApproved = (token) => {
+const accessApproved = (token, username, userId) => {
     return {
         type: ACCESS_APPROVED,
         payload: {
             token,
+            username,
+            userId,
         }
     };
 };
@@ -91,15 +93,17 @@ export const signIn = (payload, history) => {
             }
         })
             .then((response) => {
-                const {token} = response.data;
+                const { token, username, userId } = response.data;
                 localStorage.setItem('USER-TOKEN', token);
-                dispatch(accessApproved(token));
+                localStorage.setItem('USER-NAME', username);
+                localStorage.setItem('USER-ID', userId);
+                dispatch(accessApproved(token, username, userId));
                 history.push('/Dashboard');
             })
             .catch((error) => {
                 if (error)
                 window.alert('401: Invalid E-mail or password')
-                dispatch(accessFailed(error));
+                dispatch(accessFailed(error)); ///Check Error!!!
             })
     };
 };
