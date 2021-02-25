@@ -32,12 +32,13 @@ import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
+import Badges from '../badges/Badges';
 
 import './Dashboard.css';
 
 const { signOut } = require('../../redux/actions/AuthActionCreators.js');
 
-const drawerWidth = 180;
+const drawerWidth = 185;
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -180,6 +181,7 @@ export default function MiniDrawer() {
     />,
     '[ Change Profile Picture ]',
     '[ Settings ]',
+    '[See Badges]',
     'Cancel',
   ];
 
@@ -279,6 +281,7 @@ export default function MiniDrawer() {
                 color="#a8a8a8"
                 className="user-profile"
               />
+              <Badges/>
               </div>
             ) : (
                 <ListItemIcon>
@@ -295,52 +298,63 @@ export default function MiniDrawer() {
               {userName}
           </div>
           <Divider />
+          <Link to='/myProfile' className='menu-link'>
           <ListItem button>
             <ListItemIcon>
               <AccountCircleIcon />
             </ListItemIcon>
             <ListItemText primary={'My Profile'} />
           </ListItem>
+          </Link>
 
+          <Link to='/Dashboard' className='menu-link'>
           <ListItem button>
             <ListItemIcon>
               <DashboardIcon />
             </ListItemIcon>
             <ListItemText primary={'Dashboard'} />
           </ListItem>
+          </Link>
 
+          <Link to='/Messages' className='menu-link'>
           <ListItem button>
             <ListItemIcon>
               <MailIcon />
             </ListItemIcon>
             <ListItemText primary={'Messages'} />
           </ListItem>
+          </Link>
 
+          <Link to='/agenda' className='menu-link'>
           <ListItem button>
             <ListItemIcon>
               <EventIcon />
             </ListItemIcon>
             <ListItemText primary={'Agenda'} />
           </ListItem>
+          </Link>
 
+          <Link to='/files' className='menu-link'>
           <ListItem button>
             <ListItemIcon>
               <LibraryBooksIcon />
             </ListItemIcon>
             <ListItemText primary={'Files'} />
           </ListItem>
+          </Link>
 
+          <Link to='/' className='menu-link'>
           <ListItem
             button
             onClick={handleSignOut}
           >
-            <Link to='/'>
               <ListItemIcon>
                 <ExitToAppIcon />
               </ListItemIcon>
               <ListItemText primary={'Sign Out'} />
-            </Link>
-          </ListItem>
+             </ListItem>
+             </Link>
+
         </List>
         <Menu
           id="lock-menu"
@@ -365,7 +379,6 @@ export default function MiniDrawer() {
         <Divider />
       </Drawer>
       <main className={classes.content}>
-        {/* <Analytics /> */}
         <Analytics2 />
         <Plans />
       </main>
