@@ -1,36 +1,38 @@
-// import React, { Component } from 'react';
+import React, { Component } from 'react';
 // import './UserProfile.css';
 // import userIconM from '../images/userIconMale.jpg';
 // import badgeIcon from '../images/badgeIcon.png';
-// // import musicNoteBar from '../images/musicNoteBar.png';
+import musicNoteBar from '../images/musicNoteBar.png';
 
-// class UserProfile extends Component {
+class UserProfile extends Component {
 
 
-//     render() {
-//         return (
-//             <div>
-//                 <div id='userProfileContainer'>
+    render() {
+        return (
+            <div>
+                {/* <div id='userProfileContainer'>
 
-//                     <div id='userImageContainer'>
-//                         <img class="userImage" src={userIconM} alt="userPicture" />
-//                     </div>
+                    <div id='userImageContainer'>
+                        <img class="userImage" src={userIconM} alt="userPicture" />
+                    </div>
 
-//                     {/* <img id='musicalNote' src={musicNoteBar} alt="Musical Note Divider" /> */}
 
-//                     <h2 id='userProfileName'>John Doe</h2>
+                    <h2 id='userProfileName'>John Doe</h2>
 
-//                     <div id='userProBadgeContainer'>
-//                         <img class='userProBadge' src={badgeIcon} alt='userBadge1' />
-//                         <img class='userProBadge' src={badgeIcon} alt='userBadge1' />
-//                         <img class='userProBadge' src={badgeIcon} alt='userBadge1' />
+                    <div id='userProBadgeContainer'>
+                        <img class='userProBadge' src={badgeIcon} alt='userBadge1' />
+                        <img class='userProBadge' src={badgeIcon} alt='userBadge1' />
+                        <img class='userProBadge' src={badgeIcon} alt='userBadge1' />
                         
-//                     </div>
+                    </div>
 
-//                 </div>
-//             </div>
-//         );
-//     }
-// }
+                </div> */}
+                My Profile
+                <img id='musicalNote' src={musicNoteBar} alt="Musical Note Divider" />
 
-// export default UserProfile;
+            </div>
+        );
+    }
+}
+
+export default UserProfile;
