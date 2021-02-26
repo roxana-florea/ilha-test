@@ -18,7 +18,7 @@ const createRootReducer = () =>
     //         userId: '',
     //         error: '',
     //         loading: false,
-    //         isAuthenticated: false
+    //         isAuthenticated: false,
     //     }
     // };
 

@@ -33,7 +33,7 @@ import Menu from '@material-ui/core/Menu';
 import Badges from '../badges/Badges';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import SendIcon from '@material-ui/icons/Send';
+// import SendIcon from '@material-ui/icons/Send';
 import { blue } from '@material-ui/core/colors';
 
 import '../dashboard/Dashboard.css';
@@ -41,7 +41,6 @@ import '../dashboard/Dashboard.css';
 const { signOut } = require('../../redux/actions/AuthActionCreators.js');
 
 const drawerWidth = 185;
-
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -155,7 +154,6 @@ export default function UserProfile() {
     const userName = useSelector(state => state.authentication.username);
     const dispatch = useDispatch();
     const history = useHistory();
-    const secondary = blue[300];
     // const { currentUser } = useSelector((state) => state.authentication);
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [selectedIndex, setSelectedIndex] = React.useState(1);

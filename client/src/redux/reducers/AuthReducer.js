@@ -77,7 +77,9 @@ const authenticationReducer = function (state = initState, action) {
                 isAuthenticated: false,
                 loading: false,
                 currentUser: null,
-                token: ''
+                token: '',
+                username: '',
+                userId: '',
             };
         default:
             return {
