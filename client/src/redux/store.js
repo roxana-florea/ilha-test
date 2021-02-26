@@ -10,19 +10,19 @@ const createRootReducer = () =>
         plansReducer: plansReducer
     });
 
-    const initState = {
-        authentication: {
-            currentUser: null,
-            token: '',
-            username: '',
-            userId: '',
-            error: '',
-            loading: false,
-            isAuthenticated: false
-        }
-    };
+    // const initState = {
+    //     authentication: {
+    //         currentUser: null,
+    //         token: '',
+    //         username: '',
+    //         userId: '',
+    //         error: '',
+    //         loading: false,
+    //         isAuthenticated: false,
+    //     }
+    // };
 
-    export default function makeStore(initialState = initState) {
+    export default function makeStore(initialState) {
         let composeEnhancers = compose;
         const middlewares = [thunk];
 

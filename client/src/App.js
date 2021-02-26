@@ -1,6 +1,7 @@
 import React from 'react';
 import Dashboard from './components/dashboard/Dashboard';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+
 import Video from './components/video-page/Video';
 import Signin from './components/signin/Signin';
 import Signup from './components/sign-up/Signup';
