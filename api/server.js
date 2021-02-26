@@ -18,8 +18,7 @@ app.use(cors());
 app.use(express.json());
 
 //connection to mongodb
-mongoose
-.connect(dbUrl, { 
+mongoose.connect(dbUrl, { 
   useNewUrlParser: true, 
   useCreateIndex: true, 
   useUnifiedTopology: true 

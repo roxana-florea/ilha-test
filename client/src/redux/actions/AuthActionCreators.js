@@ -63,7 +63,7 @@ const accessRequest = () => {
     };
 };
 
-const accessApproved = (token, username, userId) => {
+export const accessApproved = (token, username, userId) => {
     return {
         type: ACCESS_APPROVED,
         payload: {
@@ -89,14 +89,14 @@ export const signIn = (payload, history) => {
             url: '/signIn',
             data: payload,
             headers: {
-                Authorization: `Bearer ${localStorage.getItem('USER-TOKEN')}`,
+                Authorization: `Bearer ${localStorage.getItem('USERTOKEN')}`,
             }
         })
             .then((response) => {
                 const { token, username, userId } = response.data;
-                localStorage.setItem('USER-TOKEN', token);
-                localStorage.setItem('USER-NAME', username);
-                localStorage.setItem('USER-ID', userId);
+                localStorage.setItem('USERTOKEN', token);
+                localStorage.setItem('USERNAME', username);
+                localStorage.setItem('USERID', userId);
                 dispatch(accessApproved(token, username, userId));
                 history.push('/Dashboard');
             })
@@ -132,7 +132,7 @@ export const signOut = function(history) {
         dispatch(signoutRequest());
         localStorage.clear();
         history.push('/');
-        if (localStorage.getItem('USER-TOKEN')) {
+        if (localStorage.getItem('USERTOKEN')) {
             dispatch(signoutFailed());
         } else {
             dispatch(signoutSuccess());
