@@ -166,7 +166,7 @@ const Video = () => {
     height: 40vh;
     border-radius: 15px;
     box-shadow: 0px 0px 5px 5px grey;
-    animation-name: fadeInX, fadeInY;
+    animation-name: fadeInX, fadecaInY;
     animation-duration: 0.2s;
 `
 const test4 = () =>{
