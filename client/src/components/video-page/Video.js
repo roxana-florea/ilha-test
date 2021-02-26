@@ -8,6 +8,7 @@ import styled from 'styled-components';
 import MicIcon from '@material-ui/icons/Mic';
 import StopIcon from '@material-ui/icons/Stop';
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
+import AlertSnackBar from './AlertSnackBar';
 
 const Video = (props) => {
   const userId = useSelector((state) => state.authentication.userId);
@@ -23,6 +24,7 @@ const Video = (props) => {
     incomingVideoRef,
     startRecording,
     stopRecording,
+    error,
   } = useVideo(roomId);
 
   useEffect(() => {
@@ -279,6 +281,8 @@ const Video = (props) => {
           }}
         ></video>
       </div>
+      <div>{error}</div>
+      <AlertSnackBar error={error} />
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import Peer from 'peerjs';
 import RecordRTCPromisesHandler from 'recordrtc';
 import fileSaver from 'file-saver';
@@ -8,6 +8,7 @@ const useVideo = (roomId) => {
   const myVideoRef = useRef();
   const incomingVideoRef = useRef();
   const recorederRef = useRef();
+  const [error, setError] = useState(null);
 
   const getUserMedia = (callback) => {
     navigator.mediaDevices
@@ -56,7 +57,11 @@ const useVideo = (roomId) => {
       getUserMedia((stream) => {
         myVideoRef.current.srcObject = stream;
         const call = peer.call(incomingVideoId, stream);
+        const delay = setTimeout(() => {
+          setError('The user is not online');
+        }, 3000);
         call.on('stream', (incomingStream) => {
+          clearTimeout(delay);
           incomingVideoRef.current.srcObject = incomingStream;
         });
       });
@@ -88,6 +93,7 @@ const useVideo = (roomId) => {
     incomingVideoRef,
     startRecording,
     stopRecording,
+    error,
   };
 };
 

@@ -26,7 +26,7 @@ function App() {
           <Dashboard />
         </UserRoute>
         <UserRoute path="/videoroom/:roomId" component={Video} />
-        <UserRoute path="/users" component={userList} />
+        <Route path="/users" component={userList} />
       </Switch>
     </Router>
   );
