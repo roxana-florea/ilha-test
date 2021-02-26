@@ -228,9 +228,9 @@ export default function MiniDrawer() {
         break;
       case 'Existing':
         window.open(
-          window.location.origin + `/Students/`,
-          '_blank',
-          'toolbar=0,location=0,menubar=0'
+          window.location.origin + `/users/`
+          // '_blank',
+          // 'toolbar=0,location=0,menubar=0'
         );
         break;
       default:
@@ -365,6 +365,15 @@ export default function MiniDrawer() {
                 <MailIcon />
               </ListItemIcon>
               <ListItemText primary={'Messages'} />
+            </ListItem>
+          </Link>
+
+          <Link to="/users" className="menu-link">
+            <ListItem button>
+              <ListItemIcon>
+                <VideoCallIcon />
+              </ListItemIcon>
+              <ListItemText primary={'Connect to...'} />
             </ListItem>
           </Link>
 
