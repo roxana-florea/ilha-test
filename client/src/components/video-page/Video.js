@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import useVideo from './useVideo';
 import './Video.css';
 import WidgetsIcon from '@material-ui/icons/Widgets';
@@ -9,7 +10,7 @@ import StopIcon from '@material-ui/icons/Stop';
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 
 const Video = (props) => {
-  const [incomingVideoId, setIncomingVideoId] = useState(null);
+  const userId = useSelector((state) => state.authentication.userId);
   const [isRecording, setIsRecording] = useState(false);
   const [popup, setPopUp] = useState(false);
 
@@ -24,7 +25,13 @@ const Video = (props) => {
     stopRecording,
   } = useVideo(roomId);
 
-  useEffect(start, []);
+  useEffect(() => {
+    if (userId === roomId) {
+      start();
+    } else {
+      connect(roomId);
+    }
+  }, []);
 
   const WidgetButton = styled.button`
     @media (max-width: 1920px) {
@@ -202,22 +209,6 @@ const Video = (props) => {
         }}
       ></video>
 
-      <div style={{ position: 'absolute', top: '87%' }}>
-        <p>{roomId}</p>
-        <button onClick={start}>Start</button>
-        <input
-          onChange={(event) => {
-            setIncomingVideoId(event.target.value);
-          }}
-        />
-        <button
-          onClick={() => {
-            connect(incomingVideoId);
-          }}
-        >
-          Connect
-        </button>
-      </div>
       {popup ? (
         <WidegetPopUp>
           <p>PLANS</p>

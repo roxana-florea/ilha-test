@@ -4,8 +4,6 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 
-const students = ['Alf', 'Aya', 'Rox'];
-
 const videoDialog = (props) => {
   const { onClose, selectedValue, open } = props;
 
@@ -22,20 +20,18 @@ const videoDialog = (props) => {
       <List>
         <ListItem
           button
-          onClick={() => handleListItemClick('Create videoroom')}
+          onClick={() => handleListItemClick('New')}
           key={'Create videoroom'}
         >
           <ListItemText primary={'Create new videoroom'} />
         </ListItem>
-        {students.map((student) => (
-          <ListItem
-            button
-            onClick={() => handleListItemClick(student)}
-            key={student}
-          >
-            <ListItemText primary={`Connect to ${student}`} />
-          </ListItem>
-        ))}
+        <ListItem
+          button
+          onClick={() => handleListItemClick('Existing')}
+          key={'Connect to videoroom'}
+        >
+          <ListItemText primary={'Connect to existing videoroom'} />
+        </ListItem>
       </List>
     </Dialog>
   );

@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Video from './components/video-page/Video';
 import Signin from './components/signin/Signin';
 import Signup from './components/sign-up/Signup';
-import { UserRoute } from './components/privateRoute';
+import { UserRoute } from './components/PrivateRoute';
 import UserProfile from './components/userProfile/UserProfile';
 import Messages from './components/messages/Messages';
 import Agenda from './components/agenda/Agenda';
@@ -24,6 +24,7 @@ function App() {
         <UserRoute path="/Dashboard">
           <Dashboard />
         </UserRoute>
+        <UserRoute path="/videoroom/:roomId" component={Video} />
         <UserRoute path="/videoroom/:roomId" component={Video} />
       </Switch>
     </Router>

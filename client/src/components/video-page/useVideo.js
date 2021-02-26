@@ -8,7 +8,6 @@ const useVideo = (roomId) => {
   const myVideoRef = useRef();
   const incomingVideoRef = useRef();
   const recorederRef = useRef();
-  // const [myVideoId, setMyVideoId] = useState(null);
 
   const getUserMedia = (callback) => {
     navigator.mediaDevices
@@ -38,8 +37,6 @@ const useVideo = (roomId) => {
   const start = () => {
     const peer = createPeer(roomId);
     peer.on('open', () => {
-      console.log(peer);
-      // setMyVideoId(id);
       getUserMedia((stream) => {
         myVideoRef.current.srcObject = stream;
         peer.on('call', (call) => {
@@ -55,6 +52,7 @@ const useVideo = (roomId) => {
   const connect = (incomingVideoId) => {
     const peer = createPeer();
     peer.on('open', (id) => {
+      console.log(peer);
       getUserMedia((stream) => {
         myVideoRef.current.srcObject = stream;
         const call = peer.call(incomingVideoId, stream);

@@ -218,6 +218,24 @@ export default function MiniDrawer() {
   const handleCloseVideoDialog = (value) => {
     setOpenVideoDialog(false);
     setSelectedVideoAction(value);
+    switch (value) {
+      case 'New':
+        window.open(
+          window.location.origin + `/videoroom/${userId}`,
+          '_blank',
+          'toolbar=0,location=0,menubar=0'
+        );
+        break;
+      case 'Existing':
+        window.open(
+          window.location.origin + `/Students/`,
+          '_blank',
+          'toolbar=0,location=0,menubar=0'
+        );
+        break;
+      default:
+        break;
+    }
   };
 
   return (
