@@ -9,6 +9,15 @@ async function registerUser(payload) {
             if (user.length > 0) {
                 throw new Error('This e-mail has already been registered to an account.');
             }
+            if (payload.email.length === 0){
+                throw new Error('E-mail field is required.');
+            }
+            if (payload.password.length < 6 || payload.password.length > 14){
+                throw new Error('Password length must be between 6 and 14 characters.');
+            }
+            if (!payload.email.includes('@')){
+                throw new Error('Must be a valid e-mail address.');
+            }
             return bcrypt
                 .hash(payload.password, 10)
                 .then((hashed) => {
