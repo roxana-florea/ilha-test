@@ -33,11 +33,13 @@
     "react-scripts": "4.0.1",
     "react-scroll": "^1.8.1",
     "react-user-avatar": "^1.10.0",
+    "react-validation": "^3.0.7",
     "recordrtc": "^5.6.1",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
     "redux-thunk": "^2.3.0",
     "styled-components": "^5.2.1",
+    "validator": "^13.5.2",
     "web-vitals": "^0.2.4"
   },
   "scripts": {

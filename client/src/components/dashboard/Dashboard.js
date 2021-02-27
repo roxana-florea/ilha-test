@@ -66,6 +66,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
   },
   userProfile: {
+    marginTop: -7,
     marginBottom: -9
   },
   userName: {
