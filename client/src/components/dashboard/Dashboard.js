@@ -67,14 +67,20 @@ const useStyles = makeStyles((theme) => ({
   },
   userProfile: {
     marginTop: -7,
-    marginBottom: -9
+    marginBottom: -5
   },
   userName: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    fontSize: 16,
-    paddingBottom: 10
+    fontSize: 14,
+    paddingBottom: 13,
+    fontFamily: [
+      '-apple-system',
+      'BlinkMacSystemFont',
+      '"Segoe UI"',
+      'Roboto',
+    ].join(','),
   },
   menuButton: {
     marginRight: 36,
@@ -276,13 +282,13 @@ export default function MiniDrawer() {
           >
             {open ? (
               <div className={classes.userProfile}>
-              <UserAvatar
-                size="120"
-                name={userName}
-                color="#a8a8a8"
-                className="user-profile"
-              />
-              <Badges/>
+                <UserAvatar
+                  size="120"
+                  name={userName}
+                  color="#a8a8a8"
+                  className="user-profile"
+                />
+                <Badges />
               </div>
             ) : (
                 <ListItemIcon>
@@ -296,65 +302,65 @@ export default function MiniDrawer() {
               )}
           </ListItem>
           <div className={classes.userName}>
-              {userName}
+            {userName}
           </div>
           <Divider />
           <Link to='/myProfile' className='menu-link'>
-          <ListItem button>
-            <ListItemIcon>
-              <AccountCircleIcon />
-            </ListItemIcon>
-            <ListItemText primary={'My Profile'} />
-          </ListItem>
+            <ListItem button>
+              <ListItemIcon>
+                <AccountCircleIcon />
+              </ListItemIcon>
+              <ListItemText primary={'My Profile'} />
+            </ListItem>
           </Link>
 
           <Link to='/Dashboard' className='menu-link'>
-          <ListItem button>
-            <ListItemIcon>
-              <DashboardIcon />
-            </ListItemIcon>
-            <ListItemText primary={'Dashboard'} />
-          </ListItem>
+            <ListItem button>
+              <ListItemIcon>
+                <DashboardIcon />
+              </ListItemIcon>
+              <ListItemText primary={'Dashboard'} />
+            </ListItem>
           </Link>
 
           <Link to='/Messages' className='menu-link'>
-          <ListItem button>
-            <ListItemIcon>
-              <MailIcon />
-            </ListItemIcon>
-            <ListItemText primary={'Messages'} />
-          </ListItem>
+            <ListItem button>
+              <ListItemIcon>
+                <MailIcon />
+              </ListItemIcon>
+              <ListItemText primary={'Messages'} />
+            </ListItem>
           </Link>
 
           <Link to='/agenda' className='menu-link'>
-          <ListItem button>
-            <ListItemIcon>
-              <EventIcon />
-            </ListItemIcon>
-            <ListItemText primary={'Agenda'} />
-          </ListItem>
+            <ListItem button>
+              <ListItemIcon>
+                <EventIcon />
+              </ListItemIcon>
+              <ListItemText primary={'Agenda'} />
+            </ListItem>
           </Link>
 
           <Link to='/files' className='menu-link'>
-          <ListItem button>
-            <ListItemIcon>
-              <LibraryBooksIcon />
-            </ListItemIcon>
-            <ListItemText primary={'Files'} />
-          </ListItem>
+            <ListItem button>
+              <ListItemIcon>
+                <LibraryBooksIcon />
+              </ListItemIcon>
+              <ListItemText primary={'Files'} />
+            </ListItem>
           </Link>
 
           <Link to='/' className='menu-link'>
-          <ListItem
-            button
-            onClick={handleSignOut}
-          >
+            <ListItem
+              button
+              onClick={handleSignOut}
+            >
               <ListItemIcon>
                 <ExitToAppIcon />
               </ListItemIcon>
               <ListItemText primary={'Sign Out'} />
-             </ListItem>
-             </Link>
+            </ListItem>
+          </Link>
 
         </List>
         <Menu
@@ -366,15 +372,15 @@ export default function MiniDrawer() {
         >
           {options.map((option, index) => (
             <div className={classes.selectedMenu}>
-            <MenuItem
-              key={option}
-              disabled={index === 0}
-              selected={index === selectedIndex}
-              onClick={(event) => handleMenuItemClick(event, index)}
-            >
-              {option}
-            </MenuItem>
-        </div>
+              <MenuItem
+                key={option}
+                disabled={index === 0}
+                selected={index === selectedIndex}
+                onClick={(event) => handleMenuItemClick(event, index)}
+              >
+                {option}
+              </MenuItem>
+            </div>
           ))}
         </Menu>
         <Divider />
