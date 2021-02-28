@@ -46,12 +46,17 @@ export const signUp = (user, history) => {
             .then((res) => {
                 const { data } = res.data;
                 dispatch(registerSuccess(data));
+                window.alert('User succesfully registered! Please sign in.');
                 history.push('/');
             })
             .catch((error) => {
-                if (error)
-                window.alert('400: ALL fields are required.')
-                dispatch(registerFail(error))/// Check errors!!!!!
+                const message = 
+                (error.response &&
+                    error.response.data &&
+                    error.response.data.message) ||
+                    error.message ||
+                    error.toString();
+                dispatch(registerFail(window.alert(message)));
             });
     };
 };
@@ -101,9 +106,14 @@ export const signIn = (payload, history) => {
                 history.push('/Dashboard');
             })
             .catch((error) => {
-                if (error)
-                window.alert('401: Invalid E-mail or password')
-                dispatch(accessFailed(error)); ///Check Error!!!
+                const message = 
+                (error.response &&
+                    error.response.data &&
+                    error.response.data.message) ||
+                    error.message ||
+                    error.toString();
+                dispatch(accessFailed(window.alert(message)));
+                return Promise.reject();
             })
     };
 };
