@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
+import clsx from 'clsx';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
@@ -11,6 +12,13 @@ import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
+import OutlinedInput from '@material-ui/core/OutlinedInput';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import IconButton from '@material-ui/core/IconButton';
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import { makeStyles } from '@material-ui/core/styles';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
@@ -58,6 +66,13 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  textField: {
+    width: '100%',
+  },
+  margin: {
+    marginTop: theme.spacing(1.5),
+    marginBottom: theme.spacing(1.5),
+  },
 }));
 
 export default function Signin() {
@@ -67,6 +82,7 @@ export default function Signin() {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false)
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
@@ -75,6 +91,10 @@ export default function Signin() {
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
   };
+
+  const handleClickShowPassword = () => {
+    setShowPassword(!showPassword);
+  }
 
   const handleSignInClick = (event) => {
     event.preventDefault();
@@ -107,19 +127,32 @@ export default function Signin() {
               value={email}
               onChange={handleEmailChange}
             />
-            <TextField
-              variant="outlined"
-              margin="normal"
+            <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
+            <InputLabel htmlFor="outlined-adornment-password"
+            fullWidth
+            >Password</InputLabel>
+            <OutlinedInput
               required
-              fullWidth
               name="password"
               label="Password"
-              type="password"
-              id="password"
+              type={showPassword ? 'text' : 'password'}
+              id="outlined-adornment-password"
               autoComplete="current-password"
               value={password}
               onChange={handlePasswordChange}
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={handleClickShowPassword}
+                    edge="end"
+                  >
+                    {showPassword ? <Visibility /> : <VisibilityOff />}
+                  </IconButton>
+                </InputAdornment>
+              }
             />
+            </FormControl>
             <FormControlLabel
               control={<Checkbox value="remember" color="secondary" />}
               label="Remember me"

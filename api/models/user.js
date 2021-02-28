@@ -7,31 +7,32 @@ const userSchema = new Schema({
     firstname: { type: String, required: true },
     lastname: { type: String, required: true },
     email: { type: String, required: true, unique: true },
-    password: { 
-        type: String, 
+    password: {
+        type: String,
         required: true,
         min: 6,
         max: 14
     },
-    roles: [{ 
-        type: String, 
-        enum: [ 'candidate', 'teacher', 'student', 'admin' ]
+    roles: [{
+        type: String,
+        enum: ['candidate', 'teacher', 'student', 'admin']
     }],
+    badges: [{ type: Schema.Types.ObjectId, ref: 'Badges' }],
     profilePictureUrl: String,
     linkedin: String,
     spotify: String,
-    itunes : String,
+    itunes: String,
     soundcloud: String,
     description: String,
     workExperience: String,
-    links: [ String ],
-    youtubeVideos: [ String ],
-    awards: [ String ],
-    references: [ String ],
-    interest: [{ type: String, enum: Instruments }],
+    links: [String],
+    youtubeVideos: [String],
+    awards: [String],
+    references: [String],
+    interests: [{ type: String, enum: Instruments }],
     playedInstruments: [{ type: String, enum: Instruments }],
     languages: [{ type: String, enum: Languages, required: true }],
-    classes: [{ type : Schema.Types.ObjectId, ref : 'Classroom' }]
+    classes: [{ type: Schema.Types.ObjectId, ref: 'Classroom' }]
 }, { timestamps: true });
 
 const User = mongoose.model('User', userSchema);
