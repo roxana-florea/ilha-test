@@ -1,5 +1,6 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import useVideo from './useVideo';
 import './Video.css';
 import WidgetsIcon from '@material-ui/icons/Widgets';
@@ -7,53 +8,60 @@ import styled from 'styled-components';
 import MicIcon from '@material-ui/icons/Mic';
 import StopIcon from '@material-ui/icons/Stop';
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
+import AlertSnackBar from './AlertSnackBar';
 
-
-
-
-const Video = () => {
-  const [incomingVideoId, setIncomingVideoId] = useState(null);
+const Video = (props) => {
+  const userId = useSelector((state) => state.authentication.userId);
   const [isRecording, setIsRecording] = useState(false);
   const [popup, setPopUp] = useState(false);
+
+  const roomId = props.match.params.roomId;
 
   const {
     start,
     connect,
-    myVideoId,
     myVideoRef,
     incomingVideoRef,
     startRecording,
     stopRecording,
-  } = useVideo();
+    error,
+  } = useVideo(roomId);
 
+  useEffect(() => {
+    if (userId === roomId) {
+      start();
+    } else {
+      connect(roomId);
+    }
+  }, []);
 
   const WidgetButton = styled.button`
-  @media (max-width: 1920px){
-    display: flex;
-    justify-content: center;
-    position: absolute;
-    top: 90%;
-    left: 95%;
-    color: grey;
-    background-color: white;
-    box-shadow: 0px 0px 5px 2px grey;
-    border-radius: 100%;
-    border: none;
-    width: 3vw;
-    height: 3vw;
-    opacity: 0.8;
-    outline: none;
-  }
-  @media (max-width: 1279px){
-    left: 90%;
-    width: 5vw;
-    height: 5vw;
-  }
-  @media(max-width:811px){
-    left: 90%;
-    width: 8vw;
-    height: 8vw;
-  }
+    @media (max-width: 1920px) {
+      display: flex;
+      justify-content: center;
+      position: absolute;
+      top: 90%;
+      left: 95%;
+      color: grey;
+      background-color: white;
+      box-shadow: 0px 0px 5px 2px grey;
+      border-radius: 100%;
+      border: none;
+      width: 3vw;
+      height: 3vw;
+      opacity: 0.8;
+      outline: none;
+    }
+    @media (max-width: 1279px) {
+      left: 90%;
+      width: 5vw;
+      height: 5vw;
+    }
+    @media (max-width: 811px) {
+      left: 90%;
+      width: 8vw;
+      height: 8vw;
+    }
     &:hover {
       transform: scale(1.2);
       cursor: pointer;
@@ -61,46 +69,45 @@ const Video = () => {
   `;
 
   const ControlContainer = styled.div`
-  @media (max-width: 1920px){
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    width: 10vw;
-    position: absolute;
-    top: 90%;
-    left: 45%;
-  }
-  @media (max-width: 1279px){
-    width: 15vw;
-  }
-  @media(max-width:811px){
-    width: 20vw;
-  }
-
+    @media (max-width: 1920px) {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      width: 10vw;
+      position: absolute;
+      top: 90%;
+      left: 45%;
+    }
+    @media (max-width: 1279px) {
+      width: 15vw;
+    }
+    @media (max-width: 811px) {
+      width: 20vw;
+    }
   `;
   const MicButton = styled.button`
-  @media (max-width: 1920px){
-    display: flex;
-    justify-content: center;
-    background-color: white;
-    box-shadow: 0px 0px 5px 2px grey;
-    border-radius: 100%;
-    border: none;
-    width: 3vw;
-    height: 3vw;
-    opacity: 0.8;
-    outline: none;
-  }
-  @media (max-width: 1279px){
-    left: 90%;
-    width: 5vw;
-    height: 5vw;
-  }
-  @media(max-width:811px){
-    left: 90%;
-    width: 8vw;
-    height: 8vw;
-  }
+    @media (max-width: 1920px) {
+      display: flex;
+      justify-content: center;
+      background-color: white;
+      box-shadow: 0px 0px 5px 2px grey;
+      border-radius: 100%;
+      border: none;
+      width: 3vw;
+      height: 3vw;
+      opacity: 0.8;
+      outline: none;
+    }
+    @media (max-width: 1279px) {
+      left: 90%;
+      width: 5vw;
+      height: 5vw;
+    }
+    @media (max-width: 811px) {
+      left: 90%;
+      width: 8vw;
+      height: 8vw;
+    }
     &:hover {
       transform: scale(1.2);
       cursor: pointer;
@@ -108,28 +115,28 @@ const Video = () => {
   `;
 
   const RecordButton = styled.button`
-  @media (max-width: 1920px){
-    display: flex;
-    justify-content: center;
-    background-color: rgb(177, 27, 27);
-    box-shadow: 0px 0px 5px 2px grey;
-    border-radius: 100%;
-    border: none;
-    width: 3vw;
-    height: 3vw;
-    opacity: 0.8;
-    outline: none;
-  }
-  @media (max-width: 1279px){
-    left: 90%;
-    width: 5vw;
-    height: 5vw;
-  }
-  @media(max-width:811px){
-    left: 90%;
-    width: 8vw;
-    height: 8vw;
-  }
+    @media (max-width: 1920px) {
+      display: flex;
+      justify-content: center;
+      background-color: rgb(177, 27, 27);
+      box-shadow: 0px 0px 5px 2px grey;
+      border-radius: 100%;
+      border: none;
+      width: 3vw;
+      height: 3vw;
+      opacity: 0.8;
+      outline: none;
+    }
+    @media (max-width: 1279px) {
+      left: 90%;
+      width: 5vw;
+      height: 5vw;
+    }
+    @media (max-width: 811px) {
+      left: 90%;
+      width: 8vw;
+      height: 8vw;
+    }
     &:hover {
       transform: scale(1.2);
       cursor: pointer;
@@ -145,16 +152,24 @@ const Video = () => {
       setIsRecording(false);
     }
   };
-  
+
   const WidegetPopUp = styled.div`
-  @keyframes fadeInX{
-    from {width:0vw}
-    to {width: 20vw}
-  }
-  @keyframes fadeInY{
-    from {height: 0vh}
-    to {height: 40vh}
-  }
+    @keyframes fadeInX {
+      from {
+        width: 0vw;
+      }
+      to {
+        width: 20vw;
+      }
+    }
+    @keyframes fadeInY {
+      from {
+        height: 0vh;
+      }
+      to {
+        height: 40vh;
+      }
+    }
     position: absolute;
     display: flex;
     justify-content: center;
@@ -168,15 +183,14 @@ const Video = () => {
     box-shadow: 0px 0px 5px 5px grey;
     animation-name: fadeInX, fadeInY;
     animation-duration: 0.2s;
-`
-const test4 = () =>{
-  if (popup) {
-    setPopUp(false)
-  }
-  else {
-    setPopUp(true)
-  }
-}
+  `;
+  const test4 = () => {
+    if (popup) {
+      setPopUp(false);
+    } else {
+      setPopUp(true);
+    }
+  };
 
   return (
     <div>
@@ -197,30 +211,13 @@ const test4 = () =>{
         }}
       ></video>
 
-      <div style={{ position: 'absolute', top: '87%' }}>
-        <p>{myVideoId}</p>
-        <button onClick={start}>Start</button>
-        <input
-          onChange={(event) => {
-            setIncomingVideoId(event.target.value);
-          }}
-        />
-        <button
-          onClick={() => {
-            connect(incomingVideoId);
-          }}
-        > 
-          Connect
-        </button>
-      </div>
-        {popup ? (
-          <WidegetPopUp>
-            <p>PLANS</p>
-          </WidegetPopUp>
-        ) : (
-          <WidegetPopUp style={{display: 'none'}}></WidegetPopUp>
-          )
-        }
+      {popup ? (
+        <WidegetPopUp>
+          <p>PLANS</p>
+        </WidegetPopUp>
+      ) : (
+        <WidegetPopUp style={{ display: 'none' }}></WidegetPopUp>
+      )}
       <WidgetButton onClick={test4}>
         <WidgetsIcon
           style={{
@@ -238,7 +235,7 @@ const test4 = () =>{
               color: 'rgb(39, 25, 90)',
               alignSelf: 'center',
               width: '70%',
-              height: '70%'
+              height: '70%',
             }}
           />
         </MicButton>
@@ -249,7 +246,7 @@ const test4 = () =>{
                 color: 'rgb(39, 25, 90)',
                 alignSelf: 'center',
                 width: '70%',
-                height: '70%'
+                height: '70%',
               }}
             />
           ) : (
@@ -258,7 +255,7 @@ const test4 = () =>{
                 color: 'rgb(39, 25, 90)',
                 alignSelf: 'center',
                 width: '70%',
-                height: '70%'
+                height: '70%',
               }}
             />
           )}
@@ -284,6 +281,8 @@ const test4 = () =>{
           }}
         ></video>
       </div>
+      <div>{error}</div>
+      <AlertSnackBar error={error} />
     </div>
   );
 };

@@ -19,6 +19,8 @@
     "@testing-library/user-event": "^12.6.2",
     "axios": "^0.21.1",
     "chart.js": "^2.9.4",
+    "devextreme": "^20.2.5",
+    "devextreme-react": "^20.2.5",
     "file-saver": "^2.0.5",
     "jsonwebtoken": "^8.5.1",
     "material-ui-day-time-table": "^1.0.2",
