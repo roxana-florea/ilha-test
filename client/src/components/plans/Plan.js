@@ -54,6 +54,7 @@ export default function Plan({ plan, isExpanded, toggleExpanded }) {
   const [expanded, setExpanded] = React.useState(false);
 
   const classes = useStyles();
+  const nameForUser = planName.slice(0, planName.length - 13);
 
   const executeReduxAction = useDispatch();
 
@@ -65,7 +66,6 @@ export default function Plan({ plan, isExpanded, toggleExpanded }) {
     setDeleteWarningMessage(!deleteWarningMessage);
   };
 
-
   const savePlanTitle = () => {
     setPlanNameEditable(false);
     setPlanName(planName);
@@ -75,21 +75,18 @@ export default function Plan({ plan, isExpanded, toggleExpanded }) {
 
   const clearPlanTitleInput = () => {
     setPlanName('');
-  }
-
+  };
 
   const planToString = () => {
-    const name = planName || 'New plan';
+    // const name = planName || 'New plan';
+    // const nameForUser = name.slice(0, name.lenght - 13);
 
     const planTasks = plan.tasks;
-    const duration = planTasks.reduce(
-      (accumulator, currentValue) => {
-        return accumulator + parseInt(currentValue.duration);
-      },
-      0
-    );
+    const duration = planTasks.reduce((accumulator, currentValue) => {
+      return accumulator + parseInt(currentValue.duration);
+    }, 0);
     const parts = planTasks.length;
-    return `${name}, ${duration} min  / ${parts} parts`;
+    return `${nameForUser}, ${duration} min  / ${parts} parts`;
   };
 
   const addCurrentTask = () => {
@@ -144,7 +141,7 @@ export default function Plan({ plan, isExpanded, toggleExpanded }) {
             <IconButton onClick={(event) => event.stopPropagation()}>
               <VideocamIcon />
             </IconButton>
-            <IconButton onClick={deleteCurrentPlan} >
+            <IconButton onClick={deleteCurrentPlan}>
               <DeleteIcon />
             </IconButton>
           </div>
@@ -163,13 +160,17 @@ export default function Plan({ plan, isExpanded, toggleExpanded }) {
                     onChange={handlePlanNameOnChange}
                   />
 
-
-                  {isPlanNameEditable ? 
-                  <IconButton onClick={savePlanTitle}> <CheckIcon /> </IconButton> :
-                  <IconButton onClick={clearPlanTitleInput}> <ClearIcon /> </IconButton> 
-                  }
-
-
+                  {isPlanNameEditable ? (
+                    <IconButton onClick={savePlanTitle}>
+                      {' '}
+                      <CheckIcon />{' '}
+                    </IconButton>
+                  ) : (
+                    <IconButton onClick={clearPlanTitleInput}>
+                      {' '}
+                      <ClearIcon />{' '}
+                    </IconButton>
+                  )}
                 </form>
               </div>
               <br></br>
@@ -208,7 +209,6 @@ export default function Plan({ plan, isExpanded, toggleExpanded }) {
 
             {warningMessage ? <Warning /> : ''}
             {deleteWarningMessage ? <Delete planId={plan._id} /> : ''}
-
           </Card>
         </div>
       </AccordionDetails>

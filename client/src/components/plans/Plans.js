@@ -1,6 +1,6 @@
 import './Plans.css';
 import React from 'react';
-import {useEffect} from 'react';
+import { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Plan from './Plan';
@@ -28,14 +28,12 @@ export default function Plans() {
 
   const addNewPlan = () => {
     const newPlan = {
-      planName: 'New plan ' + (Date.now()),
-      tasks:[]
+      planName: 'New plan' + Date.now(),
+      tasks: [],
     };
 
     const actionToExecute = addPlan(newPlan);
     executeReduxAction(actionToExecute);
-
-
 
     setExpandedPlan(newPlan);
     scroll.scrollToBottom();
