@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Plan from './Plan';
 import { useSelector, useDispatch } from 'react-redux';
-import { addPlan, loadPlans } from '../../actions';
+import { addPlan, loadPlans } from '../../redux/actions/PlansActions';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';

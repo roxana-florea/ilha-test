@@ -82,4 +82,5 @@ const authenticationReducer = function (state = initState, action) {
   }
 };
 
+
 export default authenticationReducer;

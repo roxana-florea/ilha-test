@@ -10,7 +10,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import VideocamIcon from '@material-ui/icons/Videocam';
 import './Plans.css';
 import { useDispatch } from 'react-redux';
-import { addTask, updatePlanTitle } from '../../actions';
+import { addTask, updatePlanTitle } from '../../redux/actions/PlansActions';
 import Warning from './messages/Warning';
 import Delete from './messages/Delete';
 import Accordion from '@material-ui/core/Accordion';
