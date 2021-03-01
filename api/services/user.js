@@ -63,4 +63,9 @@ function signInUser(payload) {
 
 }
 
+
+function editUser(payload) {
+    return User.findOne
+}
+
 module.exports = { registerUser, signInUser };
