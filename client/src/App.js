@@ -10,7 +10,7 @@ import UserProfile from './components/userProfile/UserProfile';
 import Messages from './components/messages/Messages';
 import Agenda from './components/agenda/Agenda';
 import Files from './components/files/Files';
-
+import userList from './components/userList/userList'
 import EditProfile from './components/userProfile/EditProfile';
 
 
