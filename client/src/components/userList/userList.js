@@ -11,6 +11,9 @@ import IconButton from '@material-ui/core/IconButton';
 import FolderIcon from '@material-ui/icons/Folder';
 import VideoCallIcon from '@material-ui/icons/VideoCall';
 import { makeStyles } from '@material-ui/core/styles';
+import styled from 'styled-components';
+import './userList.css'
+
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -39,15 +42,29 @@ export default function UserList() {
 
   useEffect(getUsers, []);
 
+  const UserListContainer = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 30%;
+    height: auto;
+    position: absolute;
+    left: 35%;
+    border: 1px solid white;
+    border-radius: 15px;
+    
+  `;
+
   return (
-    <div>
-      <h1>Connect to...</h1>
+    <div className='test'>
+      <h1 style={{textAlign:'center', marginTop:'0', padding:'2%'}}>Connect to your student's video room</h1>
+      <UserListContainer>
       <List className={classes.root}>
         {users &&
           users.map((user) => (
             <ListItem>
               <ListItemAvatar>
-                <Avatar>
+                <Avatar style={{backgroundColor: 'transparent', border: '1px solid white'}}>
                   <FolderIcon />
                 </Avatar>
               </ListItemAvatar>
@@ -58,12 +75,13 @@ export default function UserList() {
                     connectToUser(user._id);
                   }}
                 >
-                  <VideoCallIcon />
+                  <VideoCallIcon style={{width: '3vw', height: '3vw'}} />
                 </IconButton>
               </ListItemSecondaryAction>
             </ListItem>
           ))}
       </List>
+      </UserListContainer>
     </div>
   );
 }

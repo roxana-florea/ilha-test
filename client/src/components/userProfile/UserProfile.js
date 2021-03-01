@@ -36,7 +36,7 @@ import Grid from '@material-ui/core/Grid';
 // import SendIcon from '@material-ui/icons/Send';
 import { blue } from '@material-ui/core/colors';
 
-import '../Dashboard/Dashboard.css';
+import '../dashboard/Dashboard.css';
 
 const { signOut } = require('../../redux/actions/AuthActionCreators.js');
 
