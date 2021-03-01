@@ -368,7 +368,7 @@ export default function MiniDrawer() {
             </ListItem>
           </Link>
 
-          <Link to="/users" target='_blank' className="menu-link">
+          <Link to="/users" target="_blank" className="menu-link">
             <ListItem button>
               <ListItemIcon>
                 <VideoCallIcon />

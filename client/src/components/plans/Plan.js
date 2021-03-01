@@ -9,7 +9,7 @@ import TasksTable from './TasksTable';
 import DeleteIcon from '@material-ui/icons/Delete';
 import VideocamIcon from '@material-ui/icons/Videocam';
 import './Plans.css';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addTask, updatePlanTitle } from '../../redux/actions/PlansActions';
 import Warning from './messages/Warning';
 import Delete from './messages/Delete';
@@ -52,9 +52,9 @@ export default function Plan({ plan, isExpanded, toggleExpanded }) {
   const [warningMessage, setWarningMessage] = React.useState(false);
   const [deleteWarningMessage, setDeleteWarningMessage] = React.useState(false);
   const [expanded, setExpanded] = React.useState(false);
+  const userId = useSelector((state) => state.authentication.userId);
 
   const classes = useStyles();
-  const nameForUser = planName.slice(0, planName.length - 13);
 
   const executeReduxAction = useDispatch();
 
@@ -66,9 +66,16 @@ export default function Plan({ plan, isExpanded, toggleExpanded }) {
     setDeleteWarningMessage(!deleteWarningMessage);
   };
 
+  const openVideoroom = () => {
+    window.open(
+      window.location.origin + `/videoroom/${userId}?planId=${plan._id}`,
+      '_blank',
+      'toolbar=0,location=0,menubar=0'
+    );
+  };
+
   const savePlanTitle = () => {
     setPlanNameEditable(false);
-    setPlanName(planName);
     plan.planName = planName;
     executeReduxAction(updatePlanTitle(plan));
   };
@@ -78,15 +85,12 @@ export default function Plan({ plan, isExpanded, toggleExpanded }) {
   };
 
   const planToString = () => {
-    // const name = planName || 'New plan';
-    // const nameForUser = name.slice(0, name.lenght - 13);
-
     const planTasks = plan.tasks;
     const duration = planTasks.reduce((accumulator, currentValue) => {
       return accumulator + parseInt(currentValue.duration);
     }, 0);
     const parts = planTasks.length;
-    return `${nameForUser}, ${duration} min  / ${parts} parts`;
+    return `${planName}, ${duration} min  / ${parts} parts`;
   };
 
   const addCurrentTask = () => {
@@ -138,7 +142,7 @@ export default function Plan({ plan, isExpanded, toggleExpanded }) {
         <div className={classes['accordion-summary-content']}>
           <Typography className={classes.heading}>{planToString()}</Typography>
           <div>
-            <IconButton onClick={(event) => event.stopPropagation()}>
+            <IconButton onClick={openVideoroom}>
               <VideocamIcon />
             </IconButton>
             <IconButton onClick={deleteCurrentPlan}>

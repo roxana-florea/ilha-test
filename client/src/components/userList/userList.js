@@ -12,8 +12,7 @@ import FolderIcon from '@material-ui/icons/Folder';
 import VideoCallIcon from '@material-ui/icons/VideoCall';
 import { makeStyles } from '@material-ui/core/styles';
 import styled from 'styled-components';
-import './userList.css'
-
+import './userList.css';
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -52,35 +51,41 @@ export default function UserList() {
     left: 35%;
     border: 1px solid white;
     border-radius: 15px;
-    
   `;
 
   return (
-    <div className='test'>
-      <h1 style={{textAlign:'center', marginTop:'0', padding:'2%'}}>Connect to your student's video room</h1>
+    <div className="test">
+      <h1 style={{ textAlign: 'center', marginTop: '0', padding: '2%' }}>
+        Connect to your student's video room
+      </h1>
       <UserListContainer>
-      <List className={classes.root}>
-        {users &&
-          users.map((user) => (
-            <ListItem>
-              <ListItemAvatar>
-                <Avatar style={{backgroundColor: 'transparent', border: '1px solid white'}}>
-                  <FolderIcon />
-                </Avatar>
-              </ListItemAvatar>
-              <ListItemText primary={`${user.firstname} ${user.lastname}`} />
-              <ListItemSecondaryAction>
-                <IconButton
-                  onClick={() => {
-                    connectToUser(user._id);
-                  }}
-                >
-                  <VideoCallIcon style={{width: '3vw', height: '3vw'}} />
-                </IconButton>
-              </ListItemSecondaryAction>
-            </ListItem>
-          ))}
-      </List>
+        <List className={classes.root}>
+          {users &&
+            users.map((user) => (
+              <ListItem>
+                <ListItemAvatar>
+                  <Avatar
+                    style={{
+                      backgroundColor: 'transparent',
+                      border: '1px solid white',
+                    }}
+                  >
+                    <FolderIcon />
+                  </Avatar>
+                </ListItemAvatar>
+                <ListItemText primary={`${user.firstname} ${user.lastname}`} />
+                <ListItemSecondaryAction>
+                  <IconButton
+                    onClick={() => {
+                      connectToUser(user._id);
+                    }}
+                  >
+                    <VideoCallIcon style={{ width: '3vw', height: '3vw' }} />
+                  </IconButton>
+                </ListItemSecondaryAction>
+              </ListItem>
+            ))}
+        </List>
       </UserListContainer>
     </div>
   );
