@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
-import { useHistory } from 'react-router-dom';
+// import { useHistory } from 'react-router-dom';
 // import { useDispatch } from 'react-redux';
 
 // import { signUp } from '../../../redux/actions/AuthActionCreators'
@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function PersonalInfo() {
-    const history = useHistory();
+    // const history = useHistory();
     // const dispatch = useDispatch();
     const classes = useStyles();
 
