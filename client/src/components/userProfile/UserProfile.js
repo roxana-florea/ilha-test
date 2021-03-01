@@ -45,7 +45,6 @@ const drawerWidth = 185;
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
-        flexGrow: 1,
     },
     appBar: {
         zIndex: theme.zIndex.drawer + 1,
@@ -69,14 +68,21 @@ const useStyles = makeStyles((theme) => ({
         alignItems: 'center',
     },
     userProfile: {
-        marginBottom: -9
+        marginTop: -7,
+        marginBottom: -5
     },
     userName: {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        fontSize: 16,
-        paddingBottom: 10
+        fontSize: 14,
+        paddingBottom: 13,
+        fontFamily: [
+            '-apple-system',
+            'BlinkMacSystemFont',
+            '"Segoe UI"',
+            'Roboto',
+          ].join(','),
     },
     menuButton: {
         marginRight: 36,
@@ -142,6 +148,27 @@ const useStyles = makeStyles((theme) => ({
         margin: theme.spacing(1),
         color: blue,
     },
+    userProHeader: {
+        padding: theme.spacing(3),
+        paddingLeft: theme.spacing(10),
+        color: theme.palette.text.secondary,
+        display: 'flex',
+        alignItems: 'center',
+    },
+    headerName: {
+        paddingTop: 15,
+        paddingLeft: 30,
+        fontSize: 16,
+        fontFamily: [
+            '-apple-system',
+            'BlinkMacSystemFont',
+            '"Segoe UI"',
+            'Roboto',
+            '"Helvetica Neue"',
+            'Arial',
+            'sans-serif',
+          ].join(','),
+    }
 }));
 
 function HomeIcon(props) {
@@ -186,16 +213,17 @@ export default function UserProfile() {
 
     const options = [
         <UserAvatar
-            size="120"
-            name={userName}
-            color="#a8a8a8"
-            className="user-profile"
+          size="120"
+          name={userName}
+          color="#a8a8a8"
+          className="user-profile"
         />,
-        '[ Edit Profile ]',
-        '[ Settings ]',
-        '[See Badges]',
+        <Link to='/editProfile' className='menu-link'>
+        <Button color="secondary">Edit Profile</Button>
+        </Link>,
         'Cancel',
-    ];
+      ];
+    
 
     ////////////////Pop-Out Window for User Avatar
     const handleClickListItem = (event) => {
@@ -394,49 +422,42 @@ export default function UserProfile() {
                 <div className={classes.root}>
                     <Grid container spacing={3}>
                         <Grid item xs={12}>
-                            <Paper className={classes.paper}>
+                            <Paper className={classes.userProHeader}>
                                 <UserAvatar
                                     size="140"
                                     name={userName}
                                     color="#a8a8a8"
                                 />
-                                {/* <Button
-                                    variant="contained"
-                                    color="secondary"
-                                    className={classes.messageButton}
-                                    endIcon={<SendIcon
-                                        style={{ color: blue[500] }}
-                                        fontSize="small"
-                                    ></SendIcon >}
+                                <div
+                                    className={classes.headerName}
                                 >
-                                    Send
-                            </Button> */}
-                                {userName}
+                                    {userName}
+                                </div>
                             </Paper>
                         </Grid>
-                        <Grid item xs={6}>
-                            <Paper className={classes.paper}>Instruments</Paper>
-                        </Grid>
-                        <Grid item xs={6}>
+                        <Grid item xs={12} sm={6}>
                             <Paper className={classes.paper}>About</Paper>
                         </Grid>
-                        <Grid item xs={3}>
-                            <Paper className={classes.paper}>Badges</Paper>
-                        </Grid>
-                        <Grid item xs={3}>
+                        <Grid item xs={12} sm={6}>
                             <Paper className={classes.paper}>Interests</Paper>
                         </Grid>
-                        <Grid item xs={3}>
+                        <Grid item xs={6} sm={3}>
+                            <Paper className={classes.paper}>Badges</Paper>
+                        </Grid>
+                        <Grid item xs={6} sm={3}>
+                            <Paper className={classes.paper}>Instruments</Paper>
+                        </Grid>
+                        <Grid item xs={6} sm={3}>
                             <Paper className={classes.paper}>Languages</Paper>
                         </Grid>
-                        <Grid item xs={3}>
+                        <Grid item xs={6} sm={3}>
                             <Paper className={classes.paper}>Links</Paper>
                         </Grid>
                     </Grid>
                 </div>
                 {/* <Analytics2 />
-        <Plans /> */} 
-      </main>
+        <Plans /> */}
+            </main>
         </div>
     );
 }
