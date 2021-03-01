@@ -149,7 +149,6 @@ export default function MiniDrawer() {
   const userName = useSelector(state => state.authentication.username);
   const dispatch = useDispatch();
   const history = useHistory();
-  // const { currentUser } = useSelector((state) => state.authentication);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [selectedIndex, setSelectedIndex] = React.useState(1);
   const [open, setOpen] = React.useState(true);
@@ -186,9 +185,9 @@ export default function MiniDrawer() {
       color="#a8a8a8"
       className="user-profile"
     />,
-    '[ Change Profile Picture ]',
-    '[ Settings ]',
-    '[See Badges]',
+    <Link to='/editProfile' className='menu-link'>
+    <Button color="secondary">Edit Profile</Button>
+    </Link>,
     'Cancel',
   ];
 

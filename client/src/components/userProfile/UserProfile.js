@@ -213,16 +213,17 @@ export default function UserProfile() {
 
     const options = [
         <UserAvatar
-            size="120"
-            name={userName}
-            color="#a8a8a8"
-            className="user-profile"
+          size="120"
+          name={userName}
+          color="#a8a8a8"
+          className="user-profile"
         />,
-        '[ Edit Profile ]', //Different text that Dashboard UserAvatar Popout
-        '[ Settings ]',
-        '[See Badges]',
+        <Link to='/editProfile' className='menu-link'>
+        <Button color="secondary">Edit Profile</Button>
+        </Link>,
         'Cancel',
-    ];
+      ];
+    
 
     ////////////////Pop-Out Window for User Avatar
     const handleClickListItem = (event) => {
