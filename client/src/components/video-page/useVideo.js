@@ -1,14 +1,14 @@
-import { useState, useRef } from 'react';
+import { useRef, useState } from 'react';
 import Peer from 'peerjs';
 import RecordRTCPromisesHandler from 'recordrtc';
 import fileSaver from 'file-saver';
 import moment from 'moment';
 
-const useVideo = () => {
+const useVideo = (roomId) => {
   const myVideoRef = useRef();
   const incomingVideoRef = useRef();
   const recorederRef = useRef();
-  const [myVideoId, setMyVideoId] = useState(null);
+  const [error, setError] = useState(null);
 
   const getUserMedia = (callback) => {
     navigator.mediaDevices
@@ -25,10 +25,10 @@ const useVideo = () => {
       });
   };
 
-  const createPeer = () => {
+  const createPeer = (id) => {
     return process.env.REACT_APP_PEER_USE_CLOUD
-      ? new Peer()
-      : new Peer({
+      ? new Peer(id)
+      : new Peer(id, {
           host: process.env.REACT_APP_PEER_HOST,
           port: process.env.REACT_APP_PEER_PORT,
           path: process.env.REACT_APP_PEER_PATH,
@@ -36,9 +36,8 @@ const useVideo = () => {
   };
 
   const start = () => {
-    const peer = createPeer();
-    peer.on('open', (id) => {
-      setMyVideoId(id);
+    const peer = createPeer(roomId);
+    peer.on('open', () => {
       getUserMedia((stream) => {
         myVideoRef.current.srcObject = stream;
         peer.on('call', (call) => {
@@ -54,10 +53,15 @@ const useVideo = () => {
   const connect = (incomingVideoId) => {
     const peer = createPeer();
     peer.on('open', (id) => {
+      console.log(peer);
       getUserMedia((stream) => {
         myVideoRef.current.srcObject = stream;
         const call = peer.call(incomingVideoId, stream);
+        const delay = setTimeout(() => {
+          setError('The user is not online');
+        }, 3000);
         call.on('stream', (incomingStream) => {
+          clearTimeout(delay);
           incomingVideoRef.current.srcObject = incomingStream;
         });
       });
@@ -85,11 +89,11 @@ const useVideo = () => {
   return {
     start,
     connect,
-    myVideoId,
     myVideoRef,
     incomingVideoRef,
     startRecording,
     stopRecording,
+    error,
   };
 };
 

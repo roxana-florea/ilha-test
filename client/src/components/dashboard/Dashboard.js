@@ -32,6 +32,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
+import VideoDialog from '../video-page/VideoDialog';
 import Badges from '../badges/Badges';
 
 import './Dashboard.css';
@@ -66,15 +67,14 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
   },
   userProfile: {
-    marginTop: -7,
-    marginBottom: -9
+    marginBottom: -9,
   },
   userName: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
     fontSize: 16,
-    paddingBottom: 10
+    paddingBottom: 10,
   },
   menuButton: {
     marginRight: 36,
@@ -140,13 +140,16 @@ function HomeIcon(props) {
 export default function MiniDrawer() {
   const classes = useStyles();
   const theme = useTheme();
-  const userName = useSelector(state => state.authentication.username);
+  const userName = useSelector((state) => state.authentication.username);
+  const userId = useSelector((state) => state.authentication.userId);
   const dispatch = useDispatch();
   const history = useHistory();
   // const { currentUser } = useSelector((state) => state.authentication);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [selectedIndex, setSelectedIndex] = React.useState(1);
   const [open, setOpen] = React.useState(true);
+  const [openVideoDialog, setOpenVideoDialog] = React.useState(false);
+  const [selectedVideoAction, setSelectedVideoAction] = React.useState('open');
 
   const handleSignOut = () => {
     dispatch(signOut(history));
@@ -208,6 +211,33 @@ export default function MiniDrawer() {
     setOpen(false);
   };
 
+  const handleClickOpenVideoroom = () => {
+    setOpenVideoDialog(true);
+  };
+
+  const handleCloseVideoDialog = (value) => {
+    setOpenVideoDialog(false);
+    setSelectedVideoAction(value);
+    switch (value) {
+      case 'New':
+        window.open(
+          window.location.origin + `/videoroom/${userId}`,
+          '_blank',
+          'toolbar=0,location=0,menubar=0'
+        );
+        break;
+      case 'Existing':
+        window.open(
+          window.location.origin + `/users/`
+          // '_blank',
+          // 'toolbar=0,location=0,menubar=0'
+        );
+        break;
+      default:
+        break;
+    }
+  };
+
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -235,11 +265,25 @@ export default function MiniDrawer() {
               <p>ILHA</p>
             </div>
           </Typography>
-          <Link to="/Video" target="_blank">
+
+          {/* <Link to={`/videoroom/${userId}`} target="_blank">
             <Button variant="contained" className={classes.button}>
               <VideoCallIcon />
             </Button>
-          </Link>
+          </Link> */}
+
+          <Button
+            variant="contained"
+            className={classes.button}
+            onClick={handleClickOpenVideoroom}
+          >
+            <VideoCallIcon />
+          </Button>
+          <VideoDialog
+            selectedValue={selectedVideoAction}
+            open={openVideoDialog}
+            onClose={handleCloseVideoDialog}
+          />
         </Toolbar>
       </AppBar>
       <Drawer
@@ -260,8 +304,8 @@ export default function MiniDrawer() {
             {theme.direction === 'rtl' ? (
               <ChevronRightIcon />
             ) : (
-                <ChevronLeftIcon />
-              )}
+              <ChevronLeftIcon />
+            )}
           </IconButton>
         </div>
 
@@ -276,86 +320,89 @@ export default function MiniDrawer() {
           >
             {open ? (
               <div className={classes.userProfile}>
-              <UserAvatar
-                size="120"
-                name={userName}
-                color="#a8a8a8"
-                className="user-profile"
-              />
-              <Badges/>
+                <UserAvatar
+                  size="120"
+                  name={userName}
+                  color="#a8a8a8"
+                  className="user-profile"
+                />
+                <Badges />
               </div>
             ) : (
-                <ListItemIcon>
-                  <Avatar
-                    alt={userName}
-                    src="/static/images/avatar/1.jpg"
-                    className="small-avatar"
-                    onClick={handleClickListItem}
-                  />
-                </ListItemIcon>
-              )}
+              <ListItemIcon>
+                <Avatar
+                  alt={userName}
+                  src="/static/images/avatar/1.jpg"
+                  className="small-avatar"
+                  onClick={handleClickListItem}
+                />
+              </ListItemIcon>
+            )}
           </ListItem>
-          <div className={classes.userName}>
-              {userName}
-          </div>
+          <div className={classes.userName}>{userName}</div>
           <Divider />
-          <Link to='/myProfile' className='menu-link'>
-          <ListItem button>
-            <ListItemIcon>
-              <AccountCircleIcon />
-            </ListItemIcon>
-            <ListItemText primary={'My Profile'} />
-          </ListItem>
+          <Link to="/myProfile" className="menu-link">
+            <ListItem button>
+              <ListItemIcon>
+                <AccountCircleIcon />
+              </ListItemIcon>
+              <ListItemText primary={'My Profile'} />
+            </ListItem>
           </Link>
 
-          <Link to='/Dashboard' className='menu-link'>
-          <ListItem button>
-            <ListItemIcon>
-              <DashboardIcon />
-            </ListItemIcon>
-            <ListItemText primary={'Dashboard'} />
-          </ListItem>
+          <Link to="/Dashboard" className="menu-link">
+            <ListItem button>
+              <ListItemIcon>
+                <DashboardIcon />
+              </ListItemIcon>
+              <ListItemText primary={'Dashboard'} />
+            </ListItem>
           </Link>
 
-          <Link to='/Messages' className='menu-link'>
-          <ListItem button>
-            <ListItemIcon>
-              <MailIcon />
-            </ListItemIcon>
-            <ListItemText primary={'Messages'} />
-          </ListItem>
+          <Link to="/Messages" className="menu-link">
+            <ListItem button>
+              <ListItemIcon>
+                <MailIcon />
+              </ListItemIcon>
+              <ListItemText primary={'Messages'} />
+            </ListItem>
           </Link>
 
-          <Link to='/agenda' className='menu-link'>
-          <ListItem button>
-            <ListItemIcon>
-              <EventIcon />
-            </ListItemIcon>
-            <ListItemText primary={'Agenda'} />
-          </ListItem>
+          <Link to="/users" className="menu-link">
+            <ListItem button>
+              <ListItemIcon>
+                <VideoCallIcon />
+              </ListItemIcon>
+              <ListItemText primary={'Connect to...'} />
+            </ListItem>
           </Link>
 
-          <Link to='/files' className='menu-link'>
-          <ListItem button>
-            <ListItemIcon>
-              <LibraryBooksIcon />
-            </ListItemIcon>
-            <ListItemText primary={'Files'} />
-          </ListItem>
+          <Link to="/agenda" className="menu-link">
+            <ListItem button>
+              <ListItemIcon>
+                <EventIcon />
+              </ListItemIcon>
+              <ListItemText primary={'Agenda'} />
+            </ListItem>
           </Link>
 
-          <Link to='/' className='menu-link'>
-          <ListItem
-            button
-            onClick={handleSignOut}
-          >
+          <Link to="/files" className="menu-link">
+            <ListItem button>
+              <ListItemIcon>
+                <LibraryBooksIcon />
+              </ListItemIcon>
+              <ListItemText primary={'Files'} />
+            </ListItem>
+          </Link>
+
+          <Link to="/" className="menu-link">
+            <ListItem button onClick={handleSignOut}>
               <ListItemIcon>
                 <ExitToAppIcon />
               </ListItemIcon>
               <ListItemText primary={'Sign Out'} />
-             </ListItem>
-             </Link>
-
+            </ListItem>
+          </Link>
         </List>
         <Menu
           id="lock-menu"
@@ -366,15 +413,15 @@ export default function MiniDrawer() {
         >
           {options.map((option, index) => (
             <div className={classes.selectedMenu}>
-            <MenuItem
-              key={option}
-              disabled={index === 0}
-              selected={index === selectedIndex}
-              onClick={(event) => handleMenuItemClick(event, index)}
-            >
-              {option}
-            </MenuItem>
-        </div>
+              <MenuItem
+                key={option}
+                disabled={index === 0}
+                selected={index === selectedIndex}
+                onClick={(event) => handleMenuItemClick(event, index)}
+              >
+                {option}
+              </MenuItem>
+            </div>
           ))}
         </Menu>
         <Divider />
