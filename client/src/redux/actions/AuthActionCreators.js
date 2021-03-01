@@ -46,12 +46,17 @@ export const signUp = (user, history) => {
             .then((res) => {
                 const { data } = res.data;
                 dispatch(registerSuccess(data));
+                window.alert('User succesfully registered! Please sign in.');
                 history.push('/');
             })
             .catch((error) => {
-                if (error)
-                window.alert('400: ALL fields are required.')
-                dispatch(registerFail(error))/// Check errors!!!!!
+                const message = 
+                (error.response &&
+                    error.response.data &&
+                    error.response.data.message) ||
+                    error.message ||
+                    error.toString();
+                dispatch(registerFail(window.alert(message)));
             });
     };
 };
@@ -63,7 +68,7 @@ const accessRequest = () => {
     };
 };
 
-const accessApproved = (token, username, userId) => {
+export const accessApproved = (token, username, userId) => {
     return {
         type: ACCESS_APPROVED,
         payload: {
@@ -89,21 +94,26 @@ export const signIn = (payload, history) => {
             url: '/signIn',
             data: payload,
             headers: {
-                Authorization: `Bearer ${localStorage.getItem('USER-TOKEN')}`,
+                Authorization: `Bearer ${localStorage.getItem('USERTOKEN')}`,
             }
         })
             .then((response) => {
                 const { token, username, userId } = response.data;
-                localStorage.setItem('USER-TOKEN', token);
-                localStorage.setItem('USER-NAME', username);
-                localStorage.setItem('USER-ID', userId);
+                localStorage.setItem('USERTOKEN', token);
+                localStorage.setItem('USERNAME', username);
+                localStorage.setItem('USERID', userId);
                 dispatch(accessApproved(token, username, userId));
                 history.push('/Dashboard');
             })
             .catch((error) => {
-                if (error)
-                window.alert('401: Invalid E-mail or password')
-                dispatch(accessFailed(error)); ///Check Error!!!
+                const message = 
+                (error.response &&
+                    error.response.data &&
+                    error.response.data.message) ||
+                    error.message ||
+                    error.toString();
+                dispatch(accessFailed(window.alert(message)));
+                return Promise.reject();
             })
     };
 };
@@ -132,7 +142,7 @@ export const signOut = function(history) {
         dispatch(signoutRequest());
         localStorage.clear();
         history.push('/');
-        if (localStorage.getItem('USER-TOKEN')) {
+        if (localStorage.getItem('USERTOKEN')) {
             dispatch(signoutFailed());
         } else {
             dispatch(signoutSuccess());

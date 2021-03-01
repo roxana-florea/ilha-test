@@ -1,7 +1,7 @@
 import { combineReducers, applyMiddleware, createStore, compose } from 'redux';
 import thunk from 'redux-thunk';
 
-import plansReducer from '../reducers/plans';
+import plansReducer from './reducers/PlansReducer';
 import authenticationReducer from './reducers/AuthReducer';
 import jwt from 'jsonwebtoken';
 
@@ -61,3 +61,4 @@ export default function makeStore(initialState = initState) {
 
   return store;
 }
+

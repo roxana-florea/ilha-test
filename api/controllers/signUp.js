@@ -9,11 +9,10 @@ const signUp = async (req, res) => {
             success: true,
             data: savedUser,
         });
+
     } catch (error) {
-        if (error !== null) {
-            res.sendStatus(400);
-        }
-        console.log(error)
+        res.status(400).send({ message: error.message });
+        return;
     }
 };
 

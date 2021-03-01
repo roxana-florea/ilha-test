@@ -6,8 +6,18 @@ async function registerUser(payload) {
     return User.find({ email: payload.email })
         .exec()
         .then((user) => {
+            // const mailFormat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
             if (user.length > 0) {
                 throw new Error('This e-mail has already been registered to an account.');
+            }
+            if (payload.email.length === 0) {
+                throw new Error('E-mail field is required.');
+            }
+            if (payload.password.length < 6 || payload.password.length > 14) {
+                throw new Error('Password length must be between 6 and 14 characters.');
+            }
+            if (!payload.email.match(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)) {
+                throw new Error('Must be a valid e-mail address.');
             }
             return bcrypt
                 .hash(payload.password, 10)
@@ -40,7 +50,7 @@ function signInUser(payload) {
                         if (res) {
                             const token = getSignedToken(user._id);
                             const userId = user._id;
-                            return {token, username, userId};
+                            return { token, username, userId };
                         } else {
                             throw new Error('Invalid Password');
                         }
