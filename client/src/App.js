@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Video from './components/video-page/Video';
 import Signin from './components/signin/Signin';
 import Signup from './components/sign-up/Signup';
-import { UserRoute } from './components/PrivateRoute';
+import { UserRoute } from './components/privateRoute';
 import UserProfile from './components/userProfile/UserProfile';
 import Messages from './components/messages/Messages';
 import Agenda from './components/agenda/Agenda';
