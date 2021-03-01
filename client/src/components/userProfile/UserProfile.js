@@ -36,7 +36,7 @@ import Grid from '@material-ui/core/Grid';
 // import SendIcon from '@material-ui/icons/Send';
 import { blue } from '@material-ui/core/colors';
 
-import '../dashboard/Dashboard.css';
+import '../Dashboard/Dashboard.css';
 
 const { signOut } = require('../../redux/actions/AuthActionCreators.js');
 
@@ -191,7 +191,7 @@ export default function UserProfile() {
             color="#a8a8a8"
             className="user-profile"
         />,
-        '[ Change Profile Picture ]',
+        '[ Edit Profile ]',
         '[ Settings ]',
         '[See Badges]',
         'Cancel',
@@ -415,19 +415,19 @@ export default function UserProfile() {
                             </Paper>
                         </Grid>
                         <Grid item xs={6}>
-                            <Paper className={classes.paper}>Badges</Paper>
+                            <Paper className={classes.paper}>Instruments</Paper>
                         </Grid>
                         <Grid item xs={6}>
                             <Paper className={classes.paper}>About</Paper>
                         </Grid>
                         <Grid item xs={3}>
-                            <Paper className={classes.paper}>Instruments</Paper>
+                            <Paper className={classes.paper}>Badges</Paper>
                         </Grid>
                         <Grid item xs={3}>
                             <Paper className={classes.paper}>Interests</Paper>
                         </Grid>
                         <Grid item xs={3}>
-                            <Paper className={classes.paper}>Classes</Paper>
+                            <Paper className={classes.paper}>Languages</Paper>
                         </Grid>
                         <Grid item xs={3}>
                             <Paper className={classes.paper}>Links</Paper>

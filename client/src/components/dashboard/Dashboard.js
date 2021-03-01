@@ -27,7 +27,7 @@ import logo from '../images/logo_White_NT.png';
 import Plans from '../plans/Plans.js';
 import UserAvatar from 'react-user-avatar';
 import Avatar from '@material-ui/core/Avatar';
-import Analytics2 from '../analytics/Analytics2.js';
+import Analytics2 from '../Analytics/Analytics2.js';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -66,6 +66,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
   },
   userProfile: {
+    marginTop: -7,
     marginBottom: -9
   },
   userName: {
