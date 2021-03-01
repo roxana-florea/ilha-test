@@ -389,7 +389,14 @@ export default function MiniDrawer() {
               <ListItemText primary={'Agenda'} />
             </ListItem>
           </Link>
-
+          <Link to="/users" target='_blank' className="menu-link">
+            <ListItem button>
+              <ListItemIcon>
+                <VideoCallIcon />
+              </ListItemIcon>
+              <ListItemText primary={'Connect to...'} />
+            </ListItem>
+          </Link>
           <Link to='/files' className='menu-link'>
             <ListItem button>
               <ListItemIcon>
