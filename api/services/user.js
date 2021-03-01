@@ -6,7 +6,6 @@ async function registerUser(payload) {
     return User.find({ email: payload.email })
         .exec()
         .then((user) => {
-            // const mailFormat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
             if (user.length > 0) {
                 throw new Error('This e-mail has already been registered to an account.');
             }
@@ -61,6 +60,11 @@ function signInUser(payload) {
             }
         });
 
+}
+
+
+function editUser(payload) {
+    return User.findOne
 }
 
 module.exports = { registerUser, signInUser };

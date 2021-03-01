@@ -10,8 +10,8 @@ const mongoose = require('mongoose');
 //load the routers from other files
 const plansRouter = require('./routes/plans');
 const authRouter = require('./routes/auth');
-const dashboardRouter = require('./routes/dashboard');
-const userRouter = require('./routes/users');
+
+// const dashboardRouter = require('./routes/dashboard');
 
 const dbUrl = process.env.DB_URL;
 
@@ -33,8 +33,9 @@ connection.once('open', () => {
 //the routers are added as middleware
 app.use('/plans', plansRouter);
 app.use('/', authRouter);
-app.use('Dashboard/', dashboardRouter);
-app.use('/users', userRouter);
+
+// app.use('Dashboard/', dashboardRouter);
+
 
 const server = app.listen(port, (err) => {
   if (err) {
