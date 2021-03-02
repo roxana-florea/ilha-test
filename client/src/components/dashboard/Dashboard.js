@@ -393,7 +393,7 @@ export default function MiniDrawer() {
               <ListItemIcon>
                 <VideoCallIcon />
               </ListItemIcon>
-              <ListItemText primary={'Connect to...'} />
+              <ListItemText primary={'Connect'} />
             </ListItem>
           </Link>
           <Link to='/files' className='menu-link'>
