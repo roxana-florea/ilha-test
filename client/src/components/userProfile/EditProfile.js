@@ -67,7 +67,7 @@ function HomeIcon(props) {
       alignItems: 'center',
     },
     userProfile: {
-      marginTop: -7,
+      marginTop: -30,
       marginBottom: -5
     },
     userName: {
@@ -338,6 +338,15 @@ export default function EditProfile({user}) {
                     <ListItemText primary={'Agenda'} />
                   </ListItem>
                 </Link>
+
+                <Link to="/users" target='_blank' className="menu-link">
+            <ListItem button>
+              <ListItemIcon>
+                <VideoCallIcon />
+              </ListItemIcon>
+              <ListItemText primary={'Connect'} />
+            </ListItem>
+          </Link>
       
                 <Link to='/files' className='menu-link'>
                   <ListItem button>

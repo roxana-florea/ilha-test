@@ -35,6 +35,7 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 // import SendIcon from '@material-ui/icons/Send';
 import { blue } from '@material-ui/core/colors';
+import VideoDialog from '../video-page/VideoDialog';
 
 import '../dashboard/Dashboard.css';
 
@@ -68,7 +69,7 @@ const useStyles = makeStyles((theme) => ({
         alignItems: 'center',
     },
     userProfile: {
-        marginTop: -7,
+        marginTop: -30,
         marginBottom: -5
     },
     userName: {
@@ -82,7 +83,7 @@ const useStyles = makeStyles((theme) => ({
             'BlinkMacSystemFont',
             '"Segoe UI"',
             'Roboto',
-          ].join(','),
+        ].join(','),
     },
     menuButton: {
         marginRight: 36,
@@ -167,7 +168,7 @@ const useStyles = makeStyles((theme) => ({
             '"Helvetica Neue"',
             'Arial',
             'sans-serif',
-          ].join(','),
+        ].join(','),
     }
 }));
 
@@ -213,17 +214,17 @@ export default function UserProfile() {
 
     const options = [
         <UserAvatar
-          size="120"
-          name={userName}
-          color="#a8a8a8"
-          className="user-profile"
+            size="120"
+            name={userName}
+            color="#a8a8a8"
+            className="user-profile"
         />,
         <Link to='/editProfile' className='menu-link'>
-        <Button color="secondary">Edit Profile</Button>
+            <Button color="secondary">Edit Profile</Button>
         </Link>,
         'Cancel',
-      ];
-    
+    ];
+
 
     ////////////////Pop-Out Window for User Avatar
     const handleClickListItem = (event) => {
@@ -371,6 +372,15 @@ export default function UserProfile() {
                                 <EventIcon />
                             </ListItemIcon>
                             <ListItemText primary={'Agenda'} />
+                        </ListItem>
+                    </Link>
+
+                    <Link to="/users" target='_blank' className="menu-link">
+                        <ListItem button>
+                            <ListItemIcon>
+                                <VideoCallIcon />
+                            </ListItemIcon>
+                            <ListItemText primary={'Connect'} />
                         </ListItem>
                     </Link>
 
