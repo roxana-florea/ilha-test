@@ -3,6 +3,7 @@ import React from 'react';
 import { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
 import Plan from './Plan';
 import { useSelector, useDispatch } from 'react-redux';
 import { addPlan, loadPlans } from '../../redux/actions/PlansActions';
@@ -25,10 +26,11 @@ export default function Plans() {
   const plans = useSelector((state) => state.plansReducer);
   const classes = useStyles();
   const [expandedPlan, setExpandedPlan] = React.useState();
+  const [planName, setPlanName] = React.useState('');
 
   const addNewPlan = () => {
     const newPlan = {
-      planName: 'New plan' + Date.now(),
+      planName,
       tasks: [],
     };
 
@@ -45,6 +47,10 @@ export default function Plans() {
     } else {
       setExpandedPlan(plan);
     }
+  };
+
+  const handlePlanNameOnChange = (event) => {
+    setPlanName(event.target.value);
   };
 
   useEffect(() => {
@@ -71,14 +77,22 @@ export default function Plans() {
               )}
             </CardContent>
             <CardActions>
-              <div className="add-plan-button">
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={addNewPlan}
-                >
-                  Add a new plan
-                </Button>
+              <div className="new-plan-template">
+                <TextField
+                  id="standard-basic"
+                  label="Enter a plan title"
+                  value={planName}
+                  onChange={handlePlanNameOnChange}
+                />
+                <div className="add-plan-button">
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={addNewPlan}
+                  >
+                    Add a new plan
+                  </Button>
+                </div>
               </div>
             </CardActions>
           </Card>

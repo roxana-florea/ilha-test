@@ -159,7 +159,7 @@ export default function Plan({ plan, isExpanded, toggleExpanded }) {
                 <form className={classes.root} noValidate autoComplete="off">
                   <TextField
                     id="standard-basic"
-                    label="Add a plan title"
+                    label="Change plan title"
                     value={planName}
                     onChange={handlePlanNameOnChange}
                   />
