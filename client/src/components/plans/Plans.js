@@ -27,18 +27,29 @@ export default function Plans() {
   const classes = useStyles();
   const [expandedPlan, setExpandedPlan] = React.useState();
   const [planName, setPlanName] = React.useState('');
+  const [addPlanButtonDisable, toggleAddPlanButtonDisable] = React.useState(
+    false
+  );
 
   const addNewPlan = () => {
-    const newPlan = {
-      planName,
-      tasks: [],
-    };
+    const namesSet = new Set(plans.map((plan) => plan.planName));
+    if (namesSet.has(planName)) {
+      alert('Plan title should be unique');
+    } else {
+      const newPlan = {
+        planName,
+        tasks: [],
+      };
 
-    const actionToExecute = addPlan(newPlan);
-    executeReduxAction(actionToExecute);
+      const actionToExecute = addPlan(newPlan);
 
-    setExpandedPlan(newPlan);
-    scroll.scrollToBottom();
+      executeReduxAction(actionToExecute).then(() => {
+        setPlanName('');
+        toggleAddPlanButtonDisable(true);
+        setExpandedPlan(newPlan);
+        scroll.scrollToBottom();
+      });
+    }
   };
 
   const toggleExpanded = (plan) => {
@@ -89,6 +100,7 @@ export default function Plans() {
                     variant="contained"
                     color="primary"
                     onClick={addNewPlan}
+                    disabled={addPlanButtonDisable}
                   >
                     Add a new plan
                   </Button>
@@ -104,6 +116,7 @@ export default function Plans() {
           plan={plan}
           isExpanded={expandedPlan && plan.planName === expandedPlan.planName}
           toggleExpanded={toggleExpanded}
+          toggleAddPlanButtonDisable={toggleAddPlanButtonDisable}
         />
       ))}
     </div>

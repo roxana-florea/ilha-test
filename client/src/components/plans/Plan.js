@@ -43,7 +43,12 @@ const useStyles = makeStyles({
   },
 });
 
-export default function Plan({ plan, isExpanded, toggleExpanded }) {
+export default function Plan({
+  plan,
+  isExpanded,
+  toggleExpanded,
+  toggleAddPlanButtonDisable,
+}) {
   const [planName, setPlanName] = React.useState(plan.planName);
   const [isPlanNameEditable, setPlanNameEditable] = React.useState(false);
   const [taskName, setTaskName] = React.useState('');
@@ -108,7 +113,9 @@ export default function Plan({ plan, isExpanded, toggleExpanded }) {
     ) {
       setWarningMessage(!warningMessage);
     } else {
-      executeReduxAction(addTask(newTask));
+      executeReduxAction(addTask(newTask)).then(() =>
+        toggleAddPlanButtonDisable(false)
+      );
     }
     setTaskName('');
     setDescription('');
