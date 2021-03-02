@@ -10,6 +10,7 @@ import StopIcon from '@material-ui/icons/Stop';
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 import AlertSnackBar from './AlertSnackBar';
 import axios from 'axios';
+import TasksTable from './TasksTable';
 
 const Video = (props) => {
   const userId = useSelector((state) => state.authentication.userId);
@@ -178,7 +179,7 @@ const Video = (props) => {
         width: 0vw;
       }
       to {
-        width: 20vw;
+        width: 30vw;
       }
     }
     @keyframes fadeInY {
@@ -197,10 +198,8 @@ const Video = (props) => {
     color: white;
     top: 3%;
     right: 1%;
-    width: 20vw;
+    width: 30vw;
     height: 40vh;
-    border-radius: 15px;
-    box-shadow: 0px 0px 5px 5px grey;
     animation-name: fadeInX, fadeInY;
     animation-duration: 0.2s;
   `;
@@ -233,7 +232,7 @@ const Video = (props) => {
 
       {popup ? (
         <WidegetPopUp>
-          <div>PLAN</div>
+          {/* <div>PLAN</div>
           <div>
             <span>Name </span>
             <span>Description </span>
@@ -247,7 +246,9 @@ const Video = (props) => {
                 <span>{task.duration} </span>
               </div>
             );
-          })}
+          })} */}
+
+          {plan ? <TasksTable tasks={plan?.tasks} /> : <p>No plan selected</p>}
         </WidegetPopUp>
       ) : (
         <WidegetPopUp style={{ display: 'none' }}></WidegetPopUp>
