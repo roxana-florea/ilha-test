@@ -10,9 +10,8 @@ import UserProfile from './components/userProfile/UserProfile';
 import Messages from './components/messages/Messages';
 import Agenda from './components/agenda/Agenda';
 import Files from './components/files/Files';
-import userList from './components/userList/userList'
+import userList from './components/userList/userList';
 import EditProfile from './components/userProfile/EditProfile';
-
 
 function App() {
   return (
@@ -23,14 +22,13 @@ function App() {
         {/* <Route path="/Dashboard" component={Dashboard} /> */}
 
         <Route path="/Video" component={Video} />
-        <Route path='/myProfile' component={UserProfile}/>
-        <Route path='/editProfile' component={EditProfile}/>
-        <Route path='/messages' component={Messages}/>
-        <Route path='/agenda' component={Agenda}/>
-        <Route path='/files' component={Files}/>
+        <Route path="/myProfile" component={UserProfile} />
+        <Route path="/editProfile" component={EditProfile} />
+        <Route path="/messages" component={Messages} />
+        <Route path="/agenda" component={Agenda} />
+        <Route path="/files" component={Files} />
 
-        <UserRoute path='/Dashboard'>
-
+        <UserRoute path="/Dashboard">
           <Dashboard />
         </UserRoute>
         <UserRoute path="/videoroom/:roomId" component={Video} />

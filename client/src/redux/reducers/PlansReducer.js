@@ -11,25 +11,34 @@ const plansReducer = (state = [], action) => {
 
     case 'UPDATE_PLAN_TITLE':
       console.log(action.value);
-      const newPlans = plansArr.filter(plan => plan._id !== action.value._id);
+      const newPlans = plansArr.filter((plan) => plan._id !== action.value._id);
       newPlans.push(action.value);
       return newPlans;
 
-
     case 'DELETE_PLAN':
-      return plansArr.filter(plan => plan._id !== action.value);
+      return plansArr.filter((plan) => plan._id !== action.value);
 
     case 'ADD_TASK':
-      const uselessPlan = plansArr.filter(plan => plan._id === action.value.planId);
+      const uselessPlan = plansArr.filter(
+        (plan) => plan._id === action.value.planId
+      );
       uselessPlan[0].tasks.push(action.value);
-      plansArr.filter(plan => plan._id !== action.value.planId).push(uselessPlan[0]);
+      plansArr
+        .filter((plan) => plan._id !== action.value.planId)
+        .push(uselessPlan[0]);
 
       return plansArr;
 
     case 'DELETE_TASK':
-      const planWhereTaskShouldBeDeleted = plansArr.filter(plan => plan._id === action.value.planId); //choose the plan we want to target
-      planWhereTaskShouldBeDeleted[0].tasks = planWhereTaskShouldBeDeleted[0].tasks.filter(task => task._id !== action.value._id);//choose all tasks except action.value
-      plansArr.filter(plan => plan._id !== action.value.planId).push(planWhereTaskShouldBeDeleted[0]);// choose all plans except the one we modified and push modified one
+      const planWhereTaskShouldBeDeleted = plansArr.filter(
+        (plan) => plan._id === action.value.planId
+      ); //choose the plan we want to target
+      planWhereTaskShouldBeDeleted[0].tasks = planWhereTaskShouldBeDeleted[0].tasks.filter(
+        (task) => task._id !== action.value._id
+      ); //choose all tasks except action.value
+      plansArr
+        .filter((plan) => plan._id !== action.value.planId)
+        .push(planWhereTaskShouldBeDeleted[0]); // choose all plans except the one we modified and push modified one
 
       return plansArr;
 
@@ -44,11 +53,16 @@ const plansReducer = (state = [], action) => {
     //   return plansArr;
 
     case 'UPDATE_TASK':
-      const planToBeUpdated = plansArr.filter(plan => plan._id === action.value.planId);
-      planToBeUpdated[0].tasks = planToBeUpdated[0].tasks.filter(task => task._id !== action.value._id);
-      planToBeUpdated[0].tasks.push(action.value)
-      plansArr.filter(plan => plan._id !== action.value.planId).push(planToBeUpdated[0]);
-
+      const planToBeUpdated = plansArr.filter(
+        (plan) => plan._id === action.value.planId
+      );
+      planToBeUpdated[0].tasks = planToBeUpdated[0].tasks.filter(
+        (task) => task._id !== action.value._id
+      );
+      planToBeUpdated[0].tasks.push(action.value);
+      plansArr
+        .filter((plan) => plan._id !== action.value.planId)
+        .push(planToBeUpdated[0]);
 
       return plansArr;
 

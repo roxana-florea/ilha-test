@@ -68,8 +68,7 @@ const useStyles = makeStyles((theme) => ({
   },
   userProfile: {
     marginTop: -30,
-    marginBottom: -5
-
+    marginBottom: -5,
   },
   userName: {
     display: 'flex',
@@ -84,7 +83,6 @@ const useStyles = makeStyles((theme) => ({
       '"Segoe UI"',
       'Roboto',
     ].join(','),
-
   },
   menuButton: {
     marginRight: 36,
@@ -192,8 +190,8 @@ export default function MiniDrawer() {
       color="#a8a8a8"
       className="user-profile"
     />,
-    <Link to='/editProfile' className='menu-link'>
-    <Button color="secondary">Edit Profile</Button>
+    <Link to="/editProfile" className="menu-link">
+      <Button color="secondary">Edit Profile</Button>
     </Link>,
     'Cancel',
   ];
@@ -348,12 +346,9 @@ export default function MiniDrawer() {
               </ListItemIcon>
             )}
           </ListItem>
-          <div className={classes.userName}>
-            {userName}
-          </div>
+          <div className={classes.userName}>{userName}</div>
           <Divider />
-          <Link to='/myProfile' className='menu-link'>
-
+          <Link to="/myProfile" className="menu-link">
             <ListItem button>
               <ListItemIcon>
                 <AccountCircleIcon />
@@ -362,8 +357,7 @@ export default function MiniDrawer() {
             </ListItem>
           </Link>
 
-          <Link to='/Dashboard' className='menu-link'>
-
+          <Link to="/Dashboard" className="menu-link">
             <ListItem button>
               <ListItemIcon>
                 <DashboardIcon />
@@ -371,8 +365,7 @@ export default function MiniDrawer() {
               <ListItemText primary={'Dashboard'} />
             </ListItem>
           </Link>
-          <Link to='/Messages' className='menu-link'>
-
+          <Link to="/Messages" className="menu-link">
             <ListItem button>
               <ListItemIcon>
                 <MailIcon />
@@ -380,7 +373,7 @@ export default function MiniDrawer() {
               <ListItemText primary={'Messages'} />
             </ListItem>
           </Link>
-          <Link to='/agenda' className='menu-link'>
+          <Link to="/agenda" className="menu-link">
             <ListItem button>
               <ListItemIcon>
                 <EventIcon />
@@ -388,7 +381,7 @@ export default function MiniDrawer() {
               <ListItemText primary={'Agenda'} />
             </ListItem>
           </Link>
-          <Link to="/users" target='_blank' className="menu-link">
+          <Link to="/users" target="_blank" className="menu-link">
             <ListItem button>
               <ListItemIcon>
                 <VideoCallIcon />
@@ -396,7 +389,7 @@ export default function MiniDrawer() {
               <ListItemText primary={'Connect'} />
             </ListItem>
           </Link>
-          <Link to='/files' className='menu-link'>
+          <Link to="/files" className="menu-link">
             <ListItem button>
               <ListItemIcon>
                 <LibraryBooksIcon />
@@ -405,12 +398,8 @@ export default function MiniDrawer() {
             </ListItem>
           </Link>
 
-          <Link to='/' className='menu-link'>
-            <ListItem
-              button
-              onClick={handleSignOut}
-            >
-
+          <Link to="/" className="menu-link">
+            <ListItem button onClick={handleSignOut}>
               <ListItemIcon>
                 <ExitToAppIcon />
               </ListItemIcon>

@@ -10,6 +10,7 @@ const mongoose = require('mongoose');
 //load the routers from other files
 const plansRouter = require('./routes/plans');
 const authRouter = require('./routes/auth');
+const userRouter = require('./routes/users');
 
 // const dashboardRouter = require('./routes/dashboard');
 
@@ -22,7 +23,7 @@ app.use(express.json());
 mongoose.connect(dbUrl, {
   useNewUrlParser: true,
   useCreateIndex: true,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
 });
 
 const connection = mongoose.connection;
@@ -33,9 +34,9 @@ connection.once('open', () => {
 //the routers are added as middleware
 app.use('/plans', plansRouter);
 app.use('/', authRouter);
+app.use('/users', userRouter);
 
 // app.use('Dashboard/', dashboardRouter);
-
 
 const server = app.listen(port, (err) => {
   if (err) {

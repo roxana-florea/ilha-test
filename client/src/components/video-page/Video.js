@@ -9,13 +9,18 @@ import MicIcon from '@material-ui/icons/Mic';
 import StopIcon from '@material-ui/icons/Stop';
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 import AlertSnackBar from './AlertSnackBar';
+import axios from 'axios';
+import TasksTable from './TasksTable';
 
 const Video = (props) => {
   const userId = useSelector((state) => state.authentication.userId);
   const [isRecording, setIsRecording] = useState(false);
   const [popup, setPopUp] = useState(false);
+  const [plan, setPlan] = useState(null);
 
   const roomId = props.match.params.roomId;
+  const search = props.location.search;
+  const planId = new URLSearchParams(search).get('planId');
 
   const {
     start,
@@ -27,13 +32,28 @@ const Video = (props) => {
     error,
   } = useVideo(roomId);
 
+  const loadPlan = () => {
+    axios.get(`/plans/${planId}`).then((plan) => {
+      setPlan(plan.data);
+    });
+  };
+
   useEffect(() => {
     if (userId === roomId) {
       start();
+      if (planId) {
+        loadPlan();
+      }
     } else {
       connect(roomId);
     }
   }, []);
+
+  useEffect(() => {
+    if (plan) {
+      console.log(plan.tasks);
+    }
+  }, [plan]);
 
   const WidgetButton = styled.button`
     @media (max-width: 1920px) {
@@ -159,7 +179,7 @@ const Video = (props) => {
         width: 0vw;
       }
       to {
-        width: 20vw;
+        width: 30vw;
       }
     }
     @keyframes fadeInY {
@@ -172,15 +192,14 @@ const Video = (props) => {
     }
     position: absolute;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     text-shadow: 0px 0px 10px black;
     color: white;
     top: 3%;
     right: 1%;
-    width: 20vw;
+    width: 30vw;
     height: 40vh;
-    border-radius: 15px;
-    box-shadow: 0px 0px 5px 5px grey;
     animation-name: fadeInX, fadeInY;
     animation-duration: 0.2s;
   `;
@@ -213,7 +232,23 @@ const Video = (props) => {
 
       {popup ? (
         <WidegetPopUp>
-          <p>PLANS</p>
+          {/* <div>PLAN</div>
+          <div>
+            <span>Name </span>
+            <span>Description </span>
+            <span>Duration </span>
+          </div>
+          {plan?.tasks?.map((task) => {
+            return (
+              <div>
+                <span>{task.taskName} </span>
+                <span>{task.description} </span>
+                <span>{task.duration} </span>
+              </div>
+            );
+          })} */}
+
+          {plan ? <TasksTable tasks={plan?.tasks} /> : <p>No plan selected</p>}
         </WidegetPopUp>
       ) : (
         <WidegetPopUp style={{ display: 'none' }}></WidegetPopUp>
