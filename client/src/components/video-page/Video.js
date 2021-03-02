@@ -8,7 +8,7 @@ import styled from 'styled-components';
 import MicIcon from '@material-ui/icons/Mic';
 import StopIcon from '@material-ui/icons/Stop';
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
-import AlertSnackBar from './AlertSnackBar';
+import AlertSnackBar from '../AlertSnackBar';
 import axios from 'axios';
 import TasksTable from './TasksTable';
 

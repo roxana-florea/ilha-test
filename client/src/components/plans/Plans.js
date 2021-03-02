@@ -1,6 +1,6 @@
 import './Plans.css';
 import React from 'react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -12,6 +12,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import { animateScroll as scroll } from 'react-scroll';
+import AlertSnackBar from '../AlertSnackBar';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -30,11 +31,14 @@ export default function Plans() {
   const [addPlanButtonDisable, toggleAddPlanButtonDisable] = React.useState(
     false
   );
+  const [error, setError] = useState(null);
+  const [errorKey, setErrorKey] = useState(null);
 
   const addNewPlan = () => {
     const namesSet = new Set(plans.map((plan) => plan.planName));
     if (namesSet.has(planName)) {
-      alert('Plan title should be unique');
+      setError('Plan title should be unique');
+      setErrorKey(Math.random());
     } else {
       const newPlan = {
         planName,
@@ -88,6 +92,7 @@ export default function Plans() {
               )}
             </CardContent>
             <CardActions>
+              <AlertSnackBar key={errorKey} error={error} />
               <div className="new-plan-template">
                 <TextField
                   id="standard-basic"
