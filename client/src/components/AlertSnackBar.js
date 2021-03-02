@@ -8,7 +8,7 @@ function Alert(props) {
 }
 
 export default function AlertSnackBar({ error }) {
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(false);
 
   useEffect(() => {
     setOpen(error != null);

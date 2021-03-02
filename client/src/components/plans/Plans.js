@@ -1,8 +1,9 @@
 import './Plans.css';
 import React from 'react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
 import Plan from './Plan';
 import { useSelector, useDispatch } from 'react-redux';
 import { addPlan, loadPlans } from '../../redux/actions/PlansActions';
@@ -11,6 +12,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import { animateScroll as scroll } from 'react-scroll';
+import AlertSnackBar from '../AlertSnackBar';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -25,18 +27,33 @@ export default function Plans() {
   const plans = useSelector((state) => state.plansReducer);
   const classes = useStyles();
   const [expandedPlan, setExpandedPlan] = React.useState();
+  const [planName, setPlanName] = React.useState('');
+  const [addPlanButtonDisable, toggleAddPlanButtonDisable] = React.useState(
+    false
+  );
+  const [error, setError] = useState(null);
+  const [errorKey, setErrorKey] = useState(null);
 
   const addNewPlan = () => {
-    const newPlan = {
-      planName: 'New plan' + Date.now(),
-      tasks: [],
-    };
+    const namesSet = new Set(plans.map((plan) => plan.planName));
+    if (namesSet.has(planName)) {
+      setError('Plan title should be unique');
+      setErrorKey(Math.random());
+    } else {
+      const newPlan = {
+        planName,
+        tasks: [],
+      };
 
-    const actionToExecute = addPlan(newPlan);
-    executeReduxAction(actionToExecute);
+      const actionToExecute = addPlan(newPlan);
 
-    setExpandedPlan(newPlan);
-    scroll.scrollToBottom();
+      executeReduxAction(actionToExecute).then(() => {
+        setPlanName('');
+        toggleAddPlanButtonDisable(true);
+        setExpandedPlan(newPlan);
+        scroll.scrollToBottom();
+      });
+    }
   };
 
   const toggleExpanded = (plan) => {
@@ -45,6 +62,10 @@ export default function Plans() {
     } else {
       setExpandedPlan(plan);
     }
+  };
+
+  const handlePlanNameOnChange = (event) => {
+    setPlanName(event.target.value);
   };
 
   useEffect(() => {
@@ -71,14 +92,24 @@ export default function Plans() {
               )}
             </CardContent>
             <CardActions>
-              <div className="add-plan-button">
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={addNewPlan}
-                >
-                  Add a new plan
-                </Button>
+              <AlertSnackBar key={errorKey} error={error} />
+              <div className="new-plan-template">
+                <TextField
+                  id="standard-basic"
+                  label="Enter a plan title"
+                  value={planName}
+                  onChange={handlePlanNameOnChange}
+                />
+                <div className="add-plan-button">
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={addNewPlan}
+                    disabled={addPlanButtonDisable}
+                  >
+                    Add a new plan
+                  </Button>
+                </div>
               </div>
             </CardActions>
           </Card>
@@ -90,6 +121,7 @@ export default function Plans() {
           plan={plan}
           isExpanded={expandedPlan && plan.planName === expandedPlan.planName}
           toggleExpanded={toggleExpanded}
+          toggleAddPlanButtonDisable={toggleAddPlanButtonDisable}
         />
       ))}
     </div>
