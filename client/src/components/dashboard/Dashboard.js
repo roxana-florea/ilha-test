@@ -150,13 +150,13 @@ export default function MiniDrawer() {
   const theme = useTheme();
   const userName = useSelector((state) => state.authentication.username);
   const userId = useSelector((state) => state.authentication.userId);
+  const role = useSelector((state) => state.authentication.role);
   const dispatch = useDispatch();
   const history = useHistory();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [selectedIndex, setSelectedIndex] = React.useState(1);
   const [open, setOpen] = React.useState(true);
   const [openVideoDialog, setOpenVideoDialog] = React.useState(false);
-  const [selectedVideoAction, setSelectedVideoAction] = React.useState('open');
 
   const handleSignOut = () => {
     dispatch(signOut(history));
@@ -219,19 +219,18 @@ export default function MiniDrawer() {
   };
 
   const handleClickOpenVideoroom = () => {
-    setOpenVideoDialog(true);
+    if (role === 'teacher') {
+      setOpenVideoDialog(true);
+    } else {
+      openVideoroom();
+    }
   };
 
   const handleCloseVideoDialog = (value) => {
     setOpenVideoDialog(false);
-    setSelectedVideoAction(value);
     switch (value) {
       case 'New':
-        window.open(
-          window.location.origin + `/videoroom/${userId}`,
-          '_blank',
-          'toolbar=0,location=0,menubar=0'
-        );
+        openVideoroom();
         break;
       case 'Existing':
         window.open(
@@ -243,6 +242,14 @@ export default function MiniDrawer() {
       default:
         break;
     }
+  };
+
+  const openVideoroom = () => {
+    window.open(
+      window.location.origin + `/videoroom/${userId}`,
+      '_blank',
+      'toolbar=0,location=0,menubar=0'
+    );
   };
 
   return (
@@ -287,7 +294,6 @@ export default function MiniDrawer() {
             <VideoCallIcon />
           </Button>
           <VideoDialog
-            selectedValue={selectedVideoAction}
             open={openVideoDialog}
             onClose={handleCloseVideoDialog}
           />
@@ -381,14 +387,16 @@ export default function MiniDrawer() {
               <ListItemText primary={'Agenda'} />
             </ListItem>
           </Link>
-          <Link to="/users" target="_blank" className="menu-link">
-            <ListItem button>
-              <ListItemIcon>
-                <VideoCallIcon />
-              </ListItemIcon>
-              <ListItemText primary={'Connect'} />
-            </ListItem>
-          </Link>
+          {role === 'teacher' && (
+            <Link to="/users" target="_blank" className="menu-link">
+              <ListItem button>
+                <ListItemIcon>
+                  <VideoCallIcon />
+                </ListItemIcon>
+                <ListItemText primary={'Connect'} />
+              </ListItem>
+            </Link>
+          )}
           <Link to="/files" className="menu-link">
             <ListItem button>
               <ListItemIcon>

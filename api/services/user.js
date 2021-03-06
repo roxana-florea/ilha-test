@@ -50,13 +50,14 @@ function signInUser(payload) {
         throw new Error('Incorrect E-mail');
       } else {
         const username = user.firstname;
+        const role = user.roles[0];
         return bcrypt
           .compare(payload.password, user.password)
           .then((res) => {
             if (res) {
               const token = getSignedToken(user._id);
               const userId = user._id;
-              return { token, username, userId };
+              return { token, username, userId, role };
             } else {
               throw new Error('Invalid Password');
             }
