@@ -38,12 +38,21 @@ const Video = (props) => {
     });
   };
 
+  const ping = () => {
+    setInterval(() => {
+      axios.put(`/users/${userId}/time`).then((user) => {
+        console.log(user);
+      });
+    }, 3000);
+  };
+
   useEffect(() => {
     if (userId === roomId) {
       start();
       if (planId) {
         loadPlan();
       }
+      ping();
     } else {
       connect(roomId);
     }
