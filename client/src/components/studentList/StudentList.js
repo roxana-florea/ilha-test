@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
@@ -12,7 +13,7 @@ import FolderIcon from '@material-ui/icons/Folder';
 import VideoCallIcon from '@material-ui/icons/VideoCall';
 import { makeStyles } from '@material-ui/core/styles';
 import styled from 'styled-components';
-import './userList.css';
+import './studentList.css';
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -21,12 +22,13 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-export default function UserList() {
+export default function StudentList() {
   const [users, setUsers] = useState(null);
   const classes = useStyles();
+  const userId = useSelector((state) => state.authentication.userId);
 
   const getUsers = () => {
-    axios.get('/users').then((users) => {
+    axios.get(`/users/${userId}/students`).then((users) => {
       setUsers(users.data);
     });
   };
@@ -60,7 +62,7 @@ export default function UserList() {
       </h1>
       <UserListContainer>
         <List className={classes.root}>
-          {users &&
+          {users ? (
             users.map((user) => (
               <ListItem>
                 <ListItemAvatar>
@@ -84,7 +86,12 @@ export default function UserList() {
                   </IconButton>
                 </ListItemSecondaryAction>
               </ListItem>
-            ))}
+            ))
+          ) : (
+            <ListItem>
+              <ListItemText primary="There are no students in your list" />{' '}
+            </ListItem>
+          )}
         </List>
       </UserListContainer>
     </div>

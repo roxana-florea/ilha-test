@@ -22,6 +22,7 @@ import EventIcon from '@material-ui/icons/Event';
 import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import VideoCallIcon from '@material-ui/icons/VideoCall';
+import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import Button from '@material-ui/core/Button';
 import logo from '../images/logo_White_NT.png';
 import Plans from '../plans/Plans.js';
@@ -388,12 +389,22 @@ export default function MiniDrawer() {
             </ListItem>
           </Link>
           {role === 'teacher' && (
-            <Link to="/users" target="_blank" className="menu-link">
+            <Link to="/students" target="_blank" className="menu-link">
               <ListItem button>
                 <ListItemIcon>
                   <VideoCallIcon />
                 </ListItemIcon>
                 <ListItemText primary={'Connect'} />
+              </ListItem>
+            </Link>
+          )}
+          {role === 'student' && (
+            <Link to="/teachers" className="menu-link">
+              <ListItem button>
+                <ListItemIcon>
+                  <SupervisorAccountIcon />
+                </ListItemIcon>
+                <ListItemText primary={'Choose Teacher'} />
               </ListItem>
             </Link>
           )}

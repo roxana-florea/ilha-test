@@ -1,22 +1,25 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const Languages = require('./languages');
-const Instruments = require('./instruments')
+const Instruments = require('./instruments');
 
-const userSchema = new Schema({
+const userSchema = new Schema(
+  {
     firstname: { type: String, required: true },
     lastname: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     password: {
-        type: String,
-        required: true,
-        min: 6,
-        max: 14
+      type: String,
+      required: true,
+      min: 6,
+      max: 14,
     },
-    roles: [{
+    roles: [
+      {
         type: String,
-        enum: ['candidate', 'teacher', 'student', 'admin']
-    }],
+        enum: ['candidate', 'teacher', 'student', 'admin'],
+      },
+    ],
     badges: [{ type: Schema.Types.ObjectId, ref: 'Badges' }],
     profilePictureUrl: String,
     linkedin: String,
@@ -32,8 +35,11 @@ const userSchema = new Schema({
     interests: [{ type: String, enum: Instruments }],
     playedInstruments: [{ type: String, enum: Instruments }],
     languages: [{ type: String, enum: Languages, required: true }],
-    classes: [{ type: Schema.Types.ObjectId, ref: 'Classroom' }]
-}, { timestamps: true });
+    classes: [{ type: Schema.Types.ObjectId, ref: 'Classroom' }],
+    students: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+  },
+  { timestamps: true }
+);
 
 const User = mongoose.model('User', userSchema);
 
