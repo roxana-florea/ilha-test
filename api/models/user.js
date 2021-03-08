@@ -37,6 +37,7 @@ const userSchema = new Schema(
     languages: [{ type: String, enum: Languages, required: true }],
     classes: [{ type: Schema.Types.ObjectId, ref: 'Classroom' }],
     students: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+    totaltime: [{ date: String, time: Number }],
   },
   { timestamps: true }
 );

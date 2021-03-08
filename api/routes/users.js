@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const User = require('../models/user');
+const moment = require('moment');
 
 router.route('/').get((req, res) => {
   const role = req.query.role;
@@ -57,6 +58,25 @@ router.route('/:id/students/:student_id').put((req, res) => {
   })
     .then((user) => {
       res.json('Student added!');
+    })
+    .catch((err) => res.status(400).json('Error: ' + err));
+});
+
+router.route('/:id/time').put((req, res) => {
+  User.findById(req.params.id)
+    .then((user) => {
+      const today = moment().format('MM-DD-YYYY');
+      const dateForChangeIndex = user.totaltime.findIndex((day) => {
+        return day.date == today;
+      });
+
+      if (dateForChangeIndex === -1) {
+        user.totaltime.push({ date: today, time: 0 });
+      } else {
+        user.totaltime[dateForChangeIndex].time += 3;
+      }
+      user.save();
+      res.json('Started');
     })
     .catch((err) => res.status(400).json('Error: ' + err));
 });
