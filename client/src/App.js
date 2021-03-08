@@ -10,7 +10,8 @@ import UserProfile from './components/userProfile/UserProfile';
 import Messages from './components/messages/Messages';
 import Agenda from './components/agenda/Agenda';
 import Files from './components/files/Files';
-import userList from './components/userList/userList';
+import StudentList from './components/studentList/StudentList';
+import TeacherList from './components/teacherList/TeacherList';
 import EditProfile from './components/userProfile/EditProfile';
 
 function App() {
@@ -32,7 +33,8 @@ function App() {
           <Dashboard />
         </UserRoute>
         <UserRoute path="/videoroom/:roomId" component={Video} />
-        <Route path="/users" component={userList} />
+        <UserRoute path="/students" component={StudentList} />
+        <UserRoute path="/teachers" component={TeacherList} />
       </Switch>
     </Router>
   );
