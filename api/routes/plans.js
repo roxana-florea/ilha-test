@@ -3,7 +3,7 @@ const Plan = require('../models/plans');
 const Task = require('../models/tasks');
 
 router.route('/').get((req, res) => {
-    Plan.find()
+    Plan.find( {userId: req.header('userId')})
         .then(plans => res.json(plans))
         .catch(err => res.status(400).json('Error: ' + err));
 });
@@ -20,13 +20,13 @@ router.route('/').post((req, res) => {
 
     const planName = req.body.planName;
     const tasks = req.body.tasks;
+    const userId = req.body.userId;
     //   plan.date = Date.parse(req.body.date);
-    const newPlan = new Plan({ planName, tasks });
+    const newPlan = new Plan({ userId, planName, tasks });
 
     newPlan.save()
         .then(() => res.json(newPlan))
         .catch(err => res.status(400).json('error is here' + err));
-
 });
 
 

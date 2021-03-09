@@ -33,6 +33,8 @@ export default function Plans() {
   );
   const [error, setError] = useState(null);
   const [errorKey, setErrorKey] = useState(null);
+  const userId = useSelector((state) => state.authentication.userId);
+
 
   const addNewPlan = () => {
     const namesSet = new Set(plans.map((plan) => plan.planName));
@@ -41,6 +43,7 @@ export default function Plans() {
       setErrorKey(Math.random());
     } else {
       const newPlan = {
+        userId,
         planName,
         tasks: [],
       };
@@ -69,7 +72,7 @@ export default function Plans() {
   };
 
   useEffect(() => {
-    const actionToExecute = loadPlans();
+    const actionToExecute = loadPlans(userId);
     executeReduxAction(actionToExecute);
   }, []);
 
