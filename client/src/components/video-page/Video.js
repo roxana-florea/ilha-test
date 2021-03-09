@@ -33,14 +33,14 @@ const Video = (props) => {
   } = useVideo(roomId);
 
   const loadPlan = () => {
-    axios.get(`/plans/${planId}`).then((plan) => {
+    axios.get(`https://ilha-development.herokuapp.com/plans/${planId}`).then((plan) => {
       setPlan(plan.data);
     });
   };
 
   const ping = () => {
     setInterval(() => {
-      axios.put(`/users/${userId}/time`).then((user) => {
+      axios.put(`https://ilha-development.herokuapp.com/users/${userId}/time`).then((user) => {
         console.log(user);
       });
     }, 3000);

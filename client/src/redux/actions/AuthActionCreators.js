@@ -40,7 +40,7 @@ export const signUp = (user, history) => {
     dispatch(registerRequest());
     axios({
       method: 'post',
-      url: '/signUp',
+      url: 'https://ilha-development.herokuapp.com/signUp',
       data: user,
     })
       .then((res) => {
@@ -92,7 +92,7 @@ export const signIn = (payload, history) => {
     dispatch(accessRequest);
     axios({
       method: 'post',
-      url: '/signIn',
+      url: 'https://ilha-development.herokuapp.com/signIn',
       data: payload,
       headers: {
         Authorization: `Bearer ${localStorage.getItem('USERTOKEN')}`,

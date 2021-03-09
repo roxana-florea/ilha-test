@@ -30,7 +30,7 @@ const useVideo = (roomId) => {
       ? new Peer(id)
       : new Peer(id, {
           host: process.env.REACT_APP_PEER_HOST,
-          port: process.env.REACT_APP_PEER_PORT,
+          // port: process.env.REACT_APP_PEER_PORT,
           path: process.env.REACT_APP_PEER_PATH,
         });
   };
