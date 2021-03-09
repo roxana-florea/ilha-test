@@ -27,13 +27,13 @@ export default function TeacherList() {
   const userId = useSelector((state) => state.authentication.userId);
 
   const getUsers = () => {
-    axios.get('/users?role=teacher').then((users) => {
+    axios.get('https://ilha-development.herokuapp.com/users?role=teacher').then((users) => {
       setUsers(users.data);
     });
   };
 
   const chooseTeacher = (id) => {
-    axios.put(`/users/${id}/students/${userId}`).then((user) => {
+    axios.put(`https://ilha-development.herokuapp.com/users/${id}/students/${userId}`).then((user) => {
       console.log(user);
     });
   };

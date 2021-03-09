@@ -28,7 +28,7 @@ export default function StudentList() {
   const userId = useSelector((state) => state.authentication.userId);
 
   const getUsers = () => {
-    axios.get(`/users/${userId}/students`).then((users) => {
+    axios.get(`https://ilha-development.herokuapp.com/users/${userId}/students`).then((users) => {
       setUsers(users.data);
     });
   };
