@@ -35,6 +35,7 @@ export default function TeacherList() {
   const chooseTeacher = (id) => {
     axios.put(`https://ilha-development.herokuapp.com/users/${id}/students/${userId}`).then((user) => {
       console.log(user);
+      alert('Succesfully connected to your teacher!')
     });
   };
 

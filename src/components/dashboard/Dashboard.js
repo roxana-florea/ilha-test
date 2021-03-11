@@ -184,6 +184,8 @@ export default function MiniDrawer() {
     });
   });
 
+ 
+
   const options = [
     <UserAvatar
       size="120"
